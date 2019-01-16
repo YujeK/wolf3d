@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 17:38:26 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/01/14 18:14:21 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/01/16 17:21:03 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define WOLF3D_H
 
 # include "libft/libft.h"
-# include "../mlx/mlx.h"
 # include "uilib/includes/libui.h"
 
 # define YDIM 1200
@@ -67,7 +66,6 @@ int		ft_readverif(char *str);
 void	ft_map_catch(t_env *env, char *str);
 void    ft_mapalloc(t_env *env, char *str);
 void    ft_mapfiller(t_env *env, char *str);
-void	cursor(t_env *env);
 void	ft_looped(int *quit, t_sdl *sdl);
 void    events(int *quit, t_sdl *sdl);
 #endif

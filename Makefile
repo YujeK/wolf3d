@@ -6,7 +6,7 @@
 #    By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/08 17:31:09 by asamir-k          #+#    #+#              #
-#    Updated: 2019/01/14 16:56:56 by asamir-k         ###   ########.fr        #
+#    Updated: 2019/01/16 17:21:14 by asamir-k         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,6 @@ SDLLIB= -L mlx -lmlx -framework Opengl -framework Appkit
 SRC=SRCS/main.c				\
 	SRCS/loopedthings.c		\
 	SRCS/events.c			\
-	SRCS/cursor.c			\
 	SRCS/parsing.c
 
 OBJ = $(SRC:.c=.o)

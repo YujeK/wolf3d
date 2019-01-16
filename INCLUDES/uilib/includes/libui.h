@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 03:32:43 by nihuynh           #+#    #+#             */
-/*   Updated: 2019/01/14 16:40:48 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/01/16 18:46:47 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ struct				s_data_thr
 	void			*prg_data;
 };
 
-typedef void	(*t_game)(int *quit, t_sdl *sdl);
+typedef void	(*t_looped)(int *quit, t_sdl *sdl);
 
 # define SIVOID		static inline void
 # define SIFLOAT	static inline float
@@ -73,7 +73,7 @@ void				error_sdl(t_sdl *sdl);
 int					init_sdl(t_sdl *sdl, int width, int length);
 void				exit_sdl(t_sdl *sdl);
 void				render_sdl(t_sdl *sdl, int (*f) (int, int, void*), void *d);
-void				loop_sdl(int *quit, t_sdl *sdl, t_game gameloop);
+void				loop_sdl(int *quit, t_sdl *sdl, t_looped looped);
 
 void				init_mthr_sdl(t_sdl *sdl, int (*do_pxl)(int, int, void*),
 									void *data);
