@@ -6,13 +6,13 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 02:39:43 by nihuynh           #+#    #+#             */
-/*   Updated: 2019/01/16 18:48:15 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/01/17 19:13:16 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libui.h"
 
-void	loop_sdl(int *quit, t_sdl *sdl, t_looped ft_looped)
+void	loop_sdl(int *quit, t_env *env, t_looped ft_looped)
 {
 	while (!*quit)
 	{

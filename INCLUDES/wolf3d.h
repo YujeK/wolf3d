@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wolf3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 17:38:26 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/01/16 18:27:03 by badhont          ###   ########.fr       */
+/*   Updated: 2019/01/17 19:50:57 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,18 @@
 # define PURPLE 0x7400AC
 # define GREY 0x9A9A9A
 
+typedef struct		s_rect
+{
+	int		x;
+	int		y;
+	int		width;
+	int		height;
+}					t_rect;
+
 typedef struct		s_position
 {
-	double	x;
-	double	y;
+	int		x;
+	int		y;
 }					t_pos;
 
 typedef struct		s_player
@@ -47,25 +55,21 @@ typedef struct		s_player
 
 typedef struct		s_env
 {
+	SDL_Rect		rect;
 	t_player		player;
 	t_sdl			sdl;
 	int				**map;
 	int				map_width;
 	int				map_height;
-	int				s_l;
-	int				endian;
-	int				bpp;
-	int				*img_str;
-	void			*img;
-	void			*mlx;
-	void			*win;
 	int				quit;
 }					t_env;
 
+void    ft_print_map(t_env *env);
+void    ft_display_player(t_env *env);
 int		ft_readverif(char *str);
 void	ft_map_catch(t_env *env, char *str);
 void    ft_mapalloc(t_env *env, char *str);
 void    ft_mapfiller(t_env *env, char *str);
-void	ft_looped(int *quit, t_sdl *sdl);
-void    events(int *quit, t_sdl *sdl);
+void	ft_looped(int *quit, t_env *env);
+void    events(int *quit, t_env *env);
 #endif

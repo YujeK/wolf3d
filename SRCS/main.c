@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 09:55:41 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/01/14 17:40:06 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/01/17 19:28:59 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ int		main(int ac, char **av)
 		init_sdl(&env.sdl, XDIM, YDIM);
 		init_game(&env);
 		ft_map_catch(&env, av[1]);
-		render_sdl(&env.sdl, &give_red, NULL);
-		loop_sdl(&env.quit, &env.sdl, &events);
+		ft_looped(&env.quit, &env);
 		exit_sdl(&env.sdl);
 	}
 	ft_putstr("Hi ^-^ !!! One argument(only) after binary authorised to make it work. Have a good time using me, byebye !\n                *pff humans are so retarded wtf ...*\n");

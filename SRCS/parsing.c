@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 16:14:06 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/01/14 18:28:04 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/01/17 19:51:48 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,29 @@ void	ft_map_catch(t_env *env, char *str)
         i++;
 	}
     // print de la position du joueur
-    printf("player x : %f\n", env->player.position.x);
-    printf("player y : %f\n", env->player.position.y);
+    printf("player x : %d\n", env->player.position.x);
+    printf("player y : %d\n", env->player.position.y);
+}
+
+void    ft_print_map(t_env *env)
+{
+	int i;
+	int j;
+	i = 0;
+    // print de la map recu en arg //
+    ft_putstr("vanilla map file : \n");
+	while (i < env->map_height)
+	{
+        j = 0;
+        while (j < env->map_width)
+        {
+		    printf("%d", env->map[i][j]);
+            j++;
+        }
+        printf("\n");
+        i++;
+	}
+    // print de la position du joueur
+    printf("player x : %d\n", env->player.position.x);
+    printf("player y : %d\n", env->player.position.y);
 }
