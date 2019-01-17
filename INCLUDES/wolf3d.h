@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 17:38:26 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/01/17 19:50:57 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/01/17 23:29:58 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@
 
 typedef struct		s_rect
 {
-	int		x;
-	int		y;
-	int		width;
-	int		height;
+	double		x;
+	double		y;
+	double		width;
+	double		height;
 }					t_rect;
 
 typedef struct		s_position
@@ -62,8 +62,29 @@ typedef struct		s_env
 	int				map_width;
 	int				map_height;
 	int				quit;
+	int				posx;
+	int				posy;
 }					t_env;
 
+typedef struct		s_line
+{
+	int				x;
+	int				y;
+	int				d;
+	int				dx;
+	int				dy;
+	int				s1;
+	int				s2;
+}					t_line;
+
+typedef struct		s_point
+{
+	int				x;
+	int				y;
+}					t_point;
+
+void	ft_set_player_dir(t_env *env);
+void	dl(t_env *env, t_point pt1, t_point pt2, int color);
 void    ft_print_map(t_env *env);
 void    ft_display_player(t_env *env);
 int		ft_readverif(char *str);

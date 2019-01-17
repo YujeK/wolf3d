@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 10:22:21 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/01/17 20:01:04 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/01/17 23:31:52 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,29 +44,13 @@ void	player_events(t_env *env)
 	if(env->sdl.event.type == SDL_KEYUP)
 	{
 		if (env->sdl.event.key.keysym.sym == SDLK_d)
-		{
-			ft_swap(&env->map[env->player.position.y][env->player.position.x] , &env->map[env->player.position.y][env->player.position.x + 1]);
-			env->player.position.x++;
-			ft_print_map(env);
-		}
+			env->posx += 20;
 		if (env->sdl.event.key.keysym.sym == SDLK_a)
-		{
-			ft_swap(&env->map[env->player.position.y][env->player.position.x] , &env->map[env->player.position.y][env->player.position.x - 1]);
-			env->player.position.x--;
-			ft_print_map(env);
-		}
+			env->posx -= 20;
 		if (env->sdl.event.key.keysym.sym == SDLK_s)
-		{
-			ft_swap(&env->map[env->player.position.y][env->player.position.x] , &env->map[env->player.position.y + 1][env->player.position.x]);
-			env->player.position.y++;
-			ft_print_map(env);
-		}
+			env->posy += 20;
 		if (env->sdl.event.key.keysym.sym == SDLK_w)
-		{
-			ft_swap(&env->map[env->player.position.y][env->player.position.x] , &env->map[env->player.position.y - 1][env->player.position.x]);
-			env->player.position.y--;
-			ft_print_map(env);
-		}
+			env->posy -= 20;
 	}
 }
 void	display_events(t_env * env)

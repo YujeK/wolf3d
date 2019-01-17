@@ -6,7 +6,7 @@
 #    By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/08 17:31:09 by asamir-k          #+#    #+#              #
-#    Updated: 2019/01/17 18:16:15 by asamir-k         ###   ########.fr        #
+#    Updated: 2019/01/17 23:33:04 by asamir-k         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ SRC=SRCS/main.c				\
 	SRCS/loopedthings.c		\
 	SRCS/events.c			\
 	SRCS/ft_displayplayer.c \
-	SRCS/parsing.c
+	SRCS/parsing.c			\
+	SRCS/linedrawer.c
 
 OBJ = $(SRC:.c=.o)
 # SDL
