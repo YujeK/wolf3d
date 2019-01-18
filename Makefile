@@ -6,14 +6,14 @@
 #    By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/08 17:31:09 by asamir-k          #+#    #+#              #
-#    Updated: 2019/01/18 16:05:45 by asamir-k         ###   ########.fr        #
+#    Updated: 2019/01/18 16:24:57 by asamir-k         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME= wolf3d
 GCC= GCC
 HEADER= INCLUDES/wolf3d.h
-FLAGS = -Wall -Werror -Wextra -g -fsanitize=address
+FLAGS = -Wall -Werror -Wextra
 LIB_PATH= INCLUDES/libft/
 COMP= SDL2
 SDLLIB= -L mlx -lmlx -framework Opengl -framework Appkit
