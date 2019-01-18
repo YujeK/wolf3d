@@ -6,14 +6,14 @@
 #    By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/08 17:31:09 by asamir-k          #+#    #+#              #
-#    Updated: 2019/01/17 23:33:04 by asamir-k         ###   ########.fr        #
+#    Updated: 2019/01/18 16:05:45 by asamir-k         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME= wolf3d
 GCC= GCC
 HEADER= INCLUDES/wolf3d.h
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra -g -fsanitize=address
 LIB_PATH= INCLUDES/libft/
 COMP= SDL2
 SDLLIB= -L mlx -lmlx -framework Opengl -framework Appkit
@@ -22,7 +22,8 @@ SRC=SRCS/main.c				\
 	SRCS/events.c			\
 	SRCS/ft_displayplayer.c \
 	SRCS/parsing.c			\
-	SRCS/linedrawer.c
+	SRCS/linedrawer.c		\
+	SRCS/ft_outils.c
 
 OBJ = $(SRC:.c=.o)
 # SDL

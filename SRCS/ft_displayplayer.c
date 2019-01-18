@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 17:07:38 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/01/17 23:50:58 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/01/18 15:56:51 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ void    fillrect(t_env *env, double posx, double posy, int color)
 		x = XDIM / env->map_width * posx;
 		while(x < rectx)
 		{
-			putcolor_sdl(&env->sdl, color, x, y);
+			if (x < 0 || x > XDIM || y < YDIM || y > YDIM)
+				break ;
+			ft_setpixel(env->surface, x, y, color);
 			x++;
 		}
 	y++;

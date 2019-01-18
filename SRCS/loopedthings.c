@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 10:18:59 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/01/17 22:17:04 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/01/18 15:51:09 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 void	ft_looped(int *quit, t_env *env)
 {
-    ft_display_player(env);
-    SDL_RenderPresent(env->sdl.renderer);
+	SDL_Texture *texture = NULL;
 	while (!*quit)
 	{
 		if (SDL_PollEvent(&(env->sdl.event)) == 1)
@@ -23,6 +22,8 @@ void	ft_looped(int *quit, t_env *env)
 			events(quit, env);
             ft_display_player(env);
 			ft_set_player_dir(env);
+			SDL_CreateTextureFromSurface(env->sdl.renderer, env->surface);
+			SDL_RenderCopy(env->sdl.renderer, texture, 0, 0);
             SDL_RenderPresent(env->sdl.renderer);
 		}
 	}

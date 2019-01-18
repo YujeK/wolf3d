@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:03:54 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/01/17 21:12:06 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/01/18 16:04:35 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_brosenham(t_env *env, t_line *line, int color, int swap)
 	i = 1;
 	while (i <= line->dx)
 	{
-		putcolor_sdl(&env->sdl, color, line->x, line->y);
+		ft_setpixel(env->surface, line->x, line->y, color);
 		while (line->d >= 0)
 		{
 			line->d = line->d - 2 * line->dx;

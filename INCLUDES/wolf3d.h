@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 17:38:26 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/01/17 23:29:58 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/01/18 15:59:55 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,22 @@
 # include "libft/libft.h"
 # include "uilib/includes/libui.h"
 
-# define YDIM 1200
-# define XDIM 1200
+# define YDIM 800
+# define XDIM 800
 # define PI 3.14160
 
-# define PINK 0xFD2BE6
-# define BLUE 0x0012FD
-# define RED 0xFD0000
-# define CYAN 0x00F3FD
-# define YELLOW 0xFDF800
-# define GREEN 0x05FD00
-# define BROWN 0x8C4629
-# define ORANGE 0xF87C00
-# define WHITE 0xFFFFFF
-# define BLACK 0x000000
-# define PURPLE 0x7400AC
-# define GREY 0x9A9A9A
+# define PINK 0xFFE62BFD
+# define BLUE 0xFFFD1200
+# define RED 0xFFFD0000
+# define CYAN 0xFF00F3FD
+# define YELLOW 0xFFFDF800
+# define GREEN 0xFF00FD05
+# define BROWN 0xFF29468C
+# define ORANGE 0xFFF87C00
+# define WHITE 0xFFFFFFFF
+# define BLACK 0xFF000000
+# define PURPLE 0xFF7400AC
+# define GREY 0xFF9A9A9A
 
 typedef struct		s_rect
 {
@@ -64,6 +64,7 @@ typedef struct		s_env
 	int				quit;
 	int				posx;
 	int				posy;
+	SDL_Surface		*surface;
 }					t_env;
 
 typedef struct		s_line
@@ -83,6 +84,7 @@ typedef struct		s_point
 	int				y;
 }					t_point;
 
+void	ft_setpixel(SDL_Surface *surface, int x, int y, Uint32 pixel);
 void	ft_set_player_dir(t_env *env);
 void	dl(t_env *env, t_point pt1, t_point pt2, int color);
 void    ft_print_map(t_env *env);
