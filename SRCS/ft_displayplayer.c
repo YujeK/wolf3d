@@ -6,14 +6,14 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 17:07:38 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/01/18 16:31:23 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/01/18 17:40:55 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../INCLUDES/wolf3d.h"
+
 void    fillrect(t_env *env, double posx, double posy, int color)
 {
-
 	double     rectx;
 	double     recty;
 	double     x;
@@ -22,12 +22,12 @@ void    fillrect(t_env *env, double posx, double posy, int color)
 	recty = YDIM / env->map_height * (posy + 1);
 	rectx = XDIM / env->map_width * (posx + 1);
 	y = YDIM / env->map_height * posy;
-	while(y < recty)
+	while (y < recty)
 	{
 		x = XDIM / env->map_width * posx;
-		while(x < rectx)
+		while (x < rectx)
 		{
-			if (x < 0 || x > XDIM || y < YDIM || y > YDIM)
+			if (x < 0 || x > XDIM || y < 0 || y > YDIM)
 				break ;
 			ft_setpixel(env->surface, x, y, color);
 			x++;

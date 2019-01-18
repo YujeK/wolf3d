@@ -6,12 +6,12 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 09:55:41 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/01/17 19:28:59 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/01/18 17:29:20 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../INCLUDES/wolf3d.h"
-# include "../INCLUDES/uilib/includes/libui.h"
+#include "../INCLUDES/uilib/includes/libui.h"
 
 void	init_game(t_env *env)
 {
@@ -27,18 +27,32 @@ int		give_red(int x, int y, void *arg)
 	return (RED);
 }
 
+SDL_Surface      *ft_new_surface(int height, int width)
+{
+	SDL_Surface     *surface;
+	Uint32          color[4];
+
+	color[0] = 0x000000ff;
+	color[1] = 0x0000ff00;
+	color[2] = 0x00ff0000;
+	color[3] = 0xff000000;
+	if (!(surface = SDL_CreateRGBSurface(
+	0, width, height, 32, color[0], color[1], color[2], color[3])))
+		ft_error(__func__,__LINE__);
+	return (surface);
+}
+
 int		main(int ac, char **av)
 {
 	t_env	env;
-	(void)av;
 	if (ac == 2)
 	{
 		init_sdl(&env.sdl, XDIM, YDIM);
 		init_game(&env);
+		env.surface = ft_new_surface(XDIM, YDIM); // to protect
 		ft_map_catch(&env, av[1]);
 		ft_looped(&env.quit, &env);
 		exit_sdl(&env.sdl);
 	}
 	ft_putstr("Hi ^-^ !!! One argument(only) after binary authorised to make it work. Have a good time using me, byebye !\n                *pff humans are so retarded wtf ...*\n");
-	exit(0);
 }

@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:03:54 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/01/18 16:28:32 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/01/18 17:43:53 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ void	ft_brosenham(t_env *env, t_line *line, int color, int swap)
 	i = 1;
 	while (i <= line->dx)
 	{
-			if (line->x < 0 || line->x > XDIM || line->y < YDIM || line->y > YDIM)
-				break ;
+		if (line->x < 0 || line->x > XDIM || line->y < 0 || line->y > YDIM)
+			break ;
 		ft_setpixel(env->surface, line->x, line->y, color);
 		while (line->d >= 0)
 		{
