@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wolf3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
+/*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 17:38:26 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/01/18 17:42:11 by sgalasso         ###   ########.fr       */
+/*   Updated: 2019/01/18 21:16:13 by badhont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "libft/libft.h"
 # include "uilib/includes/libui.h"
+#include <math.h>
 
 # define YDIM 800
 # define XDIM 800
@@ -32,6 +33,13 @@
 # define BLACK 0xFF000000
 # define PURPLE 0xFF7400AC
 # define GREY 0xFF9A9A9A
+# define BLOC_SIZE 10
+
+typedef struct		s_point
+{
+	double				x;
+	double				y;
+}					t_point;
 
 typedef struct		s_rect
 {
@@ -41,31 +49,12 @@ typedef struct		s_rect
 	double		height;
 }					t_rect;
 
-typedef struct		s_position
-{
-	int		x;
-	int		y;
-}					t_pos;
-
 typedef struct		s_player
 {
-	t_pos		position;
-	double		direction;
+	t_point		pos;   // position du joueur
+	double		dir_d; // degres
+	double		dir_r; // radians
 }					t_player;
-
-typedef struct		s_env
-{
-	SDL_Rect		rect;
-	t_player		player;
-	t_sdl			sdl;
-	int				**map;
-	int				map_width;
-	int				map_height;
-	int				quit;
-	int				posx;
-	int				posy;
-	SDL_Surface		*surface;
-}					t_env;
 
 typedef struct		s_line
 {
@@ -78,11 +67,20 @@ typedef struct		s_line
 	int				s2;
 }					t_line;
 
-typedef struct		s_point
+typedef struct		s_env
 {
-	int				x;
-	int				y;
-}					t_point;
+	SDL_Rect		rect;
+	t_player		player;
+	t_sdl			sdl;
+	int				**map;
+	int				map_width;
+	int				map_height;
+	int				coef_minimap; // taille de la minimap
+	int				quit;
+	int				posx;
+	int				posy;
+	SDL_Surface		*surface;
+}					t_env;
 
 void	ft_setpixel(SDL_Surface *surface, int x, int y, Uint32 pixel);
 void	ft_set_player_dir(t_env *env);

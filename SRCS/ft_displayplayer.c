@@ -3,80 +3,79 @@
 /*                                                        :::      ::::::::   */
 /*   ft_displayplayer.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
+/*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 17:07:38 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/01/18 17:40:55 by sgalasso         ###   ########.fr       */
+/*   Updated: 2019/01/18 21:55:32 by badhont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../INCLUDES/wolf3d.h"
 
-void    fillrect(t_env *env, double posx, double posy, int color)
+void	fillrect(t_env *env, SDL_Rect rect, int color)
 {
-	double     rectx;
-	double     recty;
-	double     x;
-	double     y;
+	int	x;
+	int	y;
 
-	recty = YDIM / env->map_height * (posy + 1);
-	rectx = XDIM / env->map_width * (posx + 1);
-	y = YDIM / env->map_height * posy;
-	while (y < recty)
+	y = 0;
+	while (y < rect.h)
 	{
-		x = XDIM / env->map_width * posx;
-		while (x < rectx)
+		x = 0;
+		while (x < rect.w)
 		{
-			if (x < 0 || x > XDIM || y < 0 || y > YDIM)
+			if (rect.x + x < 0 || rect.x + x > XDIM
+			|| rect.y + y < 0 || rect.y + y > YDIM)
 				break ;
-			ft_setpixel(env->surface, x, y, color);
+			ft_setpixel(env->surface, rect.x + x, rect.y + y, color);
 			x++;
 		}
-	y++;
+		y++;
 	}
+}
+
+void	ft_dl_angle(t_env *env, double dist, double angle_d)
+{
+	t_point	step;
+	t_point	a;
+	t_point	b;
+
+	step.x = -cos(angle_d * M_PI / 180) * dist;
+ 	step.y = -sin(angle_d * M_PI / 180) * dist;
+
+	a.x = env->player.pos.x * BLOC_SIZE * env->coef_minimap;
+	a.y = env->player.pos.y * BLOC_SIZE * env->coef_minimap;
+	b.x = (env->player.pos.x + step.x) * BLOC_SIZE * env->coef_minimap;
+	b.y = (env->player.pos.y + step.y) * BLOC_SIZE * env->coef_minimap;
+ 	dl(env, a, b, RED);
 }
 
 void	ft_set_player_dir(t_env *env)
 {
-	int		x;
-	int		y;
-	x = XDIM / env->map_width * (env->player.position.x) + env->posx;
-	y = YDIM / env->map_height * (env->player.position.y) + env->posy;
-	t_point	pt[2];
-	pt[0].x = x + (XDIM / env->map_width / 2);
-	pt[0].y = y + (YDIM / env->map_height / 2);
-	pt[1].x = x + (XDIM / env->map_width / 2);
-	pt[1].y = 0;
-	dl(env,	pt[0], pt[1], RED);
-	pt[0].x = x + (XDIM / env->map_width / 2);
-	pt[0].y = y + (YDIM / env->map_height / 2);
-	pt[1].x = x + (XDIM / env->map_width / 2)  - (sin(PI / 6) * (y));
-	pt[1].y = 0;
-	dl(env,	pt[0], pt[1], RED);
-	pt[0].x = x + (XDIM / env->map_width / 2);
-	pt[0].y = y + (YDIM / env->map_height / 2);
-	pt[1].x = x + (XDIM / env->map_width / 2) + (sin(PI / 6) * (y));
-	pt[1].y = 0;
-	dl(env,	pt[0], pt[1], RED);
+	ft_dl_angle(env, 2, env->player.dir_d);
+	ft_dl_angle(env, 2, env->player.dir_d - 30);
+	ft_dl_angle(env, 2, env->player.dir_d + 30);
 }
 
-void    ft_display_player(t_env *env)
+void	ft_display_player(t_env *env)
 {
-	int x;
-	int y;
+	SDL_Rect	rect;
+	int			x;
+	int			y;
 
 	y = 0;
-	while(y < env->map_height)
+	while (y < env->map_height)
 	{
 		x = 0;
-		while(x < env->map_width)
+		while (x < env->map_width)
 		{
+			rect = (SDL_Rect){x * BLOC_SIZE * env->coef_minimap, y * BLOC_SIZE * env->coef_minimap,
+			BLOC_SIZE * env->coef_minimap, BLOC_SIZE * env->coef_minimap};
 			if (env->map[y][x] == 0)
-					fillrect(env, x, y, WHITE);
+				fillrect(env, rect, WHITE);
 			if (env->map[y][x] == 2)
-					fillrect(env, x, y, GREEN);
+				fillrect(env, rect, GREEN);
 			if (env->map[y][x] == 1)
-					fillrect(env, x, y, BROWN);
+				fillrect(env, rect, BROWN);
 			x++;
 		}
 		y++;
