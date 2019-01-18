@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
+/*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 10:22:21 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/01/17 23:31:52 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/01/18 21:56:29 by badhont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,32 @@ void	quit_events(int *quit, t_env * env)
 
 void	player_events(t_env *env)
 {
-	if(env->sdl.event.type == SDL_KEYUP)
+	t_point	step;
+
+	if(env->sdl.event.type == SDL_KEYDOWN)
 	{
-		if (env->sdl.event.key.keysym.sym == SDLK_d)
-			env->posx += 20;
-		if (env->sdl.event.key.keysym.sym == SDLK_a)
-			env->posx -= 20;
-		if (env->sdl.event.key.keysym.sym == SDLK_s)
-			env->posy += 20;
-		if (env->sdl.event.key.keysym.sym == SDLK_w)
-			env->posy -= 20;
+		/*if (env->sdl.event.key.keysym.sym == SDLK_d)
+			env->player.pos.x += 0.05;
+		else if (env->sdl.event.key.keysym.sym == SDLK_LEFT)
+			env->player.pos.x -= 0.05;*/
+		if (env->sdl.event.key.keysym.sym == SDLK_UP)
+		{
+			step.x = -cos(env->player.dir_d * M_PI / 180) * 0.1;
+ 			step.y = -sin(env->player.dir_d * M_PI / 180) * 0.1;
+			env->player.pos.x += step.x;
+			env->player.pos.y += step.y;
+		}
+		else if (env->sdl.event.key.keysym.sym == SDLK_DOWN)
+		{
+			step.x = -cos(env->player.dir_d * M_PI / 180) * 0.1;
+ 			step.y = -sin(env->player.dir_d * M_PI / 180) * 0.1;
+			env->player.pos.x -= step.x;
+			env->player.pos.y -= step.y;
+		}
+		else if (env->sdl.event.key.keysym.sym == SDLK_RIGHT)
+			env->player.dir_d = (env->player.dir_d < 360) ? env->player.dir_d + 2 : 1;
+		else if (env->sdl.event.key.keysym.sym == SDLK_LEFT)
+			env->player.dir_d = (env->player.dir_d > 1) ? env->player.dir_d - 2 : 360;
 	}
 }
 void	display_events(t_env * env)

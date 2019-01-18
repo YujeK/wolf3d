@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
+/*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 16:14:06 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/01/17 22:19:22 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/01/18 21:18:11 by badhont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ void    ft_mapfiller(t_env *env, char *str)
             env->map[y][x] = ft_atoi(line + i);
             if (env->map[y][x] == 2)
             {
-                env->player.position.x = x;
-                env->player.position.y = y;
+                env->player.pos.x = x + 0.5;
+                env->player.pos.y = y + 0.5;
             }
             x++;
             i += 2;
@@ -102,8 +102,8 @@ void	ft_map_catch(t_env *env, char *str)
         i++;
 	}
     // print de la position du joueur
-    printf("player x : %d\n", env->player.position.x);
-    printf("player y : %d\n", env->player.position.y);
+    printf("player x : %f\n", env->player.pos.x);
+    printf("player y : %f\n", env->player.pos.y);
 }
 
 void    ft_print_map(t_env *env)
@@ -125,6 +125,6 @@ void    ft_print_map(t_env *env)
         i++;
 	}
     // print de la position du joueur
-    printf("player x : %d\n", env->player.position.x);
-    printf("player y : %d\n", env->player.position.y);
+    printf("player x : %f\n", env->player.pos.x);
+    printf("player y : %f\n", env->player.pos.y);
 }
