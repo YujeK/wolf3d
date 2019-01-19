@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+         #
+#    By: badhont <badhont@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/08 17:31:09 by asamir-k          #+#    #+#              #
-#    Updated: 2019/01/18 17:22:54 by sgalasso         ###   ########.fr        #
+#    Updated: 2019/01/19 17:05:37 by badhont          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ SRC=SRCS/main.c				\
 	SRCS/ft_displayplayer.c \
 	SRCS/parsing.c			\
 	SRCS/linedrawer.c		\
-	SRCS/ft_outils.c
+	SRCS/ft_outils.c		\
+	SRCS/ft_raycasting.c
 
 OBJ = $(SRC:.c=.o)
 # SDL

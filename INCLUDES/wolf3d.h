@@ -6,7 +6,7 @@
 /*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 17:38:26 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/01/18 21:16:13 by badhont          ###   ########.fr       */
+/*   Updated: 2019/01/19 17:07:12 by badhont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@
 # define PURPLE 0xFF7400AC
 # define GREY 0xFF9A9A9A
 # define BLOC_SIZE 10
+# define FOV 60
+
 
 typedef struct		s_point
 {
@@ -93,4 +95,5 @@ void    ft_mapalloc(t_env *env, char *str);
 void    ft_mapfiller(t_env *env, char *str);
 void	ft_looped(int *quit, t_env *env);
 void    events(int *quit, t_env *env);
+void    ft_raycasting(t_env *env);
 #endif
