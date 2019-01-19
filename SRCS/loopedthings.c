@@ -6,7 +6,7 @@
 /*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 10:18:59 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/01/18 21:40:42 by badhont          ###   ########.fr       */
+/*   Updated: 2019/01/19 15:33:26 by badhont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	ft_looped(int *quit, t_env *env)
 		if (SDL_PollEvent(&(env->sdl.event)) == 1)
 		{
 			events(quit, env); // hook
+			ft_raycasting(env);
 			ft_reframe(env);
 		}
 	}
