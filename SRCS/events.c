@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 10:22:21 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/01/18 21:56:29 by badhont          ###   ########.fr       */
+/*   Updated: 2019/02/25 18:53:31 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	quit_events(int *quit, t_env * env)
 void	player_events(t_env *env)
 {
 	t_point	step;
+	t_point pos;
 
 	if(env->sdl.event.type == SDL_KEYDOWN)
 	{
@@ -55,6 +56,13 @@ void	player_events(t_env *env)
  			step.y = -sin(env->player.dir_d * M_PI / 180) * 0.1;
 			env->player.pos.x += step.x;
 			env->player.pos.y += step.y;
+			pos.x = env->player.pos.x * BLOC_SIZE;
+			pos.y = env->player.pos.y * BLOC_SIZE;
+			if (ft_is_in_wall(env, pos))
+			{
+				env->player.pos.x -= step.x;
+				env->player.pos.y -= step.y;
+			}
 		}
 		else if (env->sdl.event.key.keysym.sym == SDLK_DOWN)
 		{
@@ -62,6 +70,13 @@ void	player_events(t_env *env)
  			step.y = -sin(env->player.dir_d * M_PI / 180) * 0.1;
 			env->player.pos.x -= step.x;
 			env->player.pos.y -= step.y;
+			pos.x = env->player.pos.x * BLOC_SIZE;
+			pos.y = env->player.pos.y * BLOC_SIZE;
+			if (ft_is_in_wall(env, pos))
+			{
+				env->player.pos.x += step.x;
+				env->player.pos.y += step.y;
+			}
 		}
 		else if (env->sdl.event.key.keysym.sym == SDLK_RIGHT)
 			env->player.dir_d = (env->player.dir_d < 360) ? env->player.dir_d + 2 : 1;

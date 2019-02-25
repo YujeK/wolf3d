@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wolf3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 17:38:26 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/01/19 17:07:12 by badhont          ###   ########.fr       */
+/*   Updated: 2019/02/25 18:52:37 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,10 @@ typedef struct		s_env
 	int				posx;
 	int				posy;
 	SDL_Surface		*surface;
+	int				cardinal;
 }					t_env;
 
+int		ft_is_in_wall(t_env *env, t_point pos);
 void	ft_setpixel(SDL_Surface *surface, int x, int y, Uint32 pixel);
 void	ft_set_player_dir(t_env *env);
 void	dl(t_env *env, t_point pt1, t_point pt2, int color);

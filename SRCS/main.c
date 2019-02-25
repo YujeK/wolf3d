@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 09:55:41 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/01/18 21:35:08 by badhont          ###   ########.fr       */
+/*   Updated: 2019/02/25 18:46:37 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	init_game(t_env *env)
 	env->quit = 0;
 	env->player.dir_d = 0;
 	env->coef_minimap = 6;
+	env->cardinal = 0;
 }
 
 int		give_red(int x, int y, void *arg)
