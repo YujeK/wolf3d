@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 10:22:21 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/02/25 18:53:31 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/02/26 15:50:00 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,10 @@ void	player_events(t_env *env)
 			env->player.dir_d = (env->player.dir_d < 360) ? env->player.dir_d + 2 : 1;
 		else if (env->sdl.event.key.keysym.sym == SDLK_LEFT)
 			env->player.dir_d = (env->player.dir_d > 1) ? env->player.dir_d - 2 : 360;
+	if(env->sdl.event.key.keysym.sym == SDLK_o)
+		SDL_SetRelativeMouseMode(TRUE);
+	if (env->sdl.event.key.keysym.sym == SDLK_p)
+		SDL_SetRelativeMouseMode(FALSE);
 	}
 }
 void	display_events(t_env * env)
@@ -95,6 +99,14 @@ void	display_events(t_env * env)
 	}
 }
 
+void	mouse_events(int *quit, t_env *env)
+{
+	if (env->mouse_x > 0.0)
+		env->player.dir_d = (env->player.dir_d < 360) ? env->player.dir_d + 3 : 1;
+	if (env->mouse_x < 0.0)
+		env->player.dir_d = (env->player.dir_d > 1) ? env->player.dir_d - 3 : 360;
+	quit_events(quit, env);
+}
 void	kb_events(int *quit, t_env *env)
 {
 	display_events(env);
@@ -105,4 +117,5 @@ void	kb_events(int *quit, t_env *env)
 void	events(int *quit, t_env * env)
 {
 	kb_events(quit, env);
+	mouse_events(quit, env);
 }

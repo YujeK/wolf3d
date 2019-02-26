@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 17:07:38 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/02/25 19:33:11 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/02/26 14:50:05 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ void	ft_display_player(t_env *env)
 		x = 0;
 		while (x < env->map_width)
 		{
-			rect = (SDL_Rect){x * BLOC_SIZE * env->coef_minimap / 4, y * BLOC_SIZE * env->coef_minimap,
-			BLOC_SIZE * env->coef_minimap / 4, BLOC_SIZE * env->coef_minimap /4};
+			rect = (SDL_Rect){x * BLOC_SIZE * env->coef_minimap, y * BLOC_SIZE * env->coef_minimap,
+			BLOC_SIZE * env->coef_minimap, BLOC_SIZE * env->coef_minimap};
 			if (env->map[y][x] == 0)
 				fillrect(env, rect, WHITE);
 			if (env->map[y][x] == 2)

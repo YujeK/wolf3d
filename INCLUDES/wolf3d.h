@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 17:38:26 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/02/26 11:58:14 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/02/26 16:09:58 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,9 @@ typedef struct		s_env
 	TTF_Font		*font;
 	int				cardinal;
 	double			direction;
+	int				mouse_x;
+	int				mouse_y;
+	Uint32			last;
 }					t_env;
 
 int		ft_is_in_wall(t_env *env, t_point pos);
@@ -104,4 +107,6 @@ void    events(int *quit, t_env *env);
 void    ft_raycasting(t_env *env);
 void	ft_set_string(SDL_Rect rect, char *text, SDL_Color color, t_env *env);
 SDL_Color		ft_hex_to_rgb(int hexa);
+void    crosshair(t_env *env);
+void    fpscount(t_env *env);
 #endif

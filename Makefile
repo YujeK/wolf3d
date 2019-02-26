@@ -6,7 +6,7 @@
 #    By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/08 17:31:09 by asamir-k          #+#    #+#              #
-#    Updated: 2019/02/26 11:38:13 by asamir-k         ###   ########.fr        #
+#    Updated: 2019/02/26 15:12:34 by asamir-k         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ SRC=SRCS/main.c				\
 	SRCS/parsing.c			\
 	SRCS/linedrawer.c		\
 	SRCS/ft_outils.c		\
-	SRCS/ft_raycasting.c
+	SRCS/ft_raycasting.c	\
+	SRCS/crosshair.c
 
 OBJ = $(SRC:.c=.o)
 # SDL

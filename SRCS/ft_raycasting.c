@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/19 15:35:24 by badhont           #+#    #+#             */
-/*   Updated: 2019/02/26 12:26:18 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/02/26 15:05:45 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,17 +66,17 @@ double  ft_cast_ray(t_env *env, double direction)
 	int     side;
 	double  alpha;
 
-	step.x = -cos(direction * M_PI / 180) * 0.1;
- 	step.y = -sin(direction * M_PI / 180) * 0.1;
+	step.x = -cos(direction * M_PI / 180) * 0.05;
+ 	step.y = -sin(direction * M_PI / 180) * 0.05;
 	pos.x = env->player.pos.x * BLOC_SIZE;
 	pos.y = env->player.pos.y * BLOC_SIZE;
 	origin = (t_point){pos.x, pos.y};
 	while (pos.x > 0 && pos.x < env->map_width * BLOC_SIZE && pos.y > 0 && pos.y < env->map_height * BLOC_SIZE) //tant que est dans la map incrementer
 	{
 		pos.x += step.x;
+		side = 1;
 			if (ft_is_in_wall(env, pos)) //si on arrive dans le mur
 		{
-			side = 1;
 			ft_get_cardinal(env, side);
 			alpha = fabs((env->player.dir_d - direction) * (M_PI / 180));
 			return (ft_pythagore(pos.x - origin.x, pos.y - origin.y) * cos(alpha));
