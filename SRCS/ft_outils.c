@@ -6,11 +6,22 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 15:36:41 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/01/18 17:39:36 by sgalasso         ###   ########.fr       */
+/*   Updated: 2019/02/26 11:58:40 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../INCLUDES/wolf3d.h"
+
+SDL_Color		ft_hex_to_rgb(int hexa)
+{
+	SDL_Color color;
+
+	color.r = hexa >> 24;
+	color.g = hexa >> 16;
+	color.b = hexa >> 8;
+	color.a = hexa;
+	return (color);
+}
 
 void		ft_setpixel(SDL_Surface *surface, int x, int y, Uint32 pixel)
 {
@@ -37,4 +48,16 @@ void		ft_setpixel(SDL_Surface *surface, int x, int y, Uint32 pixel)
 			p[2] = (pixel >> 16) & 0xff;
 		}
 	}
+}
+
+void			ft_set_string(SDL_Rect rect, char *text, SDL_Color color, t_env *env)
+{
+	SDL_Surface			*surface;
+	SDL_Texture			*texture;
+
+	surface = TTF_RenderText_Blended(env->font, text, color);
+	rect.w = (rect.h * surface->w) / surface->h;
+	texture = SDL_CreateTextureFromSurface(env->sdl.renderer, surface);
+	SDL_RenderCopy(env->sdl.renderer, texture, NULL, &(rect));
+	SDL_DestroyTexture(texture);
 }

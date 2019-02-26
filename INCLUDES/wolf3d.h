@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 17:38:26 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/02/25 18:52:37 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/02/26 11:58:14 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include "libft/libft.h"
 # include "uilib/includes/libui.h"
+# include <SDL_ttf.h>
+# include <SDL_image.h>
 #include <math.h>
 
 # define YDIM 800
@@ -82,7 +84,9 @@ typedef struct		s_env
 	int				posx;
 	int				posy;
 	SDL_Surface		*surface;
+	TTF_Font		*font;
 	int				cardinal;
+	double			direction;
 }					t_env;
 
 int		ft_is_in_wall(t_env *env, t_point pos);
@@ -98,4 +102,6 @@ void    ft_mapfiller(t_env *env, char *str);
 void	ft_looped(int *quit, t_env *env);
 void    events(int *quit, t_env *env);
 void    ft_raycasting(t_env *env);
+void	ft_set_string(SDL_Rect rect, char *text, SDL_Color color, t_env *env);
+SDL_Color		ft_hex_to_rgb(int hexa);
 #endif

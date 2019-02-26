@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/19 15:35:24 by badhont           #+#    #+#             */
-/*   Updated: 2019/02/25 18:54:56 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/02/26 12:26:18 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,22 @@ int     ft_selectcolor(t_env *env)
 
 void		ft_get_cardinal(t_env *env, int side)
 {
-	if (env->player.dir_d < 180)
+	if (env->direction <= 180)
 	{
-		if (env->player.dir_d < 90 && side == 0)
+		if (env->direction <= 90 && side == 1)
 			env->cardinal = 2;
-		else if (env->player.dir_d > 90 && side == 0)
+		if (env->direction > 90 && side == 1)
 			env->cardinal = 4;
-		else if (side == 1)
+		if (side == 2)
 			env->cardinal = 3;
 	}
-		if (env->player.dir_d > 180)
+	else if (env->direction > 180)
 	{
-		if (env->player.dir_d < 270 && side == 0)
-			env->cardinal = 3;
-		else if (env->player.dir_d > 270 && side == 0)
+		if (env->direction <= 270 && side == 1)
+			env->cardinal = 4;
+		if (env->direction > 270 && side == 1)
 			env->cardinal = 2;
-		else if (side == 1)
+		if (side == 2)
 			env->cardinal = 1;
 	}
 }
@@ -74,9 +74,9 @@ double  ft_cast_ray(t_env *env, double direction)
 	while (pos.x > 0 && pos.x < env->map_width * BLOC_SIZE && pos.y > 0 && pos.y < env->map_height * BLOC_SIZE) //tant que est dans la map incrementer
 	{
 		pos.x += step.x;
-				if (ft_is_in_wall(env, pos)) //si on arrive dans le mur
+			if (ft_is_in_wall(env, pos)) //si on arrive dans le mur
 		{
-			side = 0;
+			side = 1;
 			ft_get_cardinal(env, side);
 			alpha = fabs((env->player.dir_d - direction) * (M_PI / 180));
 			return (ft_pythagore(pos.x - origin.x, pos.y - origin.y) * cos(alpha));
@@ -84,7 +84,7 @@ double  ft_cast_ray(t_env *env, double direction)
 		pos.y += step.y;
 		if (ft_is_in_wall(env, pos)) //si on arrive dans le mur
 		{
-			side = 1;
+			side = 2;
 			ft_get_cardinal(env, side);
 			alpha = fabs((env->player.dir_d - direction) * (M_PI / 180));
 			return (ft_pythagore(pos.x - origin.x, pos.y - origin.y) * cos(alpha));
@@ -118,16 +118,15 @@ void    ft_put_column(t_env *env, double wall_height, int index)
 void    ft_raycasting(t_env *env)
 {
 	int     i;
-	double  direction;
 	double  distance;
 	double  wall_height;
 
 	i = 0;
 	while (i < XDIM)
 	{
-		direction = (env->player.dir_d - FOV / 2) + i * ((double)FOV / (double)XDIM); // angle du ray
+		env->direction = (env->player.dir_d - FOV / 2) + i * ((double)FOV / (double)XDIM); // angle du ray
 		//lancer un rayon et recuperer sa longueur
-		distance = ft_cast_ray(env, direction);
+		distance = ft_cast_ray(env, env->direction);
 		wall_height = (BLOC_SIZE / distance) * 1000; // reset le coef au besoin
 		ft_put_column(env, wall_height, i);
 		i++;

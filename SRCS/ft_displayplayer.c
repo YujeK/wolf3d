@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_displayplayer.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 17:07:38 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/01/18 21:55:32 by badhont          ###   ########.fr       */
+/*   Updated: 2019/02/25 19:33:11 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_dl_angle(t_env *env, double dist, double angle_d)
 	a.y = env->player.pos.y * BLOC_SIZE * env->coef_minimap;
 	b.x = (env->player.pos.x + step.x) * BLOC_SIZE * env->coef_minimap;
 	b.y = (env->player.pos.y + step.y) * BLOC_SIZE * env->coef_minimap;
- 	dl(env, a, b, RED);
+	dl(env, a, b, RED);
 }
 
 void	ft_set_player_dir(t_env *env)
@@ -68,8 +68,8 @@ void	ft_display_player(t_env *env)
 		x = 0;
 		while (x < env->map_width)
 		{
-			rect = (SDL_Rect){x * BLOC_SIZE * env->coef_minimap, y * BLOC_SIZE * env->coef_minimap,
-			BLOC_SIZE * env->coef_minimap, BLOC_SIZE * env->coef_minimap};
+			rect = (SDL_Rect){x * BLOC_SIZE * env->coef_minimap / 4, y * BLOC_SIZE * env->coef_minimap,
+			BLOC_SIZE * env->coef_minimap / 4, BLOC_SIZE * env->coef_minimap /4};
 			if (env->map[y][x] == 0)
 				fillrect(env, rect, WHITE);
 			if (env->map[y][x] == 2)
