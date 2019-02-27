@@ -6,11 +6,19 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 15:36:41 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/02/26 11:58:40 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/02/27 11:15:49 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../INCLUDES/wolf3d.h"
+
+void			ft_loadtexture(t_env *env)
+{
+	env->north_tex = IMG_Load("RESSOURCES/pics/wood.png");
+	env->east_tex = IMG_Load("RESSOURCES/pics/bluestone.png");
+	env->west_tex = IMG_Load("RESSOURCES/pics/purplestone.png");
+	env->south_tex = IMG_Load("RESSOURCES/pics/greystone.png");
+}
 
 SDL_Color		ft_hex_to_rgb(int hexa)
 {

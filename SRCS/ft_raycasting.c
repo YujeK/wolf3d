@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/19 15:35:24 by badhont           #+#    #+#             */
-/*   Updated: 2019/02/26 15:05:45 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/02/27 14:11:32 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,11 +106,11 @@ void    ft_put_column(t_env *env, double wall_height, int index)
 	while (i < YDIM)
 	{
 		if (i < p1)
-			ft_setpixel(env->surface, index, i, BLUE);
+			ft_setpixel(env->surface, XDIM - 1 - index, i, BLUE);
 		else if (i >= p1 && i < p2)
-			ft_setpixel(env->surface, index, i, ft_selectcolor(env));
+			ft_setpixel(env->surface, XDIM - 1 - index, i, ft_selectcolor(env));
 		else
-			ft_setpixel(env->surface, index, i, GREEN);
+			ft_setpixel(env->surface, XDIM - 1 - index, i, GREEN);
 		i++;
 	}
 }
@@ -131,4 +131,21 @@ void    ft_raycasting(t_env *env)
 		ft_put_column(env, wall_height, i);
 		i++;
 	}
+}
+
+
+void		ft_texturing(t_env *env)
+{
+	if (side == 1)
+		{
+			wallhitx = pos.x % BLOC_SIZE;
+			tex.x = wallhit.x * tex.width / BLOC_SIZE;
+			whichpx = p1 * tex.h / p2;
+		}
+	if (side == 2)
+		{
+			wallhity = pos.y % BLOC_SIZE;
+			tex.y = wallhit.y * tex.width / BLOC_SIZE;
+			whichpx = p1 * tex.h / p2;
+		}
 }
