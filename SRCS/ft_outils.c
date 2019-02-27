@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 15:36:41 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/02/27 11:15:49 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/02/27 16:58:39 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,33 @@ void			ft_set_string(SDL_Rect rect, char *text, SDL_Color color, t_env *env)
 	texture = SDL_CreateTextureFromSurface(env->sdl.renderer, surface);
 	SDL_RenderCopy(env->sdl.renderer, texture, NULL, &(rect));
 	SDL_DestroyTexture(texture);
+}
+
+Uint32			ft_getpixel(SDL_Surface *surface, int x, int y)
+{
+	int				bpp;
+	Uint8			*p;
+	Uint32			ret;
+
+	if ((SDL_LockSurface(surface)) != 0)
+		exit(EXIT_FAILURE);
+	x = abs(--x);
+	y = abs(--y);
+	bpp = surface->format->BytesPerPixel;
+	p = (Uint8 *)surface->pixels + y * surface->pitch + x * bpp;
+	if (bpp == 1)
+		ret = *p;
+	else if (bpp == 2)
+		ret = *(Uint16 *)p;
+	else if (bpp == 3)
+	{
+		ret = (SDL_BYTEORDER == SDL_BIG_ENDIAN) ?
+			(p[0] << 16 | p[1] << 8 | p[2]) : (p[0] | p[1] << 8 | p[2] << 16);
+	}
+	else if (bpp == 4)
+		ret = *(Uint32 *)p;
+	else
+		ret = 0;
+	SDL_UnlockSurface(surface);
+	return (ret);
 }

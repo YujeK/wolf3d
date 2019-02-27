@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 17:38:26 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/02/27 14:09:11 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/02/27 16:48:27 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # define YDIM 800
 # define XDIM 800
 # define PI 3.14160
+# define TEX_W 64
+# define TEX_H 64
 
 # define PINK 0xFFE62BFD
 # define BLUE 0xFFFD1200
@@ -73,6 +75,7 @@ typedef struct		s_line
 
 typedef struct		s_env
 {
+	int				side;
 	SDL_Rect		rect;
 	t_player		player;
 	t_sdl			sdl;
@@ -83,6 +86,7 @@ typedef struct		s_env
 	int				quit;
 	int				posx;
 	int				posy;
+	t_point			pos;
 	SDL_Surface		*surface;
 	TTF_Font		*font;
 	int				cardinal;
@@ -116,4 +120,6 @@ SDL_Color		ft_hex_to_rgb(int hexa);
 void    crosshair(t_env *env);
 void    fpscount(t_env *env);
 void	ft_loadtexture(t_env *env);
+Uint32	ft_getpixel(SDL_Surface *surface, int x, int y);
+Uint32	ft_texturing(t_env *env, int i, int p1, int p2);
 #endif
