@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wolf3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
+/*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 17:38:26 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/02/27 14:09:11 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/02/26 14:52:21 by badhont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ typedef struct		s_rect
 typedef struct		s_player
 {
 	t_point		pos;   // position du joueur
-	double		dir_d; // degres
-	double		dir_r; // radians
+	double		dir_d; // direction en degres
+	double		dir_r; // direction en radians
 }					t_player;
 
 typedef struct		s_line

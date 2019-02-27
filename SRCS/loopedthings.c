@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loopedthings.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
+/*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 10:18:59 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/02/27 10:32:40 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/02/26 12:59:24 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ void	ft_reframe(t_env *env)
 
 	rect = (SDL_Rect){0, 0, 60, 30};
 	SDL_RenderClear(env->sdl.renderer);
-//	ft_display_player(env);
-//	ft_set_player_dir(env);
 	texture = SDL_CreateTextureFromSurface(env->sdl.renderer, env->surface);
 	SDL_RenderCopy(env->sdl.renderer, texture, NULL, NULL);
 	ft_set_string(rect, ft_itoa(env->player.dir_d), ft_hex_to_rgb(WHITE), env);
@@ -42,7 +40,10 @@ void	ft_looped(int *quit, t_env *env)
 			events(quit, env);// hook
 			ft_raycasting(env);
 			crosshair(env);
+			ft_set_player_dir(env);
+			ft_display_player(env);
 			ft_reframe(env);
+
 		}
 	}
 }

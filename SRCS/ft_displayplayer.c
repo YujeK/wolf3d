@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ft_displayplayer.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
+/*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 17:07:38 by asamir-k          #+#    #+#             */
 /*   Updated: 2019/02/26 14:50:05 by asamir-k         ###   ########.fr       */
