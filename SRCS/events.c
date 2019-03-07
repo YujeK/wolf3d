@@ -6,24 +6,30 @@
 /*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 10:22:21 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/07 22:57:53 by badhont          ###   ########.fr       */
+/*   Updated: 2019/03/08 00:01:00 by badhont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../INCLUDES/wolf3d.h"
 
-void	player_events(t_env *env)
+int		events(t_env *env)
 {
 	t_point	step;
 	t_point pos;
+	int		change;
 
-	if(env->sdl.event.type == SDL_KEYDOWN)
+	change = 0;
+	if (env->sdl.event.type == SDL_QUIT
+		|| env->sdl.event.key.keysym.sym == SDLK_ESCAPE)
+		ft_exit(env);
+
+	else if (env->sdl.event.type == SDL_KEYDOWN)
 	{
 		/*if (env->sdl.event.key.keysym.sym == SDLK_d)
 			env->player.pos.x += 0.05;
 		else if (env->sdl.event.key.keysym.sym == SDLK_LEFT)
 			env->player.pos.x -= 0.05;*/
-		if (env->sdl.event.key.keysym.sym == SDLK_UP)
+		if (env->sdl.event.key.keysym.sym == SDLK_w)
 		{
 			step.x = -cos(env->player.dir_d * M_PI / 180) * 0.1;
  			step.y = -sin(env->player.dir_d * M_PI / 180) * 0.1;
@@ -36,8 +42,9 @@ void	player_events(t_env *env)
 				env->player.pos.x -= step.x;
 				env->player.pos.y -= step.y;
 			}
+			change = 1;
 		}
-		else if (env->sdl.event.key.keysym.sym == SDLK_DOWN)
+		else if (env->sdl.event.key.keysym.sym == SDLK_s)
 		{
 			step.x = -cos(env->player.dir_d * M_PI / 180) * 0.1;
  			step.y = -sin(env->player.dir_d * M_PI / 180) * 0.1;
@@ -50,41 +57,33 @@ void	player_events(t_env *env)
 				env->player.pos.x += step.x;
 				env->player.pos.y += step.y;
 			}
+			change = 1;
 		}
-		else if (env->sdl.event.key.keysym.sym == SDLK_LEFT)
-			env->player.dir_d = (env->player.dir_d < 360) ? env->player.dir_d + 2 : 1;
-		else if (env->sdl.event.key.keysym.sym == SDLK_RIGHT)
-			env->player.dir_d = (env->player.dir_d > 1) ? env->player.dir_d - 2 : 360;
-	if(env->sdl.event.key.keysym.sym == SDLK_o)
-		SDL_SetRelativeMouseMode(TRUE);
-	if (env->sdl.event.key.keysym.sym == SDLK_p)
-		SDL_SetRelativeMouseMode(FALSE);
-	}
-}
-
-void	mouse_events(int *quit, t_env *env)
-{
-	if (env->mouse_x < 0.0)
-		env->player.dir_d = (env->player.dir_d < 360) ? env->player.dir_d + 3 : 1;
-	if (env->mouse_x > 0.0)
-		env->player.dir_d = (env->player.dir_d > 1) ? env->player.dir_d - 3 : 360;
-	quit_events(quit, env);
-}
-
-void	quit_events(int *quit, t_env * env)
-{
-	if (env->sdl.event.type == SDL_QUIT)
-		*quit = 1;
-	else if (env->sdl.event.type == SDL_KEYDOWN)
+		else if (env->sdl.event.key.keysym.sym == SDLK_a)
 		{
-			if(env->sdl.event.key.keysym.sym == SDLK_ESCAPE)
-				*quit = 1;
+			env->player.dir_d = (env->player.dir_d < 360) ? env->player.dir_d + 2 : 1;
+			change = 1;
+		}
+		else if (env->sdl.event.key.keysym.sym == SDLK_d)
+		{
+			env->player.dir_d = (env->player.dir_d > 1) ? env->player.dir_d - 2 : 360;
+			change = 1;
+		}
+		/*if(env->sdl.event.key.keysym.sym == SDLK_o)
+			SDL_SetRelativeMouseMode(FALSE);
+		if (env->sdl.event.key.keysym.sym == SDLK_p)
+			SDL_SetRelativeMouseMode(TRUE);*/
 	}
-}
 
-void	events(int *quit, t_env * env)
-{
-	player_events(env);
-	quit_events(quit, env);
-	mouse_events(quit, env);
+	if (env->sdl.event.type == SDL_MOUSEMOTION)
+	{
+		env->player.dir_d -= env->mouse_x / 6;
+		if (env->player.dir_d > 360)
+			env->player.dir_d -= 360;
+		else if (env->player.dir_d < 0)
+			env->player.dir_d = 360 - env->player.dir_d;
+		change = 1;
+	}
+
+	return (change);
 }

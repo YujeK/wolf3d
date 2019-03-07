@@ -82,7 +82,6 @@ typedef struct		s_env
 {
 	t_sdl			sdl;
 	SDL_Surface		*surface;
-	SDL_Texture		*texture;
 	TTF_Font		*font;
 	int				**map;
 	int				map_width;
@@ -114,6 +113,8 @@ typedef struct		s_env
 SDL_Surface      *ft_new_surface(int height, int width, t_env *env);
 void			ft_error_exit(char *str, t_env *env);
 void			ft_exit(t_env *env);
+int				events(t_env *env);
+void			ft_looped(t_env *env);
 
 
 int				ft_is_in_wall(t_env *env, t_point pos);
@@ -126,8 +127,6 @@ int				ft_readverif(char *str);
 void			ft_map_catch(t_env *env, char *str);
 void			ft_mapalloc(t_env *env, char *str);
 void			ft_mapfiller(t_env *env, char *str);
-void			ft_looped(int *quit, t_env *env);
-void			events(int *quit, t_env *env);
 void			ft_raycasting(t_env *env);
 void			ft_set_string(SDL_Rect rect, char *text, SDL_Color color, t_env *env);
 SDL_Color		ft_hex_to_rgb(int hexa);
