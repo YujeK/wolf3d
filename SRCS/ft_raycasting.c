@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_raycasting.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/19 15:35:24 by badhont           #+#    #+#             */
-/*   Updated: 2019/03/05 16:27:33 by badhont          ###   ########.fr       */
+/*   Updated: 2019/03/07 19:29:35 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,8 +144,6 @@ Uint32 GetPixel32(SDL_Surface* image,int i,int j)
 
 Uint32	ft_texturing(t_env *env, int y,  int p1, int p2)
 {
-	p1 = 0;
-	p2 = 0;
 	double 	wallhitx;
 	int		tex_x;
 	int		tex_y;
