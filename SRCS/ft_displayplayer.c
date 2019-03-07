@@ -6,7 +6,7 @@
 /*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 17:07:38 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/02/26 14:50:05 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/02/28 13:33:09 by badhont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ void	ft_dl_angle(t_env *env, double dist, double angle_d)
 
 void	ft_set_player_dir(t_env *env)
 {
-	ft_dl_angle(env, 2, env->player.dir_d);
-	ft_dl_angle(env, 2, env->player.dir_d - 30);
-	ft_dl_angle(env, 2, env->player.dir_d + 30);
+	ft_dl_angle(env, 2, -(env->player.dir_d - 90));
+	ft_dl_angle(env, 2, -(env->player.dir_d - 120));
+	ft_dl_angle(env, 2, -(env->player.dir_d - 60));
 }
 
 void	ft_display_player(t_env *env)

@@ -6,7 +6,7 @@
 /*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 10:18:59 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/02/26 12:59:24 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/02/27 17:08:23 by badhont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,8 @@ void	ft_looped(int *quit, t_env *env)
 	//		env->last = clock();
 			events(quit, env);// hook
 			ft_raycasting(env);
-			crosshair(env);
-			ft_set_player_dir(env);
 			ft_display_player(env);
+			ft_set_player_dir(env);
 			ft_reframe(env);
 
 		}

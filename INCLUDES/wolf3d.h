@@ -6,7 +6,7 @@
 /*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 17:38:26 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/02/26 14:52:21 by badhont          ###   ########.fr       */
+/*   Updated: 2019/02/28 18:54:25 by badhont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # define YDIM 800
 # define XDIM 800
 # define PI 3.14160
+# define TEX_W 64
+# define TEX_H 64
 
 # define PINK 0xFFE62BFD
 # define BLUE 0xFFFD1200
@@ -73,6 +75,8 @@ typedef struct		s_line
 
 typedef struct		s_env
 {
+	double			distance;
+	int				side;
 	SDL_Rect		rect;
 	t_player		player;
 	t_sdl			sdl;
@@ -83,6 +87,7 @@ typedef struct		s_env
 	int				quit;
 	int				posx;
 	int				posy;
+	t_point			pos;
 	SDL_Surface		*surface;
 	TTF_Font		*font;
 	int				cardinal;
@@ -95,7 +100,7 @@ typedef struct		s_env
 	SDL_Surface			*south_tex;
 	SDL_Surface			*east_tex;
 	int				wallhitx;
-	int				wallhity;
+	t_point			ray_pos;
 }					t_env;
 
 int		ft_is_in_wall(t_env *env, t_point pos);
@@ -116,4 +121,8 @@ SDL_Color		ft_hex_to_rgb(int hexa);
 void    crosshair(t_env *env);
 void    fpscount(t_env *env);
 void	ft_loadtexture(t_env *env);
+Uint32	ft_getpixel(SDL_Surface *surface, int x, int y);
+Uint32	ft_texturing(t_env *env, int i, int p1, int p2);
+void    ft_put_column(t_env *env, double wall_height, int x);
+void	ft_brosenham(t_env *env, t_line *line, int color, int swap);
 #endif

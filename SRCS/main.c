@@ -6,7 +6,7 @@
 /*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 09:55:41 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/02/27 11:16:40 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/02/28 18:06:20 by badhont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 void	init_game(t_env *env)
 {
 	env->quit = 0;
-	env->player.dir_d = 90;
-	env->coef_minimap = 6;
-	env->cardinal = 0;
+	env->player.dir_d = 0;
+	env->coef_minimap = 2;
+	env->cardinal = 1;
 	if (TTF_Init() < 0)
 		exit(EXIT_FAILURE);
 	if (!(env->font = TTF_OpenFont("RESSOURCES/BEBAS.ttf", 100)))
