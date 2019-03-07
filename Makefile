@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+         #
+#    By: badhont <badhont@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/08 17:31:09 by asamir-k          #+#    #+#              #
-#    Updated: 2019/02/26 15:12:34 by asamir-k         ###   ########.fr        #
+#    Updated: 2019/03/07 22:36:58 by badhont          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,14 +25,16 @@ SRC=SRCS/main.c				\
 	SRCS/linedrawer.c		\
 	SRCS/ft_outils.c		\
 	SRCS/ft_raycasting.c	\
-	SRCS/crosshair.c
+	SRCS/crosshair.c \
+	SRCS/ft_new_surface.c \
+	SRCS/ft_exit.c \
 
 OBJ = $(SRC:.c=.o)
 # SDL
 LSDL_LIB	:=	$(shell sdl2-config --libs)
 LSDL_INC	:=	$(shell sdl2-config --cflags)
-LIB			:=	$(LSDL_LIB) -L INCLUDES/uilib -lui
-INC			:=	$(LSDL_INC) -I INCLUDES/uilib/includes
+LIB			:=	$(LSDL_LIB)
+INC			:=	$(LSDL_INC)
 
 all: $(NAME)
 

@@ -6,12 +6,11 @@
 /*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 16:14:06 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/01/18 21:18:11 by badhont          ###   ########.fr       */
+/*   Updated: 2019/03/07 22:46:46 by badhont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../INCLUDES/wolf3d.h"
-# include "../INCLUDES/uilib/includes/libui.h"
 
 int		ft_readverif(char *str)
 {

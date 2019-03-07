@@ -6,7 +6,7 @@
 /*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 15:36:41 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/02/28 18:10:20 by badhont          ###   ########.fr       */
+/*   Updated: 2019/03/07 22:45:14 by badhont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,14 @@
 
 void			ft_loadtexture(t_env *env)
 {
-	env->north_tex = IMG_Load("RESSOURCES/pics/wood.png");
-	env->east_tex = IMG_Load("RESSOURCES/pics/bluestone.png");
-	env->west_tex = IMG_Load("RESSOURCES/pics/purplestone.png");
-	env->south_tex = IMG_Load("RESSOURCES/pics/greystone.png");
+	if (!(env->north_tex = IMG_Load("RESSOURCES/pics/wood.png")))
+		ft_error_exit("Wolf3d: Unable to load texture", env);
+	if (!(env->east_tex = IMG_Load("RESSOURCES/pics/bluestone.png")))
+			ft_error_exit("Wolf3d: Unable to load texture", env);
+	if (!(env->west_tex = IMG_Load("RESSOURCES/pics/purplestone.png")))
+			ft_error_exit("Wolf3d: Unable to load texture", env);
+	if (!(env->south_tex = IMG_Load("RESSOURCES/pics/greystone.png")))
+			ft_error_exit("Wolf3d: Unable to load texture", env);
 }
 
 SDL_Color		ft_hex_to_rgb(int hexa)

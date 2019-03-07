@@ -1,5 +1,5 @@
 /* ************************************************************************** */
-/*                                                                            */
+/*			                                                                  */
 /*                                                        :::      ::::::::   */
 /*   wolf3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
@@ -14,7 +14,6 @@
 # define WOLF3D_H
 
 # include "libft/libft.h"
-# include "uilib/includes/libui.h"
 # include <SDL_ttf.h>
 # include <SDL_image.h>
 #include <math.h>
@@ -40,6 +39,12 @@
 # define BLOC_SIZE 10
 # define FOV 60
 
+typedef struct		s_sdl
+{
+	SDL_Event		event;
+	SDL_Window		*window;
+	SDL_Renderer	*renderer;
+}					t_sdl;
 
 typedef struct		s_point
 {
@@ -75,54 +80,62 @@ typedef struct		s_line
 
 typedef struct		s_env
 {
-	double			distance;
-	int				side;
-	SDL_Rect		rect;
-	t_player		player;
 	t_sdl			sdl;
+	SDL_Surface		*surface;
+	SDL_Texture		*texture;
+	TTF_Font		*font;
 	int				**map;
 	int				map_width;
 	int				map_height;
+	t_player		player;
+	SDL_Surface		*north_tex;		// faire structure pour tout ca : {
+	SDL_Surface		*west_tex;		//
+	SDL_Surface		*south_tex;		//
+	SDL_Surface		*east_tex;		// }
+	int				mouse_x;
+	int				mouse_y;
+
+
+
+	double			distance;
+	int				side;
+	SDL_Rect		rect;
 	int				coef_minimap; // taille de la minimap
-	int				quit;
 	int				posx;
 	int				posy;
 	t_point			pos;
-	SDL_Surface		*surface;
-	TTF_Font		*font;
 	int				cardinal;
 	double			direction;
-	int				mouse_x;
-	int				mouse_y;
 	Uint32			last;
-	SDL_Surface			*north_tex;
-	SDL_Surface			*west_tex;
-	SDL_Surface			*south_tex;
-	SDL_Surface			*east_tex;
 	int				wallhitx;
 	t_point			ray_pos;
 }					t_env;
 
-int		ft_is_in_wall(t_env *env, t_point pos);
-void	ft_setpixel(SDL_Surface *surface, int x, int y, Uint32 pixel);
-void	ft_set_player_dir(t_env *env);
-void	dl(t_env *env, t_point pt1, t_point pt2, int color);
-void    ft_print_map(t_env *env);
-void    ft_display_player(t_env *env);
-int		ft_readverif(char *str);
-void	ft_map_catch(t_env *env, char *str);
-void    ft_mapalloc(t_env *env, char *str);
-void    ft_mapfiller(t_env *env, char *str);
-void	ft_looped(int *quit, t_env *env);
-void    events(int *quit, t_env *env);
-void    ft_raycasting(t_env *env);
-void	ft_set_string(SDL_Rect rect, char *text, SDL_Color color, t_env *env);
+SDL_Surface      *ft_new_surface(int height, int width, t_env *env);
+void			ft_error_exit(char *str, t_env *env);
+void			ft_exit(t_env *env);
+
+
+int				ft_is_in_wall(t_env *env, t_point pos);
+void			ft_setpixel(SDL_Surface *surface, int x, int y, Uint32 pixel);
+void			ft_set_player_dir(t_env *env);
+void			dl(t_env *env, t_point pt1, t_point pt2, int color);
+void			ft_print_map(t_env *env);
+void			ft_display_player(t_env *env);
+int				ft_readverif(char *str);
+void			ft_map_catch(t_env *env, char *str);
+void			ft_mapalloc(t_env *env, char *str);
+void			ft_mapfiller(t_env *env, char *str);
+void			ft_looped(int *quit, t_env *env);
+void			events(int *quit, t_env *env);
+void			ft_raycasting(t_env *env);
+void			ft_set_string(SDL_Rect rect, char *text, SDL_Color color, t_env *env);
 SDL_Color		ft_hex_to_rgb(int hexa);
-void    crosshair(t_env *env);
-void    fpscount(t_env *env);
-void	ft_loadtexture(t_env *env);
-Uint32	ft_getpixel(SDL_Surface *surface, int x, int y);
-Uint32	ft_texturing(t_env *env, int i, int p1, int p2);
-void    ft_put_column(t_env *env, double wall_height, int x);
-void	ft_brosenham(t_env *env, t_line *line, int color, int swap);
+void			crosshair(t_env *env);
+void			fpscount(t_env *env);
+void			ft_loadtexture(t_env *env);
+Uint32			ft_getpixel(SDL_Surface *surface, int x, int y);
+Uint32			ft_texturing(t_env *env, int i, int p1, int p2);
+void			ft_put_column(t_env *env, double wall_height, int x);
+void			ft_brosenham(t_env *env, t_line *line, int color, int swap);
 #endif
