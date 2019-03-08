@@ -6,7 +6,7 @@
 #    By: badhont <badhont@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/08 17:31:09 by asamir-k          #+#    #+#              #
-#    Updated: 2019/03/07 22:36:58 by badhont          ###   ########.fr        #
+#    Updated: 2019/03/08 18:41:08 by badhont          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,10 +18,10 @@ LIB_PATH= INCLUDES/libft/
 COMP= SDL2
 SDLLIB= -L mlx -lmlx -framework Opengl -framework Appkit
 SRC=SRCS/main.c				\
-	SRCS/loopedthings.c		\
+	SRCS/ft_wolf_loop.c		\
 	SRCS/events.c			\
-	SRCS/ft_displayplayer.c \
-	SRCS/parsing.c			\
+	SRCS/ft_minimap.c \
+	SRCS/ft_parsing.c			\
 	SRCS/linedrawer.c		\
 	SRCS/ft_outils.c		\
 	SRCS/ft_raycasting.c	\

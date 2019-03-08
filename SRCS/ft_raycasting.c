@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_raycasting.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
+/*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/19 15:35:24 by badhont           #+#    #+#             */
-/*   Updated: 2019/03/07 19:29:35 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/08 16:12:16 by badhont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 SDL_Surface*     ft_selectcolor(t_env *env)
 {
 	if (env->cardinal == 1)
-		return (env->north_tex);
+		return (env->tex.north);
 	if (env->cardinal == 2)
-		return (env->east_tex);
+		return (env->tex.east);
 	if (env->cardinal == 3)
-		return (env->south_tex);
+		return (env->tex.south);
 	if (env->cardinal == 4)
-		return (env->west_tex);
+		return (env->tex.west);
 	return (0);
 }
 
@@ -147,16 +147,16 @@ Uint32	ft_texturing(t_env *env, int y,  int p1, int p2)
 	double 	wallhitx;
 	int		tex_x;
 	int		tex_y;
-	tex_y = (y - p1) * env->north_tex->h / (p2 - p1);
+	tex_y = (y - p1) * env->tex.north->h / (p2 - p1);
 	if (env->side == 1)
 		{
-			wallhitx = (int)env->pos.x % BLOC_SIZE; //env->north_tex->w;
-			tex_x = (wallhitx * env->north_tex->w) / ((BLOC_SIZE / env->distance) * 10);
+			wallhitx = (int)env->pos.x % BLOC_SIZE; //env->tex.north->w;
+			tex_x = (wallhitx * env->tex.north->w) / ((BLOC_SIZE / env->distance) * 10);
 		}
 	else
 		{
 			wallhitx = (int)env->pos.y % BLOC_SIZE;
-			tex_x = (wallhitx * env->north_tex->w) / ((BLOC_SIZE / env->distance) * 10);
+			tex_x = (wallhitx * env->tex.north->w) / ((BLOC_SIZE / env->distance) * 10);
 		}
 	return(GetPixel32(ft_selectcolor(env), tex_x, tex_y));
 }

@@ -6,7 +6,7 @@
 /*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 09:55:41 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/07 23:51:10 by badhont          ###   ########.fr       */
+/*   Updated: 2019/03/08 18:40:17 by badhont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void	init_sdl(t_env *env)
 	if (!(env->sdl.renderer = SDL_CreateRenderer(env->sdl.window, -1,
 		SDL_RENDERER_TARGETTEXTURE | SDL_RENDERER_SOFTWARE)))
 		ft_error_exit("Wolf3d: Unable to make renderer", env);
-	SDL_SetRelativeMouseMode(TRUE);
+	if (SDL_SetRelativeMouseMode(TRUE) < 0)
+		ft_error_exit("Wolf3d: Unable to set relative mode", env);
 }
 
 void	init_game(t_env *env)
@@ -49,18 +50,16 @@ int		main(int ac, char **av)
 
 	if (ac == 2)
 	{
-		// initialisation
 		ft_bzero(&env, sizeof(t_env));
 		init_sdl(&env); // c'est bon
-		init_game(&env);
+		init_game(&env); // c'est bon
 
-		// parsing
-		ft_map_catch(&env, av[1]); // proteger le contenu
+		ft_parsing(&env, av[1]); // proteger le contenu
 
-		// gameloop
-		ft_looped(&env);
+		ft_wolf_loop(&env);
 	}
-	ft_putstr("Hi ^-^ !!! One argument(only) after binary authorised to make it work.");
-	ft_putendl("Have a good time using me, byebye !\n*pff humans are so retarded wtf ...*");
+	ft_putendl("\nHi ^-^ !!! One argument only authorised to make it work.");
+	ft_putendl("Have a good time using me, byebye !");
+	ft_putendl("\n\n           *pff humans are so retarded wtf ...*");
 	return (0);
 }

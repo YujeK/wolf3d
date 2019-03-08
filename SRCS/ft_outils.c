@@ -6,7 +6,7 @@
 /*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 15:36:41 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/07 22:45:14 by badhont          ###   ########.fr       */
+/*   Updated: 2019/03/08 16:12:16 by badhont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 void			ft_loadtexture(t_env *env)
 {
-	if (!(env->north_tex = IMG_Load("RESSOURCES/pics/wood.png")))
+	if (!(env->tex.north = IMG_Load("RESSOURCES/pics/wood.png")))
 		ft_error_exit("Wolf3d: Unable to load texture", env);
-	if (!(env->east_tex = IMG_Load("RESSOURCES/pics/bluestone.png")))
+	if (!(env->tex.east = IMG_Load("RESSOURCES/pics/bluestone.png")))
 			ft_error_exit("Wolf3d: Unable to load texture", env);
-	if (!(env->west_tex = IMG_Load("RESSOURCES/pics/purplestone.png")))
+	if (!(env->tex.west = IMG_Load("RESSOURCES/pics/purplestone.png")))
 			ft_error_exit("Wolf3d: Unable to load texture", env);
-	if (!(env->south_tex = IMG_Load("RESSOURCES/pics/greystone.png")))
+	if (!(env->tex.south = IMG_Load("RESSOURCES/pics/greystone.png")))
 			ft_error_exit("Wolf3d: Unable to load texture", env);
 }
 

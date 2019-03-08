@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   loopedthings.c                                     :+:      :+:    :+:   */
+/*   wolf_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 10:18:59 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/08 00:02:21 by badhont          ###   ########.fr       */
+/*   Updated: 2019/03/08 18:40:46 by badhont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ void	ft_reframe(t_env *env)
 	SDL_RenderPresent(env->sdl.renderer);
 }
 
-void	ft_looped(t_env *env)
+void	ft_wolf_loop(t_env *env)
 {
 	// make frame
 	ft_raycasting(env);
-	ft_display_player(env);
+	ft_minimap(env);
 	ft_set_player_dir(env);
 	ft_reframe(env);
 	while (1)
@@ -41,7 +41,7 @@ void	ft_looped(t_env *env)
 		{
 			// calcul des pixels a afficher
 			ft_raycasting(env);
-			ft_display_player(env);
+			ft_minimap(env);
 			ft_set_player_dir(env);
 			
 			// make frame

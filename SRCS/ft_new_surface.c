@@ -6,7 +6,7 @@
 /*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 22:15:19 by badhont           #+#    #+#             */
-/*   Updated: 2019/03/07 23:31:59 by badhont          ###   ########.fr       */
+/*   Updated: 2019/03/08 18:12:13 by badhont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ SDL_Surface      *ft_new_surface(int height, int width, t_env *env)
 	color[3] = 0xff000000;
 	if (!(surface = SDL_CreateRGBSurface(
 	0, width, height, 32, color[0], color[1], color[2], color[3])))
-		ft_error_exit("Wolf3d: Can't create SDL_Surface.", env);
+		ft_error_exit("Wolf3d: Unable create SDL_Surface.", env);
 	return (surface);
 }
