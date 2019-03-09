@@ -6,11 +6,11 @@
 /*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 21:42:55 by badhont           #+#    #+#             */
-/*   Updated: 2019/03/09 16:59:25 by sgalasso         ###   ########.fr       */
+/*   Updated: 2019/03/09 19:54:24 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../INCLUDES/wolf3d.h"
+#include "wolf3d.h"
 
 void	ft_error_exit(char *str, t_env *env)
 {

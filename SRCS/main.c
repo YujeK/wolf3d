@@ -6,11 +6,11 @@
 /*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 09:55:41 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/08 18:40:17 by badhont          ###   ########.fr       */
+/*   Updated: 2019/03/09 19:41:32 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../INCLUDES/wolf3d.h"
+#include "wolf3d.h"
 
 void	init_sdl(t_env *env)
 {

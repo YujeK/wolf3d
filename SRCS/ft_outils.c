@@ -6,11 +6,11 @@
 /*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 15:36:41 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/09 18:04:03 by sgalasso         ###   ########.fr       */
+/*   Updated: 2019/03/09 19:56:25 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../INCLUDES/wolf3d.h"
+#include "wolf3d.h"
 
 void			ft_loadtexture(t_env *env)
 {

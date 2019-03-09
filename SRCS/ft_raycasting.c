@@ -6,11 +6,11 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/19 15:35:24 by badhont           #+#    #+#             */
-/*   Updated: 2019/03/09 19:51:42 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/09 19:56:52 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../INCLUDES/wolf3d.h"
+#include "wolf3d.h"
 
 Uint32 GetPixel32(SDL_Surface* image,int i,int j)
 {

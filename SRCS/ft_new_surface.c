@@ -6,11 +6,11 @@
 /*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 22:15:19 by badhont           #+#    #+#             */
-/*   Updated: 2019/03/08 18:12:13 by badhont          ###   ########.fr       */
+/*   Updated: 2019/03/09 19:55:16 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../INCLUDES/wolf3d.h"
+#include "wolf3d.h"
 
 SDL_Surface      *ft_new_surface(int height, int width, t_env *env)
 {

@@ -6,17 +6,18 @@
 /*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 17:38:26 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/09 18:01:16 by sgalasso         ###   ########.fr       */
+/*   Updated: 2019/03/09 19:43:46 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WOLF3D_H
 # define WOLF3D_H
 
-# include "libft/libft.h"
-# include <SDL_ttf.h>
-# include <SDL_image.h>
-#include <math.h>
+# include "libft.h"
+# include <SDL2/SDL.h>
+# include <SDL2/SDL_ttf.h>
+# include <SDL2/SDL_image.h>
+# include <math.h>
 
 # define YDIM 800
 # define XDIM 800
