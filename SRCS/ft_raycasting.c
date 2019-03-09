@@ -6,11 +6,18 @@
 /*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/19 15:35:24 by badhont           #+#    #+#             */
-/*   Updated: 2019/03/08 16:12:16 by badhont          ###   ########.fr       */
+/*   Updated: 2019/03/09 16:58:48 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../INCLUDES/wolf3d.h"
+
+Uint32 GetPixel32(SDL_Surface* image,int i,int j)
+{
+    if (i<0 || i>image->w-1 || j<0 || j>image->h-1)
+        return 0;
+    return ((Uint32*)(image->pixels))[j*(image->pitch/4)+i];   // lecture directe des pixels
+}
 
 SDL_Surface*     ft_selectcolor(t_env *env)
 {
@@ -109,13 +116,33 @@ void    ft_put_column(t_env *env, double wall_height, int x)
 		if (y < p1)
 			ft_setpixel(env->surface, XDIM - 1 - x, y, BLUE);
 		else if (y >= p1 && y < p2)
-			{
 			ft_setpixel(env->surface, XDIM - 1 - x, y, ft_texturing(env, y, p1, p2));
-			}
 		else
 			ft_setpixel(env->surface, XDIM - 1 - x, y, GREEN);
 		y++;
 	}
+}
+
+Uint32	ft_texturing(t_env *env, int y,  int p1, int p2)
+{
+	double 	wallhitx;
+	Uint32	color;
+	int		tex_x;
+	int		tex_y;
+
+	tex_y = (y - p1) * env->tex.north->h / (p2 - p1);
+	if (env->side == 2)
+	{
+		wallhitx = (int)env->pos.x % BLOC_SIZE; //env->tex.north->w;
+		tex_x = (wallhitx * env->tex.north->w) / ((BLOC_SIZE / env->distance) * 10);
+	}
+	else
+	{
+		wallhitx = (int)env->pos.y % BLOC_SIZE;
+		tex_x = (wallhitx * env->tex.north->w) / ((BLOC_SIZE / env->distance) * 10);
+	}
+	color = ft_getpixel(ft_selectcolor(env), tex_x, tex_y);
+	return (color);
 }
 
 void    ft_raycasting(t_env *env)
@@ -126,37 +153,14 @@ void    ft_raycasting(t_env *env)
 	i = 0;
 	while (i < XDIM)
 	{
-		env->direction = (env->player.dir_d - FOV / 2) + i * ((double)FOV / (double)XDIM); // angle du ray
+		env->direction = (env->player.dir_d - FOV / 2) + i
+		* ((double)FOV / (double)XDIM); // angle du ray
+
 		//lancer un rayon et recuperer sa longueur
 		env->distance = ft_cast_ray(env, env->direction);
 		wall_height = (BLOC_SIZE / env->distance) * 1000; // reset le coef au besoin
+
 		ft_put_column(env, wall_height, i);
 		i++;
 	}
-}
-
-Uint32 GetPixel32(SDL_Surface* image,int i,int j)
-{
-    if (i<0 || i>image->w-1 || j<0 || j>image->h-1)
-        return 0;
-    return ((Uint32*)(image->pixels))[j*(image->pitch/4)+i];   // lecture directe des pixels
-}
-
-Uint32	ft_texturing(t_env *env, int y,  int p1, int p2)
-{
-	double 	wallhitx;
-	int		tex_x;
-	int		tex_y;
-	tex_y = (y - p1) * env->tex.north->h / (p2 - p1);
-	if (env->side == 1)
-		{
-			wallhitx = (int)env->pos.x % BLOC_SIZE; //env->tex.north->w;
-			tex_x = (wallhitx * env->tex.north->w) / ((BLOC_SIZE / env->distance) * 10);
-		}
-	else
-		{
-			wallhitx = (int)env->pos.y % BLOC_SIZE;
-			tex_x = (wallhitx * env->tex.north->w) / ((BLOC_SIZE / env->distance) * 10);
-		}
-	return(GetPixel32(ft_selectcolor(env), tex_x, tex_y));
 }

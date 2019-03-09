@@ -6,74 +6,98 @@
 /*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 10:22:21 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/08 00:01:00 by badhont          ###   ########.fr       */
+/*   Updated: 2019/03/09 17:01:27 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../INCLUDES/wolf3d.h"
 
-int		events(t_env *env)
+int		keyboard(Uint8 *state, t_env *env)
 {
-	t_point	step;
-	t_point pos;
-	int		change;
+	t_point		step;
+	t_point 	pos;
+	int change;
 
 	change = 0;
 	if (env->sdl.event.type == SDL_QUIT
-		|| env->sdl.event.key.keysym.sym == SDLK_ESCAPE)
+			|| env->sdl.event.key.keysym.sym == SDLK_ESCAPE)
 		ft_exit(env);
 
-	else if (env->sdl.event.type == SDL_KEYDOWN)
+	if (state[SDL_SCANCODE_W])
 	{
-		/*if (env->sdl.event.key.keysym.sym == SDLK_d)
-			env->player.pos.x += 0.05;
-		else if (env->sdl.event.key.keysym.sym == SDLK_LEFT)
-			env->player.pos.x -= 0.05;*/
-		if (env->sdl.event.key.keysym.sym == SDLK_w)
+		step.x = -cos(env->player.dir_d * M_PI / 180) * 0.1;
+		step.y = -sin(env->player.dir_d * M_PI / 180) * 0.1;
+		env->player.pos.x += step.x;
+		env->player.pos.y += step.y;
+		pos.x = env->player.pos.x * BLOC_SIZE;
+		pos.y = env->player.pos.y * BLOC_SIZE;
+		if (ft_is_in_wall(env, pos))
 		{
-			step.x = -cos(env->player.dir_d * M_PI / 180) * 0.1;
- 			step.y = -sin(env->player.dir_d * M_PI / 180) * 0.1;
-			env->player.pos.x += step.x;
-			env->player.pos.y += step.y;
-			pos.x = env->player.pos.x * BLOC_SIZE;
-			pos.y = env->player.pos.y * BLOC_SIZE;
-			if (ft_is_in_wall(env, pos))
-			{
-				env->player.pos.x -= step.x;
-				env->player.pos.y -= step.y;
-			}
-			change = 1;
-		}
-		else if (env->sdl.event.key.keysym.sym == SDLK_s)
-		{
-			step.x = -cos(env->player.dir_d * M_PI / 180) * 0.1;
- 			step.y = -sin(env->player.dir_d * M_PI / 180) * 0.1;
 			env->player.pos.x -= step.x;
 			env->player.pos.y -= step.y;
-			pos.x = env->player.pos.x * BLOC_SIZE;
-			pos.y = env->player.pos.y * BLOC_SIZE;
-			if (ft_is_in_wall(env, pos))
-			{
-				env->player.pos.x += step.x;
-				env->player.pos.y += step.y;
-			}
-			change = 1;
 		}
-		else if (env->sdl.event.key.keysym.sym == SDLK_a)
-		{
-			env->player.dir_d = (env->player.dir_d < 360) ? env->player.dir_d + 2 : 1;
-			change = 1;
-		}
-		else if (env->sdl.event.key.keysym.sym == SDLK_d)
-		{
-			env->player.dir_d = (env->player.dir_d > 1) ? env->player.dir_d - 2 : 360;
-			change = 1;
-		}
-		/*if(env->sdl.event.key.keysym.sym == SDLK_o)
-			SDL_SetRelativeMouseMode(FALSE);
-		if (env->sdl.event.key.keysym.sym == SDLK_p)
-			SDL_SetRelativeMouseMode(TRUE);*/
+		change = 1;
 	}
+	if (state[SDL_SCANCODE_S])
+	{
+		step.x = -cos(env->player.dir_d * M_PI / 180) * 0.1;
+		step.y = -sin(env->player.dir_d * M_PI / 180) * 0.1;
+		env->player.pos.x -= step.x;
+		env->player.pos.y -= step.y;
+		pos.x = env->player.pos.x * BLOC_SIZE;
+		pos.y = env->player.pos.y * BLOC_SIZE;
+		if (ft_is_in_wall(env, pos))
+		{
+			env->player.pos.x += step.x;
+			env->player.pos.y += step.y;
+		}
+		change = 1;
+	}
+	if (state[SDL_SCANCODE_A])
+	{
+		step.x = -cos((env->player.dir_d + 90) * M_PI / 180) * 0.1;
+		step.y = -sin((env->player.dir_d + 90) * M_PI / 180) * 0.1;
+		env->player.pos.x += step.x;
+		env->player.pos.y += step.y;
+		pos.x = env->player.pos.x * BLOC_SIZE;
+		pos.y = env->player.pos.y * BLOC_SIZE;
+		if (ft_is_in_wall(env, pos))
+		{
+			env->player.pos.x -= step.x;
+			env->player.pos.y -= step.y;
+		}
+		change = 1;
+	}
+	if (state[SDL_SCANCODE_D])
+	{
+		step.x = -cos((env->player.dir_d - 90) * M_PI / 180) * 0.1;
+		step.y = -sin((env->player.dir_d - 90) * M_PI / 180) * 0.1;
+		env->player.pos.x += step.x;
+		env->player.pos.y += step.y;
+		pos.x = env->player.pos.x * BLOC_SIZE;
+		pos.y = env->player.pos.y * BLOC_SIZE;
+		if (ft_is_in_wall(env, pos))
+		{
+			env->player.pos.x -= step.x;
+			env->player.pos.y -= step.y;
+		}
+		change = 1;
+	}
+	return (change);
+}
+
+int		events(t_env *env)
+{
+	int			change;
+	Uint8		*state;
+
+
+	change = 0;
+	state = (Uint8 *)SDL_GetKeyboardState(0);
+	SDL_GetRelativeMouseState(&(env->mouse_x), &(env->mouse_y));
+	SDL_PollEvent(&(env->sdl.event));
+
+	(keyboard(state, env) ? change = 1 : 0);
 
 	if (env->sdl.event.type == SDL_MOUSEMOTION)
 	{
@@ -85,5 +109,19 @@ int		events(t_env *env)
 		change = 1;
 	}
 
+
+
+	if (env->sdl.event.type == SDL_KEYDOWN)
+	{
+		/*if (env->sdl.event.key.keysym.sym == SDLK_d)
+		 * 			env->player.pos.x += 0.05;
+		 * 					else if (env->sdl.event.key.keysym.sym == SDLK_LEFT)
+		 * 								env->player.pos.x -= 0.05;*/
+
+		/*if(env->sdl.event.key.keysym.sym == SDLK_o)
+		 * 			SDL_SetRelativeMouseMode(FALSE);
+		 * 					if (env->sdl.event.key.keysym.sym == SDLK_p)
+		 * 								SDL_SetRelativeMouseMode(TRUE);*/
+	}
 	return (change);
 }
