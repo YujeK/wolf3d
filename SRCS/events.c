@@ -6,7 +6,7 @@
 /*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 10:22:21 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/09 19:54:11 by sgalasso         ###   ########.fr       */
+/*   Updated: 2019/03/09 21:12:33 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ int		keyboard(Uint8 *state, t_env *env)
 	int change;
 
 	change = 0;
-	if (env->sdl.event.type == SDL_QUIT
-		|| env->sdl.event.key.keysym.sym == SDLK_ESCAPE)
+	if (env->sdl.event.type == SDL_QUIT || state[SDL_SCANCODE_ESCAPE])
 		ft_exit(env);
 
 	if (state[SDL_SCANCODE_W])

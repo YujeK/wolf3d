@@ -6,7 +6,7 @@
 /*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/19 15:35:24 by badhont           #+#    #+#             */
-/*   Updated: 2019/03/09 20:55:24 by sgalasso         ###   ########.fr       */
+/*   Updated: 2019/03/09 21:14:44 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,7 @@ void    ft_raycasting(t_env *env)
 		env->ray.distance = ft_cast_ray(env, env->ray.direction);
 
 		// calcul wallheight 
-		wall_height = (BLOC_SIZE / env->ray.distance) * 1000;
+		wall_height = (BLOC_SIZE / env->ray.distance) * 800;
 
 		// set pixels
 		ft_put_column(env, wall_height, i);

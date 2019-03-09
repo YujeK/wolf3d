@@ -6,7 +6,7 @@
 /*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 10:18:59 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/09 20:16:00 by sgalasso         ###   ########.fr       */
+/*   Updated: 2019/03/09 21:17:33 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	ft_reframe(t_env *env)
 	SDL_RenderClear(env->sdl.renderer);
 
 	ft_raycasting(env);
-	ft_minimap(env);
-	ft_set_player_dir(env);
+	//ft_minimap(env);
+	//ft_set_player_dir(env);
 
 	texture = SDL_CreateTextureFromSurface(env->sdl.renderer, env->surface);
 	SDL_RenderCopy(env->sdl.renderer, texture, 0, 0);
@@ -40,5 +40,6 @@ void	ft_wolf_loop(t_env *env)
 		SDL_PollEvent(&(env->sdl.event));
 		if (events(env))
 			ft_reframe(env);
+		SDL_FlushEvent(SDL_KEYDOWN | SDL_MOUSEMOTION);
 	}
 }
