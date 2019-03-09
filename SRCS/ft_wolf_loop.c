@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wolf_loop.c                                        :+:      :+:    :+:   */
+/*   ft_wolf_loop.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 10:18:59 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/08 18:40:46 by badhont          ###   ########.fr       */
+/*   Updated: 2019/03/09 19:55:50 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	ft_wolf_loop(t_env *env)
 	ft_raycasting(env);
 	ft_minimap(env);
 	ft_set_player_dir(env);
+	crosshair(env);
 	ft_reframe(env);
 	while (1)
 	{
@@ -43,7 +44,7 @@ void	ft_wolf_loop(t_env *env)
 			ft_raycasting(env);
 			ft_minimap(env);
 			ft_set_player_dir(env);
-			
+			crosshair(env);
 			// make frame
 			ft_reframe(env);
 

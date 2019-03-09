@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 15:03:06 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/02/26 16:09:45 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/09 19:56:28 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,18 @@ void    crosshair(t_env *env)
     pt1.y = YDIM / 2 - 7;
     pt2.x = XDIM / 2 - 1;
     pt2.y = YDIM / 2 + 8;
-    dl(env, pt1, pt2, BLACK);
+    dl(env, pt1, pt2, PINK);
     pt1.x = XDIM / 2 - 8;
     pt1.y = YDIM / 2;
     pt2.x = XDIM / 2 + 7;
     pt2.y = YDIM / 2;
-    dl(env, pt1, pt2, BLACK);
+    dl(env, pt1, pt2, PINK);
 
 }
 
 void    fpscount(t_env *env)
 {
-	SDL_Rect		rect;
+    SDL_Rect		rect;
     int             fps;
 
 fps = 1000 / (clock() / 10000 - env->last / 10000);

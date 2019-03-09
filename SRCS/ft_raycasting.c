@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_raycasting.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/19 15:35:24 by badhont           #+#    #+#             */
-/*   Updated: 2019/03/09 18:12:56 by sgalasso         ###   ########.fr       */
+/*   Updated: 2019/03/09 19:51:42 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 Uint32 GetPixel32(SDL_Surface* image,int i,int j)
 {
-    if (i<0 || i>image->w-1 || j<0 || j>image->h-1)
-        return 0;
-    return ((Uint32*)(image->pixels))[j*(image->pitch/4)+i];   // lecture directe des pixels
+	if (i<0 || i>image->w-1 || j<0 || j>image->h-1)
+		return 0;
+	return ((Uint32*)(image->pixels))[j*(image->pitch/4)+i];   // lecture directe des pixels
 }
 
 SDL_Surface*     ft_selectcolor(t_env *env)
@@ -171,7 +171,7 @@ void    ft_raycasting(t_env *env)
 		//lancer un rayon et recuperer sa longueur
 		env->distance = ft_cast_ray(env, env->direction);
 
-		// calcul wallheight 
+		// calcul wallheight
 		wall_height = (BLOC_SIZE / env->distance) * 1000;
 
 		// set pixels

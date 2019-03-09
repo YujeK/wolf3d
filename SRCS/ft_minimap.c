@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minimap.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 17:07:38 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/08 18:06:05 by badhont          ###   ########.fr       */
+/*   Updated: 2019/03/09 19:54:49 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_dl_angle(t_env *env, double dist, double angle_d)
 	t_point	b;
 
 	step.x = -cos(angle_d * M_PI / 180) * dist;
- 	step.y = -sin(angle_d * M_PI / 180) * dist;
+	step.y = -sin(angle_d * M_PI / 180) * dist;
 
 	a.x = env->player.pos.y * BLOC_SIZE * env->coef_minimap;
 	a.y = env->player.pos.x * BLOC_SIZE * env->coef_minimap;
