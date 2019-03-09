@@ -6,11 +6,11 @@
 /*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 16:14:06 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/08 18:43:25 by badhont          ###   ########.fr       */
+/*   Updated: 2019/03/09 20:05:31 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../INCLUDES/wolf3d.h"
+#include "wolf3d.h"
 
 void    ft_print_map(t_env *env)
 {
@@ -76,14 +76,14 @@ void    ft_map_filler(t_env *env, char *str)
     int     fd;
     int     y;
     int     x;
-    int     i;
+	int		i;
 
-    fd = ft_readverif(str, env);
     y = 0;
+    fd = ft_readverif(str, env);
     while (get_next_line(fd, &line) == 1)
     {
         x = 0;
-        i = 0;
+		i = 0;
         if (!(env->map[y] = (int *)ft_memalloc(sizeof(int) * (env->map_width))))
             ft_error_exit("Wolf3d: Unable to malloc the map", env);
         while (line[i])
@@ -94,8 +94,11 @@ void    ft_map_filler(t_env *env, char *str)
                 env->player.pos.x = x + 0.5;
                 env->player.pos.y = y + 0.5;
             }
+			if (line[i + 1])
+				i += 2;
+			else
+				i++;
             x++;
-            i += 2;
         }
         ft_strdel(&line);
         y++;
