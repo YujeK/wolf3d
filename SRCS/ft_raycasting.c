@@ -6,7 +6,7 @@
 /*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/19 15:35:24 by badhont           #+#    #+#             */
-/*   Updated: 2019/03/09 18:01:42 by sgalasso         ###   ########.fr       */
+/*   Updated: 2019/03/09 18:12:56 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,31 +59,28 @@ Uint32	ft_texturing(t_env *env, int x, int y, int p1, int p2)
 	SDL_Surface	*surface;	// texture
 	Uint32		color;
 	int			w_tex;		// largeur texture
+	int			h_tex;		// hauteur texture
 	int			x_tex;
 	int			y_tex;
+	int			ywall;
 
 	(void)x;
-	(void)y;
-	(void)p1;
 	(void)p2;
+	ywall = y - p1;
 
 	surface = ft_selectcolor(env);
 	w_tex = surface->w;
+	h_tex = surface->h;
 
 	// calcul colonne
 	if (env->side == 2) // vertical hit
-	{
 		x_tex = ((int)env->pos.x % BLOC_SIZE) * w_tex / BLOC_SIZE;
-	}
 	else // horizontal hit
-	{
 		x_tex = ((int)env->pos.y % BLOC_SIZE) * w_tex / BLOC_SIZE;
-	}
 
-	y_tex = 0;
+	y_tex = ywall * h_tex / (p2 - p1);
 
 	color = ft_getpixel(surface, x_tex, y_tex, env);
-
 	return (color);
 }
 
