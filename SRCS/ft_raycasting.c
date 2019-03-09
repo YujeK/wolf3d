@@ -6,7 +6,7 @@
 /*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/19 15:35:24 by badhont           #+#    #+#             */
-/*   Updated: 2019/03/09 16:58:48 by sgalasso         ###   ########.fr       */
+/*   Updated: 2019/03/09 18:01:42 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,61 @@ void		ft_get_cardinal(t_env *env)
 			env->cardinal = 1;
 	}
 }
+
+Uint32	ft_texturing(t_env *env, int x, int y, int p1, int p2)
+{
+	SDL_Surface	*surface;	// texture
+	Uint32		color;
+	int			w_tex;		// largeur texture
+	int			x_tex;
+	int			y_tex;
+
+	(void)x;
+	(void)y;
+	(void)p1;
+	(void)p2;
+
+	surface = ft_selectcolor(env);
+	w_tex = surface->w;
+
+	// calcul colonne
+	if (env->side == 2) // vertical hit
+	{
+		x_tex = ((int)env->pos.x % BLOC_SIZE) * w_tex / BLOC_SIZE;
+	}
+	else // horizontal hit
+	{
+		x_tex = ((int)env->pos.y % BLOC_SIZE) * w_tex / BLOC_SIZE;
+	}
+
+	y_tex = 0;
+
+	color = ft_getpixel(surface, x_tex, y_tex, env);
+
+	return (color);
+}
+
+void    ft_put_column(t_env *env, double wall_height, int x)
+{
+	int     p1;
+	int     p2;
+	int y;
+
+	y = 0;
+	p1 = YDIM / 2 - wall_height / 2;
+	p2 = YDIM - p1;
+	while (y < YDIM)
+	{
+		if (y < p1)
+			ft_setpixel(env->surface, x, y, BLUE);
+		else if (y >= p1 && y < p2)
+			ft_setpixel(env->surface, x, y, ft_texturing(env, x, y, p1, p2));
+		else
+			ft_setpixel(env->surface, x, y, GREEN);
+		y++;
+	}
+}
+
 double		ft_pythagore(double posx, double posy)
 {
 	return (sqrt(posx * posx + posy * posy)); //retourne l'hypothenuse
@@ -60,7 +115,7 @@ double		ft_pythagore(double posx, double posy)
 
 int     ft_is_in_wall(t_env *env, t_point pos)
 {
-	if (env->map[(int)pos.x / BLOC_SIZE][(int)pos.y / BLOC_SIZE] == 1) //est dans le mur
+	if (env->map[(int)pos.x / BLOC_SIZE][(int)pos.y / BLOC_SIZE] == 1)
 		return (1);
 	return (0);
 }
@@ -76,7 +131,8 @@ double  ft_cast_ray(t_env *env, double direction)
 	env->pos.x = env->player.pos.x * BLOC_SIZE;
 	env->pos.y = env->player.pos.y * BLOC_SIZE;
 	origin = (t_point){env->pos.x, env->pos.y};
-	while (env->pos.x > 0 && env->pos.x < env->map_width * BLOC_SIZE && env->pos.y > 0 && env->pos.y < env->map_height * BLOC_SIZE) //tant que est dans la map incrementer
+	while (env->pos.x > 0 && env->pos.x < env->map_width * BLOC_SIZE
+	&& env->pos.y > 0 && env->pos.y < env->map_height * BLOC_SIZE)
 	{
 		env->pos.x += step.x;
 		if (ft_is_in_wall(env, env->pos)) //si on arrive dans le mur
@@ -85,9 +141,9 @@ double  ft_cast_ray(t_env *env, double direction)
 			env->side = 1;
 			ft_get_cardinal(env);
 			alpha = fabs((env->player.dir_d - direction) * (M_PI / 180));
-			return (ft_pythagore(env->pos.x - origin.x, env->pos.y - origin.y) * cos(alpha));
+			return (ft_pythagore(env->pos.x - origin.x,
+			env->pos.y - origin.y) * cos(alpha));
 		}
-
 		env->pos.y += step.y;
 		if (ft_is_in_wall(env, env->pos)) //si on arrive dans le mur
 		{
@@ -95,72 +151,35 @@ double  ft_cast_ray(t_env *env, double direction)
 			env->side = 2;
 			ft_get_cardinal(env);
 			alpha = fabs((env->player.dir_d - direction) * (M_PI / 180));
-			return (ft_pythagore(env->pos.x - origin.x, env->pos.y - origin.y) * cos(alpha));
+			return (ft_pythagore(env->pos.x - origin.x,
+			env->pos.y - origin.y) * cos(alpha));
 		}
 	}
 	// out of map
 	return (0);
 }
 
-void    ft_put_column(t_env *env, double wall_height, int x)
-{
-	int     p1;
-	int     p2;
-	int y;
-
-	y = 0;
-	p1 = YDIM / 2 - wall_height / 2;
-	p2 = YDIM - p1;
-	while (y < YDIM)
-	{
-		if (y < p1)
-			ft_setpixel(env->surface, XDIM - 1 - x, y, BLUE);
-		else if (y >= p1 && y < p2)
-			ft_setpixel(env->surface, XDIM - 1 - x, y, ft_texturing(env, y, p1, p2));
-		else
-			ft_setpixel(env->surface, XDIM - 1 - x, y, GREEN);
-		y++;
-	}
-}
-
-Uint32	ft_texturing(t_env *env, int y,  int p1, int p2)
-{
-	double 	wallhitx;
-	Uint32	color;
-	int		tex_x;
-	int		tex_y;
-
-	tex_y = (y - p1) * env->tex.north->h / (p2 - p1);
-	if (env->side == 2)
-	{
-		wallhitx = (int)env->pos.x % BLOC_SIZE; //env->tex.north->w;
-		tex_x = (wallhitx * env->tex.north->w) / ((BLOC_SIZE / env->distance) * 10);
-	}
-	else
-	{
-		wallhitx = (int)env->pos.y % BLOC_SIZE;
-		tex_x = (wallhitx * env->tex.north->w) / ((BLOC_SIZE / env->distance) * 10);
-	}
-	color = ft_getpixel(ft_selectcolor(env), tex_x, tex_y);
-	return (color);
-}
-
 void    ft_raycasting(t_env *env)
 {
-	int     i;
 	double  wall_height;
+	int     i;
 
 	i = 0;
 	while (i < XDIM)
 	{
-		env->direction = (env->player.dir_d - FOV / 2) + i
-		* ((double)FOV / (double)XDIM); // angle du ray
+		// calcul direction du rayon
+		env->direction = (env->player.dir_d - FOV / 2)
+		+ i * ((double)FOV / (double)XDIM);
 
 		//lancer un rayon et recuperer sa longueur
 		env->distance = ft_cast_ray(env, env->direction);
-		wall_height = (BLOC_SIZE / env->distance) * 1000; // reset le coef au besoin
 
+		// calcul wallheight 
+		wall_height = (BLOC_SIZE / env->distance) * 1000;
+
+		// set pixels
 		ft_put_column(env, wall_height, i);
+
 		i++;
 	}
 }

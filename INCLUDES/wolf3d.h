@@ -6,7 +6,7 @@
 /*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 17:38:26 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/09 16:41:49 by sgalasso         ###   ########.fr       */
+/*   Updated: 2019/03/09 18:01:16 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,17 +99,16 @@ typedef struct		s_env
 	int				mouse_x;
 	int				mouse_y;
 
+	double			direction;	// dir_d d'un rayon
+	double			distance;	// dist d'un rayon
+	int				side;		// side impact mur
+	t_point			pos;		// position bout du rayon
 
-
-	double			distance;
-	int				side;
 	SDL_Rect		rect;
 	int				coef_minimap; // taille de la minimap
 	int				posx;
 	int				posy;
-	t_point			pos;
 	int				cardinal;
-	double			direction;
 	Uint32			last;
 	int				wallhitx;
 	t_point			ray_pos;
@@ -138,8 +137,7 @@ SDL_Color		ft_hex_to_rgb(int hexa);
 void			crosshair(t_env *env);
 void			fpscount(t_env *env);
 void			ft_loadtexture(t_env *env);
-Uint32			ft_getpixel(SDL_Surface *surface, int x, int y);
-Uint32			ft_texturing(t_env *env, int i, int p1, int p2);
+Uint32			ft_getpixel(SDL_Surface *surface, int x, int y, t_env *env);
 void			ft_put_column(t_env *env, double wall_height, int x);
 void			ft_brosenham(t_env *env, t_line *line, int color, int swap);
 #endif

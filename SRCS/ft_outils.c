@@ -6,7 +6,7 @@
 /*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 15:36:41 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/09 16:39:00 by sgalasso         ###   ########.fr       */
+/*   Updated: 2019/03/09 18:04:03 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ void			ft_loadtexture(t_env *env)
 	if (!(env->tex.north = IMG_Load("RESSOURCES/pics/wood.png")))
 		ft_error_exit("Wolf3d: Unable to load texture", env);
 	if (!(env->tex.east = IMG_Load("RESSOURCES/pics/bluestone.png")))
-			ft_error_exit("Wolf3d: Unable to load texture", env);
+		ft_error_exit("Wolf3d: Unable to load texture", env);
 	if (!(env->tex.west = IMG_Load("RESSOURCES/pics/purplestone.png")))
-			ft_error_exit("Wolf3d: Unable to load texture", env);
+		ft_error_exit("Wolf3d: Unable to load texture", env);
 	if (!(env->tex.south = IMG_Load("RESSOURCES/pics/greystone.png")))
-			ft_error_exit("Wolf3d: Unable to load texture", env);
+		ft_error_exit("Wolf3d: Unable to load texture", env);
 }
 
 SDL_Color		ft_hex_to_rgb(int hexa)
@@ -35,16 +35,21 @@ SDL_Color		ft_hex_to_rgb(int hexa)
 	return (color);
 }
 
+double		ft_abs(double a)
+{
+	return (a < 0 ? -a : a);
+}
 
-Uint32			ft_getpixel(SDL_Surface *surface, int x, int y)
+Uint32			ft_getpixel(SDL_Surface *surface, int x, int y, t_env *env)
 {
 	int				bpp;
 	Uint8			*p;
 	Uint32			ret;
 
 	if ((SDL_LockSurface(surface)) != 0)
-	x = abs(--x);
-	y = abs(--y);
+		ft_error_exit("Wolf3d: error getPixel", env);
+	x = ft_abs(--x);
+	y = ft_abs(--y);
 	bpp = surface->format->BytesPerPixel;
 	p = (Uint8 *)surface->pixels + y * surface->pitch + x * bpp;
 	if (bpp == 1)
@@ -61,7 +66,7 @@ Uint32			ft_getpixel(SDL_Surface *surface, int x, int y)
 	else
 		ret = 0;
 	SDL_UnlockSurface(surface);
-	return (ret);
+	return (ret | 0xFF000000);
 }
 
 void			ft_setpixel(SDL_Surface *surface, int x, int y, Uint32 pixel)
