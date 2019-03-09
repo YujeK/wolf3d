@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 09:55:41 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/09 19:41:32 by sgalasso         ###   ########.fr       */
+/*   Updated: 2019/03/09 23:12:17 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,9 @@ void	init_game(t_env *env)
 
 	// standby
 	env->player.dir_d = 0;
-	env->coef_minimap = 2;
-	env->cardinal = 1;
+	env->coef_minimap = 1;
+	env->ray.cardinal = 1;
+	env->bloc_size = 10;
 }
 
 
