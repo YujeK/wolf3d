@@ -6,7 +6,7 @@
 /*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 17:38:26 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/09 20:59:46 by sgalasso         ###   ########.fr       */
+/*   Updated: 2019/03/09 21:30:12 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # define BLACK 0xFF000000
 # define PURPLE 0xFF7400AC
 # define GREY 0xFF9A9A9A
-# define BLOC_SIZE 10
+# define BLOC_SIZE 20
 # define FOV 60
 
 typedef	struct	s_sdl		t_sdl;
