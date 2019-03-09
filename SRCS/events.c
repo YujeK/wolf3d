@@ -6,7 +6,7 @@
 /*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 10:22:21 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/09 21:12:33 by sgalasso         ###   ########.fr       */
+/*   Updated: 2019/03/09 21:29:47 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int		events(t_env *env)
 
 	(keyboard(state, env) ? change = 1 : 0);
 
-	if (env->sdl.event.type == SDL_MOUSEMOTION)
+	if (env->mouse_x)
 	{
 		env->player.dir_d += env->mouse_x / 6;
 		if (env->player.dir_d > 360)
