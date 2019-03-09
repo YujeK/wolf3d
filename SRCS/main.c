@@ -6,7 +6,7 @@
 /*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 09:55:41 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/09 19:41:32 by sgalasso         ###   ########.fr       */
+/*   Updated: 2019/03/09 20:52:11 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	init_game(t_env *env)
 	// standby
 	env->player.dir_d = 0;
 	env->coef_minimap = 2;
-	env->cardinal = 1;
+	env->ray.cardinal = 1;
 }
 
 
