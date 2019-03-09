@@ -6,14 +6,12 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 15:03:06 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/02/26 16:09:45 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/09 19:53:47 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "wolf3d.h"
 
-
-#include "../INCLUDES/wolf3d.h"
-#include "time.h"
 void    crosshair(t_env *env)
 {
     t_point pt1;
@@ -37,7 +35,7 @@ void    fpscount(t_env *env)
 	SDL_Rect		rect;
     int             fps;
 
-fps = 1000 / (clock() / 10000 - env->last / 10000);
-rect = (SDL_Rect){0, 740, 60, 30};
-        ft_set_string(rect, ft_itoa((int)fps), ft_hex_to_rgb(WHITE), env);
+	fps = 1000 / (clock() / 10000 - env->last / 10000);
+	rect = (SDL_Rect){0, 740, 60, 30};
+	ft_set_string(rect, ft_itoa((int)fps), ft_hex_to_rgb(WHITE), env);
 }

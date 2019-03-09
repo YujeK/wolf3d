@@ -1,63 +1,73 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: badhont <badhont@student.42.fr>            +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/12/08 17:31:09 by asamir-k          #+#    #+#              #
-#    Updated: 2019/03/08 18:41:08 by badhont          ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+NAME 		= wolf3d
+CC			= gcc
+CFLAGS 		= -Wall -Wextra -Werror -O3 #-g -fsanitize=address
 
-NAME= wolf3d
-GCC= GCC
-HEADER= INCLUDES/wolf3d.h
-FLAGS = -Wall -Werror -Wextra
-LIB_PATH= INCLUDES/libft/
-COMP= SDL2
-SDLLIB= -L mlx -lmlx -framework Opengl -framework Appkit
-SRC=SRCS/main.c				\
-	SRCS/ft_wolf_loop.c		\
-	SRCS/events.c			\
-	SRCS/ft_minimap.c \
-	SRCS/ft_parsing.c			\
-	SRCS/linedrawer.c		\
-	SRCS/ft_outils.c		\
-	SRCS/ft_raycasting.c	\
-	SRCS/crosshair.c \
-	SRCS/ft_new_surface.c \
-	SRCS/ft_exit.c \
+ID_UN 		= $(shell id -un)
+SRC_PATH 	= srcs/
+OBJ_PATH 	= objs/
+INC_PATH	= includes/ \
+			  libft/includes/
+LIBFT 		= libft/
 
-OBJ = $(SRC:.c=.o)
-# SDL
-LSDL_LIB	:=	$(shell sdl2-config --libs)
-LSDL_INC	:=	$(shell sdl2-config --cflags)
-LIB			:=	$(LSDL_LIB)
-INC			:=	$(LSDL_INC)
+WHITE       = "\\033[0m"
+CYAN        = "\\033[36m"
+GREEN       = "\\033[32m"
+
+SDL_NUM		= $(shell ls /Users/$(ID_UN)/.brew/Cellar/sdl2/ | tail -1)
+TTF_NUM		= $(shell ls /Users/$(ID_UN)/.brew/Cellar/sdl2_ttf/ | tail -1)
+IMG_NUM		= $(shell ls /Users/$(ID_UN)/.brew/Cellar/sdl2_image/ | tail -1)
+
+INC_PATH	+= /Users/$(ID_UN)/.brew/Cellar/sdl2/$(SDL_NUM)/include/ \
+			   /Users/$(ID_UN)/.brew/Cellar/sdl2/$(SDL_NUM)/include/SDL2/ \
+			   /Users/$(ID_UN)/.brew/Cellar/sdl2_ttf/$(TTF_NUM)/include/ \
+			   /Users/$(ID_UN)/.brew/Cellar/sdl2_image/$(IMG_NUM)/include/ \
+
+SRC_NAME 	= 	main.c \
+				crosshair.c \
+				events.c \
+				ft_exit.c \
+				ft_minimap.c \
+				ft_new_surface.c \
+				ft_outils.c \
+				ft_parsing.c \
+				ft_raycasting.c \
+				ft_wolf_loop.c \
+				linedrawer.c \
+
+OBJ_NAME = $(SRC_NAME:.c=.o)
+LSDL2 	 = -L/Users/$(ID_UN)/.brew/lib/ -lSDL2 -lSDL2_ttf -lSDL2_image
+
+SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
+OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
+INC = $(addprefix -I, $(INC_PATH))
 
 all: $(NAME)
 
-$(OBJ): %.o: %.c $(HEADER)
-	gcc $(FLAGS) -o $@ -c $< -I $(LIB_PATH) -I ../INCLUDES $(INC)
+$(NAME): $(OBJ)
+	@Make -C $(LIBFT)
+	@printf "$(CYAN)[WAIT]$(WHITE) Compiling into %-50s\r" $(NAME)
+	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) -L$(LIBFT) -lft $(INC) $(LSDL2)
+	@printf "$(GREEN)[OK]$(WHITE) %s has been well compiled\n" $(NAME)
 
-$(NAME): $(OBJ) $(LIB_PATH)libft.a
-	gcc -o $(NAME) $(OBJ) -lm -L $(LIB_PATH) -lft -I $(COMP) $(INC) -lm $(LIB) -lSDL2 -lSDL2_ttf -lSDL2_image
-	@echo "\033[1;34;2m FRIED CHICKEN READY TO BE EATEN ~ (__)=3 ~\033[0m"
-	@echo "\033[0;31;3m                        (ALL RULE DONE)                               ~ (__)=3 ~\033[0m"
+$(OBJ) : | $(OBJ_PATH)
 
-$(LIB_PATH)libft.a :
-	make -C $(LIB_PATH)
+$(OBJ_PATH) :
+	@mkdir objs
+
+$(OBJ_PATH)%.o: $(SRC_PATH)%.c $(INC_PATH) Makefile
+	@printf "$(CYAN)[WAIT]$(WHITE) Compiling into .o %-50s\r" $@
+	@$(CC) $(CFLAGS) $(INC) -o $@ -c $<
+
 clean:
-	@rm -f $(OBJ)
-	@echo "\033[1;33;2m IVE EATEN HALF OF THE CHICKEN , ONE WORD AND WINGS ERADICATION WILL BE ORDERED \033[0m"
-	@echo "\033[0;31;3m                        (CLEAN RULE DONE)                             ~ (__)=3 ~ \033[0m"
+	@make -C $(LIBFT) clean
+	@rm -rf $(OBJ_PATH)
+	@printf "$(GREEN)[OK]$(WHITE) Clean done\n"
 
 fclean: clean
+	@make -C $(LIBFT) fclean
 	@rm -f $(NAME)
-	@echo "\033[1;31;2m JOB DONE SERGEANT WingZLord NO MORE WINGS ARE DETECTED IN THE bckt (-_-)ゞ\033[0m"
-	@echo "\033[0;31;3m                        (FCLEAN RULE DONE)                            ~ (__)=3  ~\033[0m"
+	@printf "$(GREEN)[OK]$(WHITE) Fclean done\n"
 
 re: fclean all
-	@echo "\033[0;35;2m BTW I'VE SUCCESSFULLY REFILL 24 WINGS JUST FOR YOU (♥_♥)ゞ\033[0m"
-	@echo "\033[0;31;3m                        (RE RULE DONE)                                ~ (__)=3  ~\033[0m"
+
+.PHONY: all re clean fclean
