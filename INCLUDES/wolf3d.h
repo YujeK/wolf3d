@@ -6,7 +6,7 @@
 /*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 17:38:26 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/09 20:44:58 by sgalasso         ###   ########.fr       */
+/*   Updated: 2019/03/09 20:59:46 by sgalasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef	struct	s_point		t_point;
 typedef	struct	s_rect		t_rect;
 typedef	struct	s_player	t_player;
 typedef	struct	s_line		t_line;
+typedef	struct	s_ray		t_ray;
 typedef	struct	s_tex		t_tex;
 typedef	struct	s_env		t_env;
 
@@ -86,6 +87,15 @@ struct						s_line
 	int				s2;
 };
 
+struct						s_ray
+{
+	double			direction;	// dir_d d'un rayon
+	int				cardinal;	// N / S / E / W
+	double			distance;	// dist d'un rayon
+	int				side;		// side impact mur
+	t_point			pos;		// position bout du rayon
+};
+
 struct						s_tex
 {
 	SDL_Surface		*north;
@@ -94,33 +104,22 @@ struct						s_tex
 	SDL_Surface		*east;
 };
 
-
 struct						s_env
 {
-	t_sdl			sdl;
-	t_tex			tex;
-	SDL_Surface		*surface;
-	TTF_Font		*font;
-	int				**map;
-	int				map_width;
-	int				map_height;
-	t_player		player;
-	int				mouse_x;
-	int				mouse_y;
-
-	double			direction;	// dir_d d'un rayon
-	double			distance;	// dist d'un rayon
-	int				side;		// side impact mur
-	t_point			pos;		// position bout du rayon
-
-	SDL_Rect		rect;
-	int				coef_minimap; // taille de la minimap
-	int				posx;
-	int				posy;
-	int				cardinal;
-	Uint32			last;
-	int				wallhitx;
-	t_point			ray_pos;
+	t_sdl			sdl;		// object sdl
+	t_tex			tex;		// images
+	SDL_Surface		*surface;	// surface principale
+	TTF_Font		*font;		// police d'ecriture
+	int				**map;		// map
+	int				map_width;	// largeur map
+	int				map_height;	// hauteur map
+	t_player		player;		// data joueur
+	int				mouse_x;	// data souris
+	int				mouse_y;	// data souris
+	t_ray			ray;		// data rayon courant
+	Uint32			last;		// last timestamp for fps
+	int				coef_minimap;	// coef minimap
+	t_point			ray_pos;		// ??? 
 };
 
 /*
