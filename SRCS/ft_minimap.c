@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_displayplayer.c                                 :+:      :+:    :+:   */
+/*   ft_minimap.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
+/*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 17:07:38 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/07 19:30:56 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/08 18:06:05 by badhont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	ft_set_player_dir(t_env *env)
 	ft_dl_angle(env, 2, (env->player.dir_d + 30));
 }
 
-void	ft_display_player(t_env *env)
+void	ft_minimap(t_env *env)
 {
 	SDL_Rect	rect;
 	int			x;
