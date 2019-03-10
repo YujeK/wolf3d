@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 10:22:21 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/10 18:54:28 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/10 21:00:08 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int		keyboard(Uint8 *state, t_env *env)
 		}
 		change = 1;
 	}
-	if (state[SDL_SCANCODE_D])
+	if (state[SDL_SCANCODE_A])
 	{
 		step.x = -cos((env->player.dir_d + 90) * M_PI / 180) * 0.1;
 		step.y = -sin((env->player.dir_d + 90) * M_PI / 180) * 0.1;
@@ -66,7 +66,7 @@ int		keyboard(Uint8 *state, t_env *env)
 		}
 		change = 1;
 	}
-	if (state[SDL_SCANCODE_A])
+	if (state[SDL_SCANCODE_D])
 	{
 		step.x = -cos((env->player.dir_d - 90) * M_PI / 180) * 0.1;
 		step.y = -sin((env->player.dir_d - 90) * M_PI / 180) * 0.1;
@@ -96,7 +96,7 @@ int		events(t_env *env)
 	(keyboard(state, env) ? change = 1 : 0);
 	if (env->mouse_x)
 	{
-		env->player.dir_d += env->mouse_x / 6;
+		env->player.dir_d -= env->mouse_x / 6;
 		if (env->player.dir_d > 360)
 			env->player.dir_d -= 360;
 		else if (env->player.dir_d < 0)

@@ -6,13 +6,13 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/19 15:35:24 by badhont           #+#    #+#             */
-/*   Updated: 2019/03/10 18:28:48 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/10 21:01:40 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-SDL_Surface		*ft_selectcolor(t_env *env)
+SDL_Surface		*ft_selectex(t_env *env)
 {
 	if (env->ray.cardinal == 1)
 		return (env->tex.north);
@@ -58,7 +58,7 @@ Uint32			ft_texturing(t_env *env, int y, int p1, int p2)
 	int			ywall;
 
 	ywall = y - p1;
-	surface = ft_selectcolor(env);
+	surface = ft_selectex(env);
 	w_tex = surface->w;
 	h_tex = surface->h;
 	if (env->ray.side == 2)
@@ -82,11 +82,11 @@ void			ft_put_column(t_env *env, double wall_height, int x)
 	while (y < YDIM)
 	{
 		if (y < p1)
-			ft_setpixel(env->surface, x, y, BLUE);
+			ft_setpixel(env->surface, XDIM - 1 - x, y, BLUE);
 		else if (y >= p1 && y < p2)
-			ft_setpixel(env->surface, x, y, ft_texturing(env, y, p1, p2));
-		else
-			ft_setpixel(env->surface, x, y, 0xFFFFFACD);
+			ft_setpixel(env->surface, XDIM - 1 - x, y, ft_texturing(env, y, p1, p2));
+		if (y >= p2)
+			ft_setpixel(env->surface, XDIM - 1 - x, y, 0xFFFFFACD);
 		y++;
 	}
 }
@@ -98,6 +98,8 @@ double			ft_pythagore(double posx, double posy)
 
 int				ft_is_in_wall(t_env *env, t_point pos)
 {
+	if (pos.x < 0 || pos.x > env->map_width * env->bloc_size || pos.y < 0 || pos.y > env->map_height * env->bloc_size)
+		return (1);
 	if (env->map[(int)pos.x / env->bloc_size][(int)pos.y / env->bloc_size] == 1)
 		return (1);
 	return (0);

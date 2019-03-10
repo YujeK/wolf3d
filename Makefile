@@ -23,7 +23,7 @@ INC_PATH	+=	/Users/$(ID_UN)/.brew/Cellar/sdl2/$(SDL_NUM)/include/ \
 				/Users/$(ID_UN)/.brew/Cellar/sdl2_image/$(IMG_NUM)/include/ \
 
 SRC_NAME 	= 	main.c \
-				crosshair.c \
+				ft_crosshair.c \
 				events.c \
 				ft_exit.c \
 				ft_minimap.c \

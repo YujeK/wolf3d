@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 17:07:38 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/10 18:35:44 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/10 20:45:50 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ void	ft_minimap(t_env *env)
 		x = 0;
 		while (x < env->map_width)
 		{
-			rect = (SDL_Rect){x * env->bloc_size * env->coef_minimap,
-			y * env->bloc_size * env->coef_minimap,
+			rect = (SDL_Rect){y * env->bloc_size * env->coef_minimap,
+			x * env->bloc_size * env->coef_minimap,
 			env->bloc_size * env->coef_minimap,
 			env->bloc_size * env->coef_minimap};
 			if (env->map[y][x] == 0 || env->map[y][x] == 2)

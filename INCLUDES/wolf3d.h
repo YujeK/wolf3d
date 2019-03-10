@@ -102,6 +102,7 @@ struct						s_tex
 	SDL_Surface		*west;
 	SDL_Surface		*south;
 	SDL_Surface		*east;
+	int				which_tex;
 };
 
 struct						s_env
@@ -137,6 +138,7 @@ void			ft_wolf_loop(t_env *env);
 void			ft_raycasting(t_env *env);
 void			ft_set_player_dir(t_env *env);
 void			ft_minimap(t_env *env);
+void			ft_crosshair(t_env *env);
 
 /*
 **	Events
@@ -159,8 +161,9 @@ void			ft_loadtexture(t_env *env);
 Uint32			ft_getpixel(SDL_Surface *surface, int x, int y, t_env *env);
 void			ft_setpixel(SDL_Surface *surface, int x, int y, Uint32 pixel);
 void			dl(t_env *env, t_point pt1, t_point pt2, int color);
-void			ft_set_string(SDL_Rect rect, char *text, SDL_Color color, t_env *env);
+//void			ft_set_string(SDL_Rect rect, char *text, SDL_Color color, t_env *env);
 SDL_Color		ft_hex_to_rgb(int hexa);
+void			ft_reframe(t_env *env);
 
 /*
 **	Exit

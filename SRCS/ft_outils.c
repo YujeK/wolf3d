@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 15:36:41 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/10 18:07:00 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/10 20:58:05 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void			ft_loadtexture(t_env *env)
 			ft_error_exit("Wolf3d: Unable to load texture", env);
 		if (!(env->tex.south = IMG_Load("RESSOURCES/pics/greystone.png")))
 			ft_error_exit("Wolf3d: Unable to load texture", env);
-		ft_reframe(env);
 	}
 	if (env->tex.which_tex == 1)
 	{
@@ -36,8 +35,8 @@ void			ft_loadtexture(t_env *env)
 			ft_error_exit("Wolf3d: Unable to load texture", env);
 		if (!(env->tex.south = IMG_Load("RESSOURCES/pics/nihuynh.png")))
 			ft_error_exit("Wolf3d: Unable to load texture", env);
-		ft_reframe(env);
 	}
+	ft_reframe(env);
 }
 
 SDL_Color		ft_hex_to_rgb(int hexa)
