@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 10:22:21 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/09 23:18:39 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/10 18:54:28 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,12 @@
 int		keyboard(Uint8 *state, t_env *env)
 {
 	t_point		step;
-	t_point 	pos;
-	int change;
+	t_point		pos;
+	int			change;
 
 	change = 0;
 	if (env->sdl.event.type == SDL_QUIT || state[SDL_SCANCODE_ESCAPE])
 		ft_exit(env);
-
 	if (state[SDL_SCANCODE_W])
 	{
 		step.x = -cos(env->player.dir_d * M_PI / 180) * 0.1;
@@ -90,14 +89,11 @@ int		events(t_env *env)
 	int			change;
 	Uint8		*state;
 
-
 	change = 0;
 	state = (Uint8 *)SDL_GetKeyboardState(0);
 	SDL_GetRelativeMouseState(&(env->mouse_x), &(env->mouse_y));
 	SDL_PollEvent(&(env->sdl.event));
-
 	(keyboard(state, env) ? change = 1 : 0);
-
 	if (env->mouse_x)
 	{
 		env->player.dir_d += env->mouse_x / 6;
@@ -109,12 +105,22 @@ int		events(t_env *env)
 	}
 	if (env->sdl.event.type == SDL_KEYDOWN)
 	{
-		if (env->sdl.event.key.keysym.sym == SDLK_m)
+		if (env->sdl.event.key.keysym.sym == SDLK_p)
 			if (env->bloc_size < 540)
 				env->bloc_size += 30;
-		if(env->sdl.event.key.keysym.sym == SDLK_l)
+		if (env->sdl.event.key.keysym.sym == SDLK_o)
 			if (env->bloc_size > 10)
-			env->bloc_size -= 30;
+				env->bloc_size -= 30;
+		if (env->sdl.event.key.keysym.sym == SDLK_l)
+		{
+			env->tex.which_tex = 1;
+			ft_loadtexture(env);
+		}
+		if (env->sdl.event.key.keysym.sym == SDLK_k)
+		{
+			env->tex.which_tex = 0;
+			ft_loadtexture(env);
+		}
 	}
-			return (change);
+	return (change);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_outils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 15:36:41 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/09 19:56:25 by sgalasso         ###   ########.fr       */
+/*   Updated: 2019/03/10 18:07:00 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,30 @@
 
 void			ft_loadtexture(t_env *env)
 {
-	if (!(env->tex.north = IMG_Load("RESSOURCES/pics/wood.png")))
-		ft_error_exit("Wolf3d: Unable to load texture", env);
-	if (!(env->tex.east = IMG_Load("RESSOURCES/pics/bluestone.png")))
-		ft_error_exit("Wolf3d: Unable to load texture", env);
-	if (!(env->tex.west = IMG_Load("RESSOURCES/pics/purplestone.png")))
-		ft_error_exit("Wolf3d: Unable to load texture", env);
-	if (!(env->tex.south = IMG_Load("RESSOURCES/pics/greystone.png")))
-		ft_error_exit("Wolf3d: Unable to load texture", env);
+	if (env->tex.which_tex == 0)
+	{
+		if (!(env->tex.north = IMG_Load("RESSOURCES/pics/wood.png")))
+			ft_error_exit("Wolf3d: Unable to load texture", env);
+		if (!(env->tex.east = IMG_Load("RESSOURCES/pics/bluestone.png")))
+			ft_error_exit("Wolf3d: Unable to load texture", env);
+		if (!(env->tex.west = IMG_Load("RESSOURCES/pics/colorstone.png")))
+			ft_error_exit("Wolf3d: Unable to load texture", env);
+		if (!(env->tex.south = IMG_Load("RESSOURCES/pics/greystone.png")))
+			ft_error_exit("Wolf3d: Unable to load texture", env);
+		ft_reframe(env);
+	}
+	if (env->tex.which_tex == 1)
+	{
+		if (!(env->tex.north = IMG_Load("RESSOURCES/pics/sgalasso.png")))
+			ft_error_exit("Wolf3d: Unable to load texture", env);
+		if (!(env->tex.east = IMG_Load("RESSOURCES/pics/asamir-k.png")))
+			ft_error_exit("Wolf3d: Unable to load texture", env);
+		if (!(env->tex.west = IMG_Load("RESSOURCES/pics/badhont.png")))
+			ft_error_exit("Wolf3d: Unable to load texture", env);
+		if (!(env->tex.south = IMG_Load("RESSOURCES/pics/nihuynh.png")))
+			ft_error_exit("Wolf3d: Unable to load texture", env);
+		ft_reframe(env);
+	}
 }
 
 SDL_Color		ft_hex_to_rgb(int hexa)
@@ -35,7 +51,7 @@ SDL_Color		ft_hex_to_rgb(int hexa)
 	return (color);
 }
 
-double		ft_abs(double a)
+double			ft_abs(double a)
 {
 	return (a < 0 ? -a : a);
 }
@@ -96,16 +112,4 @@ void			ft_setpixel(SDL_Surface *surface, int x, int y, Uint32 pixel)
 			p[2] = (pixel >> 16) & 0xff;
 		}
 	}
-}
-
-void			ft_set_string(SDL_Rect rect, char *text, SDL_Color color, t_env *env)
-{
-	SDL_Surface			*surface;
-	SDL_Texture			*texture;
-
-	surface = TTF_RenderText_Blended(env->font, text, color);
-	rect.w = (rect.h * surface->w) / surface->h;
-	texture = SDL_CreateTextureFromSurface(env->sdl.renderer, surface);
-	SDL_RenderCopy(env->sdl.renderer, texture, NULL, &(rect));
-	SDL_DestroyTexture(texture);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 21:42:55 by badhont           #+#    #+#             */
-/*   Updated: 2019/03/09 21:08:10 by sgalasso         ###   ########.fr       */
+/*   Updated: 2019/03/10 18:11:14 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_error_exit(char *str, t_env *env)
 	exit(EXIT_FAILURE);
 }
 
-void    ft_exit(t_env *env)
+void	ft_exit(t_env *env)
 {
 	if (env->surface)
 		SDL_FreeSurface(env->surface);

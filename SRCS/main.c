@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 09:55:41 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/09 23:12:17 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/10 18:30:06 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,12 @@ void	init_game(t_env *env)
 	if (!(env->font = TTF_OpenFont("RESSOURCES/BEBAS.ttf", 100)))
 		ft_error_exit("Wolf3d: Unable to get font", env);
 	ft_loadtexture(env);
-
-	// standby
 	env->player.dir_d = 0;
 	env->coef_minimap = 1;
 	env->ray.cardinal = 1;
 	env->bloc_size = 10;
+	env->tex.which_tex = 0;
 }
-
-
 
 int		main(int ac, char **av)
 {
@@ -52,11 +49,9 @@ int		main(int ac, char **av)
 	if (ac == 2)
 	{
 		ft_bzero(&env, sizeof(t_env));
-		init_sdl(&env); // c'est bon
-		init_game(&env); // c'est bon
-
-		ft_parsing(&env, av[1]); // proteger le contenu
-
+		init_sdl(&env);
+		init_game(&env);
+		ft_parsing(&env, av[1]); // protect content
 		ft_wolf_loop(&env);
 	}
 	ft_putendl("\nHi ^-^ !!! One argument only authorised to make it work.");
