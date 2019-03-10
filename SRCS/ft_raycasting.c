@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/19 15:35:24 by badhont           #+#    #+#             */
-/*   Updated: 2019/03/10 21:01:40 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/10 21:22:56 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,17 @@
 
 SDL_Surface		*ft_selectex(t_env *env)
 {
-	if (env->ray.cardinal == 1)
-		return (env->tex.north);
-	if (env->ray.cardinal == 2)
-		return (env->tex.east);
-	if (env->ray.cardinal == 3)
+	if (env->ray.side == 2)
+	{
+		if ((env->ray.direction >= 0 && env->ray.direction <= 180)
+		|| env->ray.direction >= 360)
+			return (env->tex.north);
+		else
+			return (env->tex.east);
+	}
+	if (env->ray.direction >= 90 && env->ray.direction <= 270)
 		return (env->tex.south);
-	if (env->ray.cardinal == 4)
-		return (env->tex.west);
-	return (0);
-}
-
-void			ft_get_cardinal(t_env *env)
-{
-	if (env->ray.direction <= 180)
-	{
-		if (env->ray.direction <= 90 && env->ray.side == 1)
-			env->ray.cardinal = 2;
-		if (env->ray.direction > 90 && env->ray.side == 1)
-			env->ray.cardinal = 4;
-		if (env->ray.side == 2)
-			env->ray.cardinal = 3;
-	}
-	else if (env->ray.direction > 180)
-	{
-		if (env->ray.direction <= 270 && env->ray.side == 1)
-			env->ray.cardinal = 4;
-		if (env->ray.direction > 270 && env->ray.side == 1)
-			env->ray.cardinal = 2;
-		if (env->ray.side == 2)
-			env->ray.cardinal = 1;
-	}
+	return (env->tex.west);
 }
 
 Uint32			ft_texturing(t_env *env, int y, int p1, int p2)
@@ -124,7 +104,6 @@ double			ft_cast_ray(t_env *env, double direction)
 		{
 			env->ray_pos.x = env->ray.pos.x;
 			env->ray.side = 1;
-			ft_get_cardinal(env);
 			alpha = fabs((env->player.dir_d - direction) * (M_PI / 180));
 			return (ft_pythagore(env->ray.pos.x - origin.x,
 			env->ray.pos.y - origin.y) * cos(alpha));
@@ -134,7 +113,6 @@ double			ft_cast_ray(t_env *env, double direction)
 		{
 			env->ray_pos.y = env->ray.pos.y;
 			env->ray.side = 2;
-			ft_get_cardinal(env);
 			alpha = fabs((env->player.dir_d - direction) * (M_PI / 180));
 			return (ft_pythagore(env->ray.pos.x - origin.x,
 			env->ray.pos.y - origin.y) * cos(alpha));
