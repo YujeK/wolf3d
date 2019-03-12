@@ -17,10 +17,11 @@
 # include <SDL2/SDL.h>
 # include <SDL2/SDL_ttf.h>
 # include <SDL2/SDL_image.h>
+# include <SDL2/SDL_mixer.h>
 # include <math.h>
 
-# define YDIM 800
-# define XDIM 800
+# define YDIM 1000
+# define XDIM 1000
 # define TEX_W 64
 # define TEX_H 64
 
@@ -74,6 +75,8 @@ struct						s_player
 	t_point			pos;   // position du joueur
 	double			dir_d; // direction en degres
 	double			dir_r; // direction en radians
+	int				ammo;
+	int				life;
 };
 
 struct						s_line
@@ -102,11 +105,17 @@ struct						s_tex
 	SDL_Surface		*west;
 	SDL_Surface		*south;
 	SDL_Surface		*east;
+	SDL_Surface		*widow_0;
+	SDL_Surface		*widow_1;
 	int				which_tex;
 };
 
 struct						s_env
 {
+	Mix_Music		*music;
+	Mix_Chunk		*widow_rifle;
+	int				click_state;
+	int				weapon_state;
 	int				bloc_size;
 	t_sdl			sdl;		// object sdl
 	t_tex			tex;		// images
@@ -151,12 +160,14 @@ int				events(t_env *env);
 */
 
 int				ft_is_in_wall(t_env *env, t_point pos);
-
+void			weapon_sound(t_env *env);
+void			sound_control(t_env *env);
 /*
 **	Graphics
 */
 
 SDL_Surface      *ft_new_surface(int height, int width, t_env *env);
+void			ft_load_weapontex(t_env *env);
 void			ft_loadtexture(t_env *env);
 Uint32			ft_getpixel(SDL_Surface *surface, int x, int y, t_env *env);
 void			ft_setpixel(SDL_Surface *surface, int x, int y, Uint32 pixel);
@@ -164,6 +175,7 @@ void			dl(t_env *env, t_point pt1, t_point pt2, int color);
 //void			ft_set_string(SDL_Rect rect, char *text, SDL_Color color, t_env *env);
 SDL_Color		ft_hex_to_rgb(int hexa);
 void			ft_reframe(t_env *env);
+void				ft_ui(t_env *env);
 
 /*
 **	Exit

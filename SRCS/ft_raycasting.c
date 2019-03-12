@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/19 15:35:24 by badhont           #+#    #+#             */
-/*   Updated: 2019/03/10 21:22:56 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/12 13:03:17 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,11 @@ void			ft_put_column(t_env *env, double wall_height, int x)
 	while (y < YDIM)
 	{
 		if (y < p1)
-			ft_setpixel(env->surface, XDIM - 1 - x, y, BLUE);
+			ft_setpixel(env->surface, XDIM - 1 - x, y, BLACK);
 		else if (y >= p1 && y < p2)
 			ft_setpixel(env->surface, XDIM - 1 - x, y, ft_texturing(env, y, p1, p2));
 		if (y >= p2)
-			ft_setpixel(env->surface, XDIM - 1 - x, y, 0xFFFFFACD);
+			ft_setpixel(env->surface, XDIM - 1 - x, y, 0x2F4F4FFF);
 		y++;
 	}
 }
@@ -133,7 +133,7 @@ void			ft_raycasting(t_env *env)
 		env->ray.direction = (env->player.dir_d - FOV / 2)
 		+ i * ((double)FOV / (double)XDIM);
 		env->ray.distance = ft_cast_ray(env, env->ray.direction);
-		wall_height = (env->bloc_size / env->ray.distance) * 600;
+		wall_height = (env->bloc_size / env->ray.distance) * 700;
 		ft_put_column(env, wall_height, i);
 		i++;
 	}

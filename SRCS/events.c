@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 10:22:21 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/10 21:00:08 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/12 15:24:10 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,17 @@ int		events(t_env *env)
 		else if (env->player.dir_d < 0)
 			env->player.dir_d = 360 - env->player.dir_d;
 		change = 1;
+	}
+	if (env->sdl.event.type == SDL_MOUSEBUTTONDOWN)
+	{
+			env->weapon_state = (env->weapon_state) ? 0 : 1;
+			env->player.ammo += (env->player.ammo > 0) ? -1 : 100;
+			change = 1;
+	}
+	if (env->sdl.event.type == SDL_MOUSEBUTTONUP)
+	{
+			env->weapon_state = 0;
+			change = 1;
 	}
 	if (env->sdl.event.type == SDL_KEYDOWN)
 	{
