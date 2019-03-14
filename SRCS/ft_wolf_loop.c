@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_wolf_loop.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
+/*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 10:18:59 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/14 18:26:50 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/14 22:07:11 by badhont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,28 @@
 
 void	ft_reframe(t_env *env)
 {
+	t_thrd		thrd[NB_THRD];
 	SDL_Texture		*texture;
 	SDL_Rect		rect;
+	int				i;
 
 	SDL_RenderClear(env->sdl.renderer);
-	ft_raycasting(env);
+	//
+	i = 0;
+	while (i < NB_THRD)
+	{
+		thrd[i].env = env;
+		thrd[i].start = i;
+		pthread_create(&(thrd[i].th), NULL, ft_raycasting, (void *)&(thrd[i]));
+		i++;
+	}
+	i = 0;
+	while (i < NB_THRD)
+	{
+		pthread_join(thrd[i].th, NULL);
+		i++;
+	}
+	//
 	//ft_minimap(env);
 	//ft_set_player_dir(env);
 	ft_crosshair(env);

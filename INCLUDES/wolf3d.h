@@ -18,10 +18,11 @@
 # include <SDL2/SDL_ttf.h>
 # include <SDL2/SDL_image.h>
 # include <SDL2/SDL_mixer.h>
+# include <pthread.h>
 # include <math.h>
 
-# define YDIM 1000
-# define XDIM 1000
+# define YDIM 800
+# define XDIM 800
 # define TEX_W 64
 # define TEX_H 64
 
@@ -45,7 +46,10 @@
 
 # define FOV 60
 
+# define NB_THRD 8
+
 typedef	struct	s_sdl		t_sdl;
+typedef struct	s_thrd		t_thrd;
 typedef	struct	s_point		t_point;
 typedef	struct	s_rect		t_rect;
 typedef	struct	s_player	t_player;
@@ -75,6 +79,23 @@ struct						s_rect
 	double		height;
 };
 
+struct						s_ray
+{
+	double			direction;	// dir_d d'un rayon
+	int				cardinal;	// N / S / E / W
+	double			distance;	// dist d'un rayon
+	int				side;		// side impact mur
+	t_point			pos;		// position bout du rayon
+};
+
+struct					s_thrd
+{
+	pthread_t	th;
+	t_env		*env;
+	int			start;
+	t_ray		ray;		// data rayon courant
+};
+
 struct						s_player
 {
 	t_point			pos;   // position du joueur
@@ -93,15 +114,6 @@ struct						s_line
 	int				dy;
 	int				s1;
 	int				s2;
-};
-
-struct						s_ray
-{
-	double			direction;	// dir_d d'un rayon
-	int				cardinal;	// N / S / E / W
-	double			distance;	// dist d'un rayon
-	int				side;		// side impact mur
-	t_point			pos;		// position bout du rayon
 };
 
 struct						s_tex
@@ -132,7 +144,6 @@ struct						s_env
 	t_player		player;		// data joueur
 	int				mouse_x;	// data souris
 	int				mouse_y;	// data souris
-	t_ray			ray;		// data rayon courant
 	Uint32			last;		// last timestamp for fps
 	int				coef_minimap;	// coef minimap
 	t_point			ray_pos;		// ???
@@ -149,7 +160,7 @@ void			ft_parsing(t_env *env, char *str);
 */
 
 void			ft_wolf_loop(t_env *env);
-void			ft_raycasting(t_env *env);
+void			*ft_raycasting(void *arg);
 void			ft_set_player_dir(t_env *env);
 void			ft_minimap(t_env *env);
 void			ft_crosshair(t_env *env);
