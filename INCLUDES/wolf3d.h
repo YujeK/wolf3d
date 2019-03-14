@@ -38,6 +38,11 @@
 # define PURPLE 0xFF7400AC
 # define GREY 0xFF9A9A9A
 
+# define FORWARD 0
+# define RIGHT 90
+# define BACKWARD 180
+# define LEFT 270
+
 # define FOV 60
 
 typedef	struct	s_sdl		t_sdl;
