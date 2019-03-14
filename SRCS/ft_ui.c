@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/10 23:42:09 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/12 15:25:04 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/14 18:58:06 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,6 @@ void	ft_value_display(t_env *env)
 
 }
 
-void		sound_control(t_env *env)
-{
-	if (env->weapon_state == 1)
-	Mix_PlayChannel(0, env->widow_rifle, 0);
-	else
-	Mix_HaltChannel(0);
-}
 void		weapon_sound(t_env *env)
 {
 	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);

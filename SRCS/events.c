@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 10:22:21 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/12 15:24:10 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/14 19:08:22 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,16 +84,10 @@ int		keyboard(Uint8 *state, t_env *env)
 	return (change);
 }
 
-int		events(t_env *env)
+int		mouse_event(t_env *env)
 {
-	int			change;
-	Uint8		*state;
+	int change;
 
-	change = 0;
-	state = (Uint8 *)SDL_GetKeyboardState(0);
-	SDL_GetRelativeMouseState(&(env->mouse_x), &(env->mouse_y));
-	SDL_PollEvent(&(env->sdl.event));
-	(keyboard(state, env) ? change = 1 : 0);
 	if (env->mouse_x)
 	{
 		env->player.dir_d -= env->mouse_x / 6;
@@ -105,15 +99,34 @@ int		events(t_env *env)
 	}
 	if (env->sdl.event.type == SDL_MOUSEBUTTONDOWN)
 	{
-			env->weapon_state = (env->weapon_state) ? 0 : 1;
-			env->player.ammo += (env->player.ammo > 0) ? -1 : 100;
-			change = 1;
+		//if (no sound playing)
+			if ((Mix_Playing(0)) == 0)
+				Mix_PlayChannel(0, env->widow_rifle, 0); // protect
+		env->weapon_state = (env->weapon_state) ? 0 : 1;
+		env->player.ammo += (env->player.ammo > 0) ? -1 : 100;
+		change = 1;
 	}
 	if (env->sdl.event.type == SDL_MOUSEBUTTONUP)
 	{
-			env->weapon_state = 0;
-			change = 1;
+		Mix_HaltChannel(0);
+		env->weapon_state = 0;
+		change = 1;
 	}
+	return (change);
+}
+
+
+int		events(t_env *env)
+{
+	int			change;
+	Uint8		*state;
+
+	change = 0;
+	state = (Uint8 *)SDL_GetKeyboardState(0);
+	SDL_GetRelativeMouseState(&(env->mouse_x), &(env->mouse_y));
+	SDL_PollEvent(&(env->sdl.event));
+	(keyboard(state, env) ? change = 1 : 0);
+	(mouse_event(env) ? change = 1 : 0);
 	if (env->sdl.event.type == SDL_KEYDOWN)
 	{
 		if (env->sdl.event.key.keysym.sym == SDLK_p)
