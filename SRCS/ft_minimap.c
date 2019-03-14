@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minimap.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 17:07:38 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/09 19:54:35 by sgalasso         ###   ########.fr       */
+/*   Updated: 2019/03/10 20:45:50 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,11 @@ void	ft_dl_angle(t_env *env, double dist, double angle_d)
 	t_point	b;
 
 	step.x = -cos(angle_d * M_PI / 180) * dist;
- 	step.y = -sin(angle_d * M_PI / 180) * dist;
-
-	a.x = env->player.pos.y * BLOC_SIZE * env->coef_minimap;
-	a.y = env->player.pos.x * BLOC_SIZE * env->coef_minimap;
-	b.x = (env->player.pos.y + step.y) * BLOC_SIZE * env->coef_minimap;
-	b.y = (env->player.pos.x + step.x) * BLOC_SIZE * env->coef_minimap;
+	step.y = -sin(angle_d * M_PI / 180) * dist;
+	a.x = env->player.pos.y * env->bloc_size * env->coef_minimap;
+	a.y = env->player.pos.x * env->bloc_size * env->coef_minimap;
+	b.x = (env->player.pos.y + step.y) * env->bloc_size * env->coef_minimap;
+	b.y = (env->player.pos.x + step.x) * env->bloc_size * env->coef_minimap;
 	dl(env, a, b, PINK);
 }
 
@@ -68,8 +67,10 @@ void	ft_minimap(t_env *env)
 		x = 0;
 		while (x < env->map_width)
 		{
-			rect = (SDL_Rect){x * BLOC_SIZE * env->coef_minimap, y * BLOC_SIZE * env->coef_minimap,
-			BLOC_SIZE * env->coef_minimap, BLOC_SIZE * env->coef_minimap};
+			rect = (SDL_Rect){y * env->bloc_size * env->coef_minimap,
+			x * env->bloc_size * env->coef_minimap,
+			env->bloc_size * env->coef_minimap,
+			env->bloc_size * env->coef_minimap};
 			if (env->map[y][x] == 0 || env->map[y][x] == 2)
 				fillrect(env, rect, WHITE);
 			if (env->map[y][x] == 1)

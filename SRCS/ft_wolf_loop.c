@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wolf_loop.c                                        :+:      :+:    :+:   */
+/*   ft_wolf_loop.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 10:18:59 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/09 21:17:33 by sgalasso         ###   ########.fr       */
+/*   Updated: 2019/03/14 18:26:50 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,14 @@ void	ft_reframe(t_env *env)
 	SDL_Rect		rect;
 
 	SDL_RenderClear(env->sdl.renderer);
-
 	ft_raycasting(env);
 	//ft_minimap(env);
 	//ft_set_player_dir(env);
-
+	ft_crosshair(env);
+	ft_ui(env);
 	texture = SDL_CreateTextureFromSurface(env->sdl.renderer, env->surface);
 	SDL_RenderCopy(env->sdl.renderer, texture, 0, 0);
 	rect = (SDL_Rect){0, 0, 60, 30};
-	//ft_set_string(rect, ft_itoa(env->player.dir_d), ft_hex_to_rgb(WHITE), env);
 	SDL_DestroyTexture(texture);
 	SDL_RenderPresent(env->sdl.renderer);
 }
@@ -40,6 +39,5 @@ void	ft_wolf_loop(t_env *env)
 		SDL_PollEvent(&(env->sdl.event));
 		if (events(env))
 			ft_reframe(env);
-		SDL_FlushEvent(SDL_KEYDOWN | SDL_MOUSEMOTION);
 	}
 }

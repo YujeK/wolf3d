@@ -6,7 +6,7 @@ ID_UN 		= $(shell id -un)
 SRC_PATH 	= srcs/
 OBJ_PATH 	= objs/
 INC_PATH	= includes/ \
-			  libft/includes/
+				libft/includes/
 LIBFT 		= libft/
 
 WHITE       = "\\033[0m"
@@ -16,14 +16,16 @@ GREEN       = "\\033[32m"
 SDL_NUM		= $(shell ls /Users/$(ID_UN)/.brew/Cellar/sdl2/ | tail -1)
 TTF_NUM		= $(shell ls /Users/$(ID_UN)/.brew/Cellar/sdl2_ttf/ | tail -1)
 IMG_NUM		= $(shell ls /Users/$(ID_UN)/.brew/Cellar/sdl2_image/ | tail -1)
+MIX_NUM		= $(shell ls /Users/$(ID_UN)/.brew/Cellar/sdl2_mixer/ | tail -1)
 
-INC_PATH	+= /Users/$(ID_UN)/.brew/Cellar/sdl2/$(SDL_NUM)/include/ \
-			   /Users/$(ID_UN)/.brew/Cellar/sdl2/$(SDL_NUM)/include/SDL2/ \
-			   /Users/$(ID_UN)/.brew/Cellar/sdl2_ttf/$(TTF_NUM)/include/ \
-			   /Users/$(ID_UN)/.brew/Cellar/sdl2_image/$(IMG_NUM)/include/ \
+INC_PATH	+=	/Users/$(ID_UN)/.brew/Cellar/sdl2/$(SDL_NUM)/include/ \
+				/Users/$(ID_UN)/.brew/Cellar/sdl2/$(SDL_NUM)/include/SDL2/ \
+				/Users/$(ID_UN)/.brew/Cellar/sdl2_ttf/$(TTF_NUM)/include/ \
+				/Users/$(ID_UN)/.brew/Cellar/sdl2_image/$(IMG_NUM)/include/ \
+				/Users/$(ID_UN)/.brew/Cellar/sdl2_mixer/$(MIX_NUM)/include/
 
 SRC_NAME 	= 	main.c \
-				crosshair.c \
+				ft_crosshair.c \
 				events.c \
 				ft_exit.c \
 				ft_minimap.c \
@@ -33,9 +35,10 @@ SRC_NAME 	= 	main.c \
 				ft_raycasting.c \
 				ft_wolf_loop.c \
 				linedrawer.c \
+				ft_ui.c \
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
-LSDL2 	 = -L/Users/$(ID_UN)/.brew/lib/ -lSDL2 -lSDL2_ttf -lSDL2_image
+LSDL2 	 = -L/Users/$(ID_UN)/.brew/lib/ -lSDL2 -lSDL2_ttf -lSDL2_image -lSDL2_mixer
 
 SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
