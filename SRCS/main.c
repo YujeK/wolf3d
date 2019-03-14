@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
+/*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 09:55:41 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/12 14:42:25 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/14 22:13:01 by badhont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,7 @@ void	init_game(t_env *env)
 	weapon_sound(env);
 	env->player.dir_d = 0;
 	env->coef_minimap = 1;
-	env->ray.cardinal = 1;
-	env->bloc_size = 10;
+	env->bloc_size = 50;
 	env->tex.which_tex = 0;
 	env->player.life = 100;
 	env->player.ammo = 100;

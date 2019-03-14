@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ui.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
+/*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/10 23:42:09 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/14 18:58:06 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/14 22:07:53 by badhont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void		ft_ui(t_env *env)
 {
 	SDL_Surface *weapon;
 	SDL_Rect	rect;
-	ft_value_display(env);
+	//ft_value_display(env);
 	weapon = (env->weapon_state == 1) ? env->tex.widow_1 : env->tex.widow_0;
 	rect = (SDL_Rect){XDIM / 3.5, 0, 1000, 1000};
 	SDL_BlitScaled(weapon, 0, env->surface, &rect);
