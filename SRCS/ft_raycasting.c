@@ -3,51 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_raycasting.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/19 15:35:24 by badhont           #+#    #+#             */
-/*   Updated: 2019/03/14 22:05:15 by badhont          ###   ########.fr       */
+/*   Updated: 2019/03/14 23:38:24 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-SDL_Surface		*ft_selectex(t_thrd *thrd)
+double			ft_pythagore(double posx, double posy)
 {
-	if (thrd->ray.side == 2)
-	{
-		if ((thrd->ray.direction >= 0 && thrd->ray.direction <= 180)
-		|| thrd->ray.direction >= 360)
-			return (thrd->env->tex.north);
-		else
-			return (thrd->env->tex.east);
-	}
-	if (thrd->ray.direction >= 90 && thrd->ray.direction <= 270)
-		return (thrd->env->tex.south);
-	return (thrd->env->tex.west);
-}
-
-Uint32			ft_texturing(t_thrd *thrd, int y, int p1, int p2)
-{
-	SDL_Surface	*surface;
-	Uint32		color;
-	int			w_tex;
-	int			h_tex;
-	int			x_tex;
-	int			y_tex;
-	int			ywall;
-
-	ywall = y - p1;
-	surface = ft_selectex(thrd);
-	w_tex = surface->w;
-	h_tex = surface->h;
-	if (thrd->ray.side == 2)
-		x_tex = ((int)thrd->ray.pos.x % thrd->env->bloc_size) * w_tex / thrd->env->bloc_size;
-	else
-		x_tex = ((int)thrd->ray.pos.y % thrd->env->bloc_size) * w_tex / thrd->env->bloc_size;
-	y_tex = ywall * h_tex / (p2 - p1);
-	color = ft_getpixel(surface, x_tex, y_tex, thrd->env);
-	return (color);
+	return (sqrt(posx * posx + posy * posy));
 }
 
 void			ft_put_column(t_thrd *thrd, double wall_height, int x)
@@ -64,21 +31,18 @@ void			ft_put_column(t_thrd *thrd, double wall_height, int x)
 		if (y < p1)
 			ft_setpixel(thrd->env->surface, XDIM - 1 - x, y, BLACK);
 		else if (y >= p1 && y < p2)
-			ft_setpixel(thrd->env->surface, XDIM - 1 - x, y, ft_texturing(thrd, y, p1, p2));
+			ft_setpixel(thrd->env->surface, XDIM - 1 - x, y,
+				ft_texturing(thrd, y, p1, p2));
 		if (y >= p2)
 			ft_setpixel(thrd->env->surface, XDIM - 1 - x, y, 0x2F4F4FFF);
 		y++;
 	}
 }
 
-double			ft_pythagore(double posx, double posy)
-{
-	return (sqrt(posx * posx + posy * posy)); //retourne l'hypothenuse
-}
-
 int				ft_is_in_wall(t_env *env, t_point pos)
 {
-	if (pos.x < 0 || pos.x > env->map_width * env->bloc_size || pos.y < 0 || pos.y > env->map_height * env->bloc_size)
+	if (pos.x < 0 || pos.x > env->map_width * env->bloc_size ||
+			pos.y < 0 || pos.y > env->map_height * env->bloc_size)
 		return (1);
 	if (env->map[(int)pos.x / env->bloc_size][(int)pos.y / env->bloc_size] == 1)
 		return (1);
@@ -97,56 +61,44 @@ double			ft_cast_ray(t_thrd *thrd, double direction)
 	thrd->ray.pos.y = thrd->env->player.pos.y * thrd->env->bloc_size;
 	origin = (t_point){thrd->ray.pos.x, thrd->ray.pos.y};
 	while (thrd->ray.pos.x > 0 && thrd->ray.pos.x < thrd->env->map_width * thrd->env->bloc_size
-	&& thrd->ray.pos.y > 0 && thrd->ray.pos.y < thrd->env->map_height * thrd->env->bloc_size)
+			&& thrd->ray.pos.y > 0 && thrd->ray.pos.y < thrd->env->map_height * thrd->env->bloc_size)
 	{
 		thrd->ray.pos.x += step.x;
 		if (ft_is_in_wall(thrd->env, thrd->ray.pos))
 		{
-			//thrd->ray_pos.x = thrd->ray.pos.x;
 			thrd->ray.side = 1;
 			alpha = fabs((thrd->env->player.dir_d - direction) * (M_PI / 180));
 			return (ft_pythagore(thrd->ray.pos.x - origin.x,
-			thrd->ray.pos.y - origin.y) * cos(alpha));
+						thrd->ray.pos.y - origin.y) * cos(alpha));
 		}
 		thrd->ray.pos.y += step.y;
 		if (ft_is_in_wall(thrd->env, thrd->ray.pos))
 		{
-			//thrd->ray_pos.y = thrd->ray.pos.y;
 			thrd->ray.side = 2;
 			alpha = fabs((thrd->env->player.dir_d - direction) * (M_PI / 180));
 			return (ft_pythagore(thrd->ray.pos.x - origin.x,
-			thrd->ray.pos.y - origin.y) * cos(alpha));
+						thrd->ray.pos.y - origin.y) * cos(alpha));
 		}
 	}
-	// out of map
 	return (0);
 }
 
-void    *ft_raycasting(void *arg)
+void			*ft_raycasting(void *arg)
 {
 	t_thrd	*thrd;
+	double	wall_height;
+	int		i;
 
 	thrd = (t_thrd *)arg;
 	thrd->ray.cardinal = 1;
-	double  wall_height;
-	int		i;
-
 	i = thrd->start;
 	while (i < XDIM)
 	{
-		// calcul direction du rayon
 		thrd->ray.direction = (thrd->env->player.dir_d - FOV / 2)
-		+ i * ((double)FOV / (double)XDIM);
-
-		//lancer un rayon et recuperer sa longueur
+			+ i * ((double)FOV / (double)XDIM);
 		thrd->ray.distance = ft_cast_ray(thrd, thrd->ray.direction);
-
-		// calcul wallheight 
 		wall_height = (thrd->env->bloc_size) / thrd->ray.distance * 800;
-
-		// set pixels
 		ft_put_column(thrd, wall_height, i);
-
 		i += 8;
 	}
 	pthread_exit(NULL);

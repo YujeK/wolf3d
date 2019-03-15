@@ -36,6 +36,7 @@ SRC_NAME 	= 	main.c \
 				ft_wolf_loop.c \
 				linedrawer.c \
 				ft_ui.c \
+				ft_text_utils.c \
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 LSDL2 	 = -L/Users/$(ID_UN)/.brew/lib/ -lSDL2 -lSDL2_ttf -lSDL2_image -lSDL2_mixer

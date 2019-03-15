@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 09:55:41 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/14 22:13:01 by badhont          ###   ########.fr       */
+/*   Updated: 2019/03/15 00:06:01 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
-
 
 void	init_sdl(t_env *env)
 {

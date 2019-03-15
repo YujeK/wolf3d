@@ -6,46 +6,18 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 15:36:41 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/12 13:35:05 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/15 00:05:29 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-
 void			ft_load_weapontex(t_env *env)
 {
-		if (!(env->tex.widow_0 = IMG_Load("RESSOURCES/pics/weapon/widow.png")))
-			ft_error_exit("Wolf3d: Unable to load texture", env);
-		if (!(env->tex.widow_1 = IMG_Load("RESSOURCES/pics/weapon/widow2.png")))
-			ft_error_exit("Wolf3d: Unable to load texture", env);
-}
-void			ft_loadtexture(t_env *env)
-{
-	if (env->tex.which_tex == 0)
-	{
-		if (!(env->tex.north = IMG_Load("RESSOURCES/pics/basic/wood.png")))
-			ft_error_exit("Wolf3d: Unable to load texture", env);
-		if (!(env->tex.east = IMG_Load("RESSOURCES/pics/basic/bluestone.png")))
-			ft_error_exit("Wolf3d: Unable to load texture", env);
-		if (!(env->tex.west = IMG_Load("RESSOURCES/pics/basic/colorstone.png")))
-			ft_error_exit("Wolf3d: Unable to load texture", env);
-		if (!(env->tex.south = IMG_Load("RESSOURCES/pics/basic/greystone.png")))
-			ft_error_exit("Wolf3d: Unable to load texture", env);
-	}
-	if (env->tex.which_tex == 1)
-	{
-		if (!(env->tex.north = IMG_Load("RESSOURCES/pics/halloffame/sgalasso.png")))
-			ft_error_exit("Wolf3d: Unable to load texture", env);
-		if (!(env->tex.east = IMG_Load("RESSOURCES/pics/halloffame/asamir-k.png")))
-			ft_error_exit("Wolf3d: Unable to load texture", env);
-		if (!(env->tex.west = IMG_Load("RESSOURCES/pics/halloffame/badhont.png")))
-			ft_error_exit("Wolf3d: Unable to load texture", env);
-		if (!(env->tex.south = IMG_Load("RESSOURCES/pics/halloffame/nihuynh.png")))
-			ft_error_exit("Wolf3d: Unable to load texture", env);
-	}
-	ft_load_weapontex(env);
-	ft_reframe(env);
+	if (!(env->tex.widow_0 = IMG_Load("RESSOURCES/pics/weapon/widow.png")))
+		ft_error_exit("Wolf3d: Unable to load texture", env);
+	if (!(env->tex.widow_1 = IMG_Load("RESSOURCES/pics/weapon/widow2.png")))
+		ft_error_exit("Wolf3d: Unable to load texture", env);
 }
 
 SDL_Color		ft_hex_to_rgb(int hexa)

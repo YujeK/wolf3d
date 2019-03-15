@@ -21,8 +21,8 @@
 # include <pthread.h>
 # include <math.h>
 
-# define YDIM 800
-# define XDIM 800
+# define YDIM 1000
+# define XDIM 1000
 # define TEX_W 64
 # define TEX_H 64
 
@@ -129,6 +129,8 @@ struct						s_tex
 
 struct						s_env
 {
+	int				w_tex;
+	int				h_tex;
 	Mix_Music		*music;
 	Mix_Chunk		*widow_rifle;
 	int				click_state;
@@ -192,6 +194,8 @@ void			dl(t_env *env, t_point pt1, t_point pt2, int color);
 SDL_Color		ft_hex_to_rgb(int hexa);
 void			ft_reframe(t_env *env);
 void				ft_ui(t_env *env);
+Uint32			ft_texturing(t_thrd *thrd, int y, int p1, int p2);
+SDL_Surface		*ft_selectex(t_thrd *thrd);
 
 /*
 **	Exit

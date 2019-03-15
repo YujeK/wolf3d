@@ -6,15 +6,16 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 10:22:21 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/14 21:51:14 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/15 00:29:02 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
-int		ft_movement(int	relative_dir_d, t_env *env)
+
+int		ft_movement(int relative_dir_d, t_env *env)
 {
 	t_point		step;
-	t_point 	pos;
+	t_point		pos;
 
 	step.x = -cos((env->player.dir_d + relative_dir_d) * M_PI / 180) * 0.1;
 	step.y = -sin((env->player.dir_d + relative_dir_d) * M_PI / 180) * 0.1;
@@ -28,6 +29,32 @@ int		ft_movement(int	relative_dir_d, t_env *env)
 		env->player.pos.y -= step.y;
 	}
 	return (1);
+}
+
+int		ft_text_and_res(t_env *env, int change)
+{
+	if (env->sdl.event.type == SDL_KEYDOWN)
+	{
+		if (env->sdl.event.key.keysym.sym == SDLK_p)
+			if (env->bloc_size < 540)
+				env->bloc_size += 30;
+		if (env->sdl.event.key.keysym.sym == SDLK_o)
+			if (env->bloc_size > 10)
+				env->bloc_size -= 30;
+		if (env->sdl.event.key.keysym.sym == SDLK_l)
+		{
+			env->tex.which_tex = 1;
+			ft_loadtexture(env);
+			change = 1;
+		}
+		if (env->sdl.event.key.keysym.sym == SDLK_k)
+		{
+			env->tex.which_tex = 0;
+			ft_loadtexture(env);
+			change = 1;
+		}
+	}
+	return (change);
 }
 
 int		ft_keyboard(Uint8 *state, t_env *env)
@@ -46,12 +73,11 @@ int		ft_keyboard(Uint8 *state, t_env *env)
 	if (state[SDL_SCANCODE_A])
 		change = ft_movement(RIGHT, env);
 	return (change);
+	(ft_text_and_res(env, change) ? change = 1 : 0);
 }
 
-int		ft_mouse_event(t_env *env)
+int		ft_mouse_event(t_env *env, int change)
 {
-	int change;
-
 	if (env->mouse_x)
 	{
 		env->player.dir_d -= env->mouse_x / 6;
@@ -63,9 +89,8 @@ int		ft_mouse_event(t_env *env)
 	}
 	if (env->sdl.event.type == SDL_MOUSEBUTTONDOWN)
 	{
-		//if (no sound playing)
-			if ((Mix_Playing(0)) == 0)
-				Mix_PlayChannel(0, env->widow_rifle, 0); // protect
+		if ((Mix_Playing(0)) == 0)
+			Mix_PlayChannel(0, env->widow_rifle, 0);
 		env->weapon_state = (env->weapon_state) ? 0 : 1;
 		env->player.ammo += (env->player.ammo > 0) ? -1 : 100;
 		change = 1;
@@ -79,7 +104,6 @@ int		ft_mouse_event(t_env *env)
 	return (change);
 }
 
-
 int		events(t_env *env)
 {
 	int			change;
@@ -90,25 +114,6 @@ int		events(t_env *env)
 	SDL_GetRelativeMouseState(&(env->mouse_x), &(env->mouse_y));
 	SDL_PollEvent(&(env->sdl.event));
 	(ft_keyboard(state, env) ? change = 1 : 0);
-	(ft_mouse_event(env) ? change = 1 : 0);
-	if (env->sdl.event.type == SDL_KEYDOWN)
-	{
-		if (env->sdl.event.key.keysym.sym == SDLK_p)
-			if (env->bloc_size < 540)
-				env->bloc_size += 30;
-		if (env->sdl.event.key.keysym.sym == SDLK_o)
-			if (env->bloc_size > 10)
-				env->bloc_size -= 30;
-		if (env->sdl.event.key.keysym.sym == SDLK_l)
-		{
-			env->tex.which_tex = 1;
-			ft_loadtexture(env);
-		}
-		if (env->sdl.event.key.keysym.sym == SDLK_k)
-		{
-			env->tex.which_tex = 0;
-			ft_loadtexture(env);
-		}
-	}
+	(ft_mouse_event(env, change) ? change = 1 : 0);
 	return (change);
 }
