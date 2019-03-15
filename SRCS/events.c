@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 10:22:21 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/15 00:29:02 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/15 03:15:57 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,31 +31,34 @@ int		ft_movement(int relative_dir_d, t_env *env)
 	return (1);
 }
 
-int		ft_text_and_res(t_env *env, int change)
+int		ft_text_and_res(t_env *env, int change, Uint8 *state)
 {
-	if (env->sdl.event.type == SDL_KEYDOWN)
-	{
-		if (env->sdl.event.key.keysym.sym == SDLK_p)
-			if (env->bloc_size < 540)
-				env->bloc_size += 30;
-		if (env->sdl.event.key.keysym.sym == SDLK_o)
+	if (state[SDL_SCANCODE_I])
+		{
+			if(env->inv_state == 1)
+				env->inv_state = 0;
+			else
+				env->inv_state = 1;
+			change = 1;
+		}
+		if (state[SDL_SCANCODE_O])
 			if (env->bloc_size > 10)
 				env->bloc_size -= 30;
-		if (env->sdl.event.key.keysym.sym == SDLK_l)
+		if (state[SDL_SCANCODE_L])
 		{
 			env->tex.which_tex = 1;
 			ft_loadtexture(env);
 			change = 1;
 		}
-		if (env->sdl.event.key.keysym.sym == SDLK_k)
+		if (state[SDL_SCANCODE_K])
 		{
 			env->tex.which_tex = 0;
 			ft_loadtexture(env);
 			change = 1;
 		}
-	}
 	return (change);
 }
+
 
 int		ft_keyboard(Uint8 *state, t_env *env)
 {
@@ -72,8 +75,8 @@ int		ft_keyboard(Uint8 *state, t_env *env)
 		change = ft_movement(LEFT, env);
 	if (state[SDL_SCANCODE_A])
 		change = ft_movement(RIGHT, env);
+	(ft_text_and_res(env, change, state) ? change = 1 : 0);
 	return (change);
-	(ft_text_and_res(env, change) ? change = 1 : 0);
 }
 
 int		ft_mouse_event(t_env *env, int change)

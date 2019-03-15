@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 09:55:41 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/15 00:06:01 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/15 03:03:59 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	init_game(t_env *env)
 	env->tex.which_tex = 0;
 	env->player.life = 100;
 	env->player.ammo = 100;
+	env->inv_state = 0;
 }
 
 int		main(int ac, char **av)

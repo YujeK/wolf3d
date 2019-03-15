@@ -124,6 +124,8 @@ struct						s_tex
 	SDL_Surface		*east;
 	SDL_Surface		*widow_0;
 	SDL_Surface		*widow_1;
+	SDL_Surface		*lil_bag;
+	SDL_Surface		*bag;
 	int				which_tex;
 };
 
@@ -135,6 +137,7 @@ struct						s_env
 	Mix_Chunk		*widow_rifle;
 	int				click_state;
 	int				weapon_state;
+	int				inv_state;
 	int				bloc_size;
 	t_sdl			sdl;		// object sdl
 	t_tex			tex;		// images
@@ -180,6 +183,8 @@ int				events(t_env *env);
 int				ft_is_in_wall(t_env *env, t_point pos);
 void			weapon_sound(t_env *env);
 void			sound_control(t_env *env);
+void			ft_set_string(SDL_Rect rect, char *text,
+				SDL_Color color, t_env *env);
 /*
 **	Graphics
 */
@@ -203,5 +208,5 @@ SDL_Surface		*ft_selectex(t_thrd *thrd);
 
 void			ft_error_exit(char *str, t_env *env);
 void			ft_exit(t_env *env);
-
+void			ft_inventory(t_env *env);
 #endif
