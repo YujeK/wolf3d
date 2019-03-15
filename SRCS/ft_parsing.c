@@ -6,35 +6,11 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 16:14:06 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/10 20:43:57 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/14 23:26:16 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
-
-void    ft_print_map(t_env *env)
-{
-	int i;
-	int j;
-	i = 0;
-	printf("mapx : %d\nmapy : %d\n", env->map_height, env->map_width);
-	// print de la map recu en arg
-	ft_putstr("vanilla map file : \n");
-	while (i < env->map_height)
-	{
-		j = 0;
-		while (j < env->map_width)
-		{
-			printf("%d", env->map[i][j]);
-			j++;
-		}
-		printf("\n");
-		i++;
-	}
-	// print de la position du joueur
-	printf("player x : %f\n", env->player.pos.x);
-	printf("player y : %f\n", env->player.pos.y);
-}
 
 int			ft_readverif(char *str, t_env *env)
 {
@@ -76,7 +52,6 @@ void		ft_map_alloc(t_env *env, char *str)
 
 void		ft_map_elems(t_env *env, int x, int y, char *line)
 {
-
 	int i;
 
 	i = 0;
@@ -110,7 +85,7 @@ void		ft_map_filler(t_env *env, char *str)
 		x = 0;
 		if (!(env->map[y] = (int *)ft_memalloc(sizeof(int) * (env->map_width))))
 			ft_error_exit("Wolf3d: Unable to malloc the map", env);
-			ft_map_elems(env, x, y, line);
+		ft_map_elems(env, x, y, line);
 		ft_strdel(&line);
 		y++;
 	}

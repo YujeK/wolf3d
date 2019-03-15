@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 09:55:41 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/14 22:13:01 by badhont          ###   ########.fr       */
+/*   Updated: 2019/03/15 03:03:59 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
-
 
 void	init_sdl(t_env *env)
 {
@@ -45,6 +44,7 @@ void	init_game(t_env *env)
 	env->tex.which_tex = 0;
 	env->player.life = 100;
 	env->player.ammo = 100;
+	env->inv_state = 0;
 }
 
 int		main(int ac, char **av)

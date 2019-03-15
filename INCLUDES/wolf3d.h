@@ -21,8 +21,8 @@
 # include <pthread.h>
 # include <math.h>
 
-# define YDIM 800
-# define XDIM 800
+# define YDIM 1000
+# define XDIM 1000
 # define TEX_W 64
 # define TEX_H 64
 
@@ -124,15 +124,20 @@ struct						s_tex
 	SDL_Surface		*east;
 	SDL_Surface		*widow_0;
 	SDL_Surface		*widow_1;
+	SDL_Surface		*lil_bag;
+	SDL_Surface		*bag;
 	int				which_tex;
 };
 
 struct						s_env
 {
+	int				w_tex;
+	int				h_tex;
 	Mix_Music		*music;
 	Mix_Chunk		*widow_rifle;
 	int				click_state;
 	int				weapon_state;
+	int				inv_state;
 	int				bloc_size;
 	t_sdl			sdl;		// object sdl
 	t_tex			tex;		// images
@@ -178,6 +183,8 @@ int				events(t_env *env);
 int				ft_is_in_wall(t_env *env, t_point pos);
 void			weapon_sound(t_env *env);
 void			sound_control(t_env *env);
+void			ft_set_string(SDL_Rect rect, char *text,
+				SDL_Color color, t_env *env);
 /*
 **	Graphics
 */
@@ -192,6 +199,8 @@ void			dl(t_env *env, t_point pt1, t_point pt2, int color);
 SDL_Color		ft_hex_to_rgb(int hexa);
 void			ft_reframe(t_env *env);
 void				ft_ui(t_env *env);
+Uint32			ft_texturing(t_thrd *thrd, int y, int p1, int p2);
+SDL_Surface		*ft_selectex(t_thrd *thrd);
 
 /*
 **	Exit
@@ -199,5 +208,5 @@ void				ft_ui(t_env *env);
 
 void			ft_error_exit(char *str, t_env *env);
 void			ft_exit(t_env *env);
-
+void			ft_inventory(t_env *env);
 #endif
