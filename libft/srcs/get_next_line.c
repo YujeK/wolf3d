@@ -3,51 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
+/*   By: badhont <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/25 15:26:05 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/10 17:58:20 by asamir-k         ###   ########.fr       */
+/*   Created: 2018/09/12 19:20:44 by badhont           #+#    #+#             */
+/*   Updated: 2018/10/10 18:37:27 by badhont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		retnextline(char **str, const int fd, char **line)
+int		ft_subjoinfree(char **line, char *buff, int len)
 {
-	size_t len;
+	char	*tmp;
+	char	*tmp2;
 
 	len = 0;
-	while (str[fd][len] && str[fd][len] != '\n')
+	while (buff[len] && buff[len] != '\n')
 		len++;
-	if (len != 0 || ft_strlen(str[fd]) > 0)
-	{
-		*line = ft_strsub(str[fd], 0, len);
-		len += (len == ft_strlen(str[fd])) ? 0 : 1;
-		str[fd] = ft_strsubfree(str[fd], len, ft_strlen(str[fd]) - len);
-		return (1);
-	}
-	return (0);
+	tmp = *line;
+	tmp2 = ft_strsub(buff, 0, len);
+	if (!(*line = ft_strjoin(tmp, tmp2)))
+		return (-1);
+	free(tmp);
+	free(tmp2);
+	return (len);
 }
 
-int		get_next_line(const int fd, char **line)
+int		get_next_line(int fd, char **line)
 {
-	int			reid;
-	char		readance[BUFF_SIZE + 1];
-	static char	*str[10240];
+	static char	buff[BUFF_SIZE + 1] = {'\0'};
+	int			ret;
+	int			len;
 
-	if (line == NULL || fd < 0 || fd > 10240 || BUFF_SIZE < 1)
+	if (!line || fd < 0 || !(*line = ft_strnew(0)))
 		return (-1);
-	if (str[fd] == NULL)
-		if ((str[fd] = ft_strnew(0)) == NULL)
-			return (-1);
-	while (!(ft_strchr(str[fd], '\n')) &&
-			(reid = read(fd, readance, BUFF_SIZE)) > 0)
+	ret = 1;
+	while (ret)
 	{
-		readance[reid] = '\0';
-		if (!(str[fd] = ft_strjoinfree(str[fd], readance)))
-			return (0);
+		if (!(*buff) && (ret = read(fd, buff, BUFF_SIZE)) == -1)
+			return (-1);
+		if ((len = ft_subjoinfree(line, buff, len)) == -1)
+			return (-1);
+		if (buff[len] == '\n')
+		{
+			ft_strncpy(buff, buff + len + 1, BUFF_SIZE);
+			return (1);
+		}
+		ft_strncpy(buff, buff + len, BUFF_SIZE);
+		if (!(*buff) && ret == 0 && **line)
+			return (1);
 	}
-	if (reid == -1)
-		return (-1);
-	return (retnextline(str, fd, line));
+	return (0);
 }
