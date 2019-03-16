@@ -131,9 +131,11 @@ struct						s_tex
 
 struct						s_env
 {
+	int				realm_x;
+	int				realm_y;
 	int				w_tex;
 	int				h_tex;
-	Mix_Music		*music;
+	Mix_Music		*plage;
 	Mix_Chunk		*widow_rifle;
 	int				click_state;
 	int				weapon_state;
@@ -185,6 +187,7 @@ void			weapon_sound(t_env *env);
 void			sound_control(t_env *env);
 void			ft_set_string(SDL_Rect rect, char *text,
 				SDL_Color color, t_env *env);
+int				ft_mouse_inventory(t_env *env, int change);
 /*
 **	Graphics
 */

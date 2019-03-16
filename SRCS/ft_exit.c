@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 21:42:55 by badhont           #+#    #+#             */
-/*   Updated: 2019/03/12 15:08:13 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/16 00:54:55 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	ft_exit(t_env *env)
 	if (env->sdl.window)
 		SDL_DestroyWindow(env->sdl.window);
 	Mix_FreeChunk(env->widow_rifle);
+	Mix_FreeMusic(env->plage);
 	TTF_Quit();
 	Mix_Quit();
 	SDL_Quit();

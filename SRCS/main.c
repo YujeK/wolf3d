@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 09:55:41 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/15 03:03:59 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/16 01:08:47 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	init_sdl(t_env *env)
 		ft_error_exit("Wolf3d: Unable to initialize SDL2", env);
 	if (TTF_Init() < 0)
 		ft_error_exit("Wolf3d: Unable to initialize SDL TTF", env);
+	if (SDL_Init(SDL_INIT_AUDIO) < 0)
+		ft_error_exit("Wolf3d: Unable to initialize SDL AUDIO", env);
 	if (Mix_Init(MIX_INIT_MP3) < 0)
 		ft_error_exit("Wolf3d: Unable to initialize SDL MP3 MIXER", env);
 	if (!(env->sdl.window = SDL_CreateWindow("Wolf3d",
@@ -45,6 +47,7 @@ void	init_game(t_env *env)
 	env->player.life = 100;
 	env->player.ammo = 100;
 	env->inv_state = 0;
+	env->weapon_state = 2;
 }
 
 int		main(int ac, char **av)
