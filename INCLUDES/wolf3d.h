@@ -51,6 +51,7 @@
 typedef	struct	s_sdl		t_sdl;
 typedef struct	s_thrd		t_thrd;
 typedef	struct	s_point		t_point;
+typedef	struct	s_pos		t_pos;
 typedef	struct	s_rect		t_rect;
 typedef	struct	s_player	t_player;
 typedef	struct	s_line		t_line;
@@ -69,6 +70,12 @@ struct					s_point
 {
 	double				x;
 	double				y;
+};
+
+struct					s_pos
+{
+	int					x;
+	int					y;
 };
 
 struct						s_rect
@@ -139,13 +146,12 @@ struct						s_env
 	int				weapon_state;
 	int				inv_state;
 	int				bloc_size;
+	t_pos			mapsize;
 	t_sdl			sdl;		// object sdl
 	t_tex			tex;		// images
 	SDL_Surface		*surface;	// surface principale
 	TTF_Font		*font;		// police d'ecriture
 	int				**map;		// map
-	int				map_width;	// largeur map
-	int				map_height;	// hauteur map
 	t_player		player;		// data joueur
 	int				mouse_x;	// data souris
 	int				mouse_y;	// data souris

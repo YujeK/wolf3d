@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minimap.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
+/*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 17:07:38 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/10 20:45:50 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/16 18:06:44 by badhont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,10 @@ void	ft_minimap(t_env *env)
 	int			y;
 
 	y = 0;
-	while (y < env->map_height)
+	while (y < env->mapsize.y)
 	{
 		x = 0;
-		while (x < env->map_width)
+		while (x < env->mapsize.x)
 		{
 			rect = (SDL_Rect){y * env->bloc_size * env->coef_minimap,
 			x * env->bloc_size * env->coef_minimap,
