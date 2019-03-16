@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/15 01:39:25 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/16 02:09:30 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/16 04:15:48 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int			ft_mouse_inventory(t_env *env, int change)
 		change = 1;
 					ft_reframe(env);
 	}
-		if (env->sdl.event.type == SDL_MOUSEBUTTONDOWN && ft_is_in(env, 275, 425, 460, 550) == 1)
+	if (env->sdl.event.type == SDL_MOUSEBUTTONDOWN && ft_is_in(env, 275, 425, 460, 550) == 1)
 	{
 		if (env->tex.which_tex == 1)
 			env->tex.which_tex = 0;
@@ -43,7 +43,7 @@ int			ft_mouse_inventory(t_env *env, int change)
 		ft_loadtexture(env);
 		change = 1;
 	}
-			if (env->sdl.event.type == SDL_MOUSEBUTTONDOWN && ft_is_in(env, 275, 425, 350, 450) == 1)
+	if (env->sdl.event.type == SDL_MOUSEBUTTONDOWN && ft_is_in(env, 275, 425, 350, 450) == 1)
 	{
 		if(Mix_PlayingMusic() == 0)
 			Mix_PlayMusic(env->plage, -1);
@@ -53,11 +53,12 @@ int			ft_mouse_inventory(t_env *env, int change)
 			Mix_PauseMusic();
 		change = 1;
 	}
-/*
-	\\ipod
-		ft_is_in(env, 275, 425, 460, 650)
-		\\mushroom
-		ft_is_in(env, 275, 425, 245, 340)*/
+	if (env->sdl.event.type == SDL_MOUSEBUTTONDOWN && ft_is_in(env, 275, 425, 245, 340) == 1)
+	{
+		env->tex.which_tex = 2;
+		ft_loadtexture(env);
+		change = 1;
+	}
 	return (change);
 }
 

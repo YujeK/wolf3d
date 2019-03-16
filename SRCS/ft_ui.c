@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/10 23:42:09 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/16 02:10:50 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/16 02:59:42 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void			ft_value_display(t_env *env)
 void			weapon_sound(t_env *env)
 {
 	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
+
 	env->plage = Mix_LoadMUS("RESSOURCES/sound/ulysse.wav");
 	env->widow_rifle = Mix_LoadWAV("RESSOURCES/sound/widow_rifle.wav");
 }

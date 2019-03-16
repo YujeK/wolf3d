@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 10:22:21 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/16 02:04:13 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/16 04:15:15 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,6 @@ int		ft_text_and_res(t_env *env, int change, Uint8 *state)
 				env->inv_state = 0;
 			else
 				env->inv_state = 1;
-			change = 1;
-		}
-		if (state[SDL_SCANCODE_O])
-			if (env->bloc_size > 10)
-				env->bloc_size -= 30;
-		if (state[SDL_SCANCODE_L])
-		{
-			env->tex.which_tex = 1;
-			ft_loadtexture(env);
 			change = 1;
 		}
 		if (state[SDL_SCANCODE_K])
