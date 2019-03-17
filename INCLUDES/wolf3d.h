@@ -25,6 +25,7 @@
 # define XDIM 1000
 # define TEX_W 64
 # define TEX_H 64
+# define MAX_DIM 200
 
 # define PINK 0xFFE62BFD
 # define BLUE 0xFFFD1200
@@ -161,7 +162,7 @@ struct						s_env
 };
 
 /*
-**	Parsing
+**	Init / Parsing
 */
 
 void			ft_parsing(t_env *env, char *str);
