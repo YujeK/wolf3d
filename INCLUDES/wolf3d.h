@@ -161,7 +161,7 @@ struct						s_env
 };
 
 /*
-**	Init / Parsing
+**	Parsing
 */
 
 void			ft_parsing(t_env *env, char *str);

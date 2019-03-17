@@ -84,6 +84,7 @@ SRCS_NAME = ft_atoi.c \
 			ft_tolower.c \
 			ft_toupper.c \
 			get_next_line.c \
+			ft_numberlen.c \
 
 SRCS = $(addprefix $(SRCS_PATH), $(SRCS_NAME))
 OBJS = $(subst $(SRCS_PATH), $(OBJS_PATH), $(SRCS:.c=.o))
