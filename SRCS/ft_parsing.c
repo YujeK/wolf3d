@@ -6,7 +6,7 @@
 /*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 16:14:06 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/17 05:06:03 by badhont          ###   ########.fr       */
+/*   Updated: 2019/03/18 15:58:42 by badhont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,9 @@ int			ft_stock_line(char *line, int y, t_env *env)
 {
 	int		i;
 	int		x;
-	int		spawn;
 
 	i = 0;
 	x = 0;
-	spawn = 0;
 	if (!(env->map[y] = (int *)ft_memalloc(sizeof(int) * (env->mapsize.x))))
 		ft_error_exit("Wolf3d: Unable to malloc the map", env);
 	while (line[i])
@@ -66,14 +64,15 @@ int			ft_stock_line(char *line, int y, t_env *env)
 		env->map[y][x] = ft_atoi(line + i);
 		if (env->map[y][x] == 2)
 		{
+			if (env->player.pos.x > -1)
+				ft_error_exit("Wolf3d: there could be only one spawn", env);
 			env->player.pos.x = y;
 			env->player.pos.y = x;
-			spawn++;
 		}
 		i = (line[i + 1]) ? i + 2 : i + 1;
 		x++;
 	}
-	return (spawn);
+	return (1);
 }
 
 void		ft_check_characters(char *str, t_env *env)
@@ -105,7 +104,6 @@ void		ft_check_characters(char *str, t_env *env)
 void		ft_parsing(t_env *env, char *str)
 {
 	int			fd;
-	int			spawn;
 	int			nb_line;
 	char		*line;
 
@@ -116,18 +114,17 @@ void		ft_parsing(t_env *env, char *str)
 		ft_check_first_line(line, env);
 	if (!(env->map = (int **)ft_memalloc(sizeof(int *) * (env->mapsize.y))))
 		ft_error_exit("Wolf3d: Unable to malloc the map", env);
-	spawn = 0;
 	nb_line = 0;
 	while (get_next_line(fd, &line) == 1)
 	{
 		ft_check_map_line(line, env);
-		spawn += ft_stock_line(line, nb_line, env);
+		ft_stock_line(line, nb_line, env);
 		ft_strdel(&line);
 		nb_line++;
 	}
 	if (nb_line != env->mapsize.y)
 		ft_error_exit("Wolf3d: Invalid map format", env);
-	if (spawn != 1)
+	if (env->player.pos.x == -1)
 		ft_error_exit("Wolf3d: Map: One spawn point required", env);
 	close(fd);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
+/*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 10:22:21 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/15 20:42:27 by badhont          ###   ########.fr       */
+/*   Updated: 2019/03/18 19:55:41 by badhont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int		ft_mouse_event(t_env *env, int change)
 {
 	if (env->mouse_x)
 	{
-		env->player.dir_d -= env->mouse_x / 6;
+		env->player.dir_d -= env->mouse_x * MOUSE_SENS / 100;
 		if (env->player.dir_d > 360)
 			env->player.dir_d -= 360;
 		else if (env->player.dir_d < 0)

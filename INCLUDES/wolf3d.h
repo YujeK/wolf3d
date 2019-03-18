@@ -46,6 +46,7 @@
 # define LEFT 270
 
 # define FOV 60
+# define MOUSE_SENS 12
 
 # define NB_THRD 8
 

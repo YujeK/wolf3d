@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ui.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
+/*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/10 23:42:09 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/15 03:05:40 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/18 20:59:32 by badhont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void			ft_ui(t_env *env)
 	ft_value_display(env);
 	weapon = (env->weapon_state == 1) ? env->tex.widow_1 : env->tex.widow_0;
 	rect = (SDL_Rect){XDIM / 3.5, 0, 1000, 1000};
-	SDL_BlitScaled(weapon, 0, env->surface, &rect);
+	if ((SDL_BlitScaled(weapon, 0, env->surface, &rect)) == -1)
+		ft_error_exit("Wolf3d: Unable to display weapon", env);
 	ft_inventory(env);
 }
