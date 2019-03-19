@@ -6,7 +6,7 @@
 /*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 09:55:41 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/18 21:00:09 by badhont          ###   ########.fr       */
+/*   Updated: 2019/03/16 04:08:02 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	init_sdl(t_env *env)
 		ft_error_exit("Wolf3d: Unable to initialize SDL2", env);
 	if (TTF_Init() < 0)
 		ft_error_exit("Wolf3d: Unable to initialize SDL TTF", env);
+	if (SDL_Init(SDL_INIT_AUDIO) < 0)
+		ft_error_exit("Wolf3d: Unable to initialize SDL AUDIO", env);
 	if (!(env->font = TTF_OpenFont("RESSOURCES/BEBAS.ttf", 100)))
 		ft_error_exit("Wolf3d: Unable to get font", env);
 	if (Mix_Init(MIX_INIT_MP3) < 0)
@@ -41,11 +43,12 @@ void	init_game(t_env *env)
 	env->player.pos.x = -1;
 	//env->player.dir_d = 0;
 	env->coef_minimap = 1;
-	env->bloc_size = 50;
-	//env->tex.which_tex = 0;
+	env->bloc_size = 20;
+	env->tex.which_tex = 0;
 	env->player.life = 100;
 	env->player.ammo = 100;
-	//env->inv_state = 0;
+	env->inv_state = 0;
+	env->weapon_state = 2;
 }
 
 int		main(int ac, char **av)

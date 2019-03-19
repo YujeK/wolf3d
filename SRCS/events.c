@@ -6,7 +6,7 @@
 /*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 10:22:21 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/18 19:55:41 by badhont          ###   ########.fr       */
+/*   Updated: 2019/03/16 04:15:15 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,28 +34,19 @@ int		ft_movement(int relative_dir_d, t_env *env)
 int		ft_text_and_res(t_env *env, int change, Uint8 *state)
 {
 	if (state[SDL_SCANCODE_I])
-	{
-		if(env->inv_state == 1)
-			env->inv_state = 0;
-		else
-			env->inv_state = 1;
-		change = 1;
-	}
-	if (state[SDL_SCANCODE_O])
-		if (env->bloc_size > 10)
-			env->bloc_size -= 30;
-	if (state[SDL_SCANCODE_L])
-	{
-		env->tex.which_tex = 1;
-		ft_loadtexture(env);
-		change = 1;
-	}
-	if (state[SDL_SCANCODE_K])
-	{
-		env->tex.which_tex = 0;
-		ft_loadtexture(env);
-		change = 1;
-	}
+		{
+			if(env->inv_state == 1)
+				env->inv_state = 0;
+			else
+				env->inv_state = 1;
+			change = 1;
+		}
+		if (state[SDL_SCANCODE_K])
+		{
+			env->tex.which_tex = 0;
+			ft_loadtexture(env);
+			change = 1;
+		}
 	return (change);
 }
 
@@ -81,7 +72,7 @@ int		ft_keyboard(Uint8 *state, t_env *env)
 
 int		ft_mouse_event(t_env *env, int change)
 {
-	if (env->mouse_x)
+	if (env->mouse_x && env->inv_state == 0)
 	{
 		env->player.dir_d -= env->mouse_x * MOUSE_SENS / 100;
 		if (env->player.dir_d > 360)
@@ -90,7 +81,7 @@ int		ft_mouse_event(t_env *env, int change)
 			env->player.dir_d = 360 - env->player.dir_d;
 		change = 1;
 	}
-	if (env->sdl.event.type == SDL_MOUSEBUTTONDOWN)
+	if (env->sdl.event.type == SDL_MOUSEBUTTONDOWN && env->weapon_state != 2 && env->inv_state == 0)
 	{
 		if ((Mix_Playing(0)) == 0)
 			Mix_PlayChannel(0, env->widow_rifle, 0);
@@ -98,12 +89,13 @@ int		ft_mouse_event(t_env *env, int change)
 		env->player.ammo += (env->player.ammo > 0) ? -1 : 100;
 		change = 1;
 	}
-	if (env->sdl.event.type == SDL_MOUSEBUTTONUP)
+	if (env->sdl.event.type == SDL_MOUSEBUTTONUP && env->weapon_state != 2 && env->inv_state == 0)
 	{
 		Mix_HaltChannel(0);
 		env->weapon_state = 0;
 		change = 1;
 	}
+	ft_mouse_inventory(env, change);
 	return (change);
 }
 

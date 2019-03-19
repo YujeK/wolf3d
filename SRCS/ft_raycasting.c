@@ -17,6 +17,27 @@ double			ft_pythagore(double posx, double posy)
 	return (sqrt(posx * posx + posy * posy));
 }
 
+int		rbw(int x)
+{
+	int			color;
+	int			whichcolor;
+	int			thiscolor;
+	static int	rainbow[7] = {RED, ORANGE, YELLOW, GREEN, CYAN, BLUE, PURPLE};
+
+	color = 0;
+	whichcolor = (XDIM) / 7;
+	thiscolor = 0;
+	while (color < 6)
+	{
+		thiscolor = thiscolor + whichcolor;
+		if (x <= thiscolor)
+			return (rainbow[color]);
+		color++;
+	}
+	return (rainbow[color]);
+}
+
+
 void			ft_put_column(t_thrd *thrd, double wall_height, int x)
 {
 	int		p1;
@@ -29,12 +50,22 @@ void			ft_put_column(t_thrd *thrd, double wall_height, int x)
 	while (y < YDIM)
 	{
 		if (y < p1)
-			ft_setpixel(thrd->env->surface, XDIM - 1 - x, y, BLACK);
+			{
+				if (thrd->env->tex.which_tex == 2)
+					ft_setpixel(thrd->env->surface, XDIM - 1 - x, y, rbw(x));
+				else
+					ft_setpixel(thrd->env->surface, XDIM - 1 - x, y, BLACK);
+			}
 		else if (y >= p1 && y < p2)
-			ft_setpixel(thrd->env->surface, XDIM - 1 - x, y,
+				ft_setpixel(thrd->env->surface, XDIM - 1 - x, y,
 				ft_texturing(thrd, y, p1, p2));
 		if (y >= p2)
-			ft_setpixel(thrd->env->surface, XDIM - 1 - x, y, 0x2F4F4FFF);
+			{
+				if (thrd->env->tex.which_tex == 2)
+					ft_setpixel(thrd->env->surface, XDIM - 1 - x, y, rbw(XDIM - 1 - x));
+				else
+					ft_setpixel(thrd->env->surface, XDIM - 1 - x, y, 0x2F4F4FFF);
+			}
 		y++;
 	}
 }

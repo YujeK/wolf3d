@@ -54,11 +54,11 @@ void			ft_mushroom(t_env *env)
 {
 if (env->tex.which_tex == 2)
 	{
-		if (!(env->tex.north = IMG_Load("RESSOURCES/lsl.png")))
+		if (!(env->tex.north = IMG_Load("RESSOURCES/olol.png")))
 			ft_error_exit("Wolf3d: Unable to load texture", env);
 		if (!(env->tex.east = IMG_Load("RESSOURCES/olol.png")))
 			ft_error_exit("Wolf3d: Unable to load texture", env);
-		if (!(env->tex.west = IMG_Load("RESSOURCES/lsl.png")))
+		if (!(env->tex.west = IMG_Load("RESSOURCES/olol.png")))
 			ft_error_exit("Wolf3d: Unable to load texture", env);
 		if (!(env->tex.south = IMG_Load("RESSOURCES/olol.png")))
 			ft_error_exit("Wolf3d: Unable to load texture", env);
