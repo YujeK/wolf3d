@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 23:30:45 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/16 03:40:44 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/24 10:38:54 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ Uint32			ft_texturing(t_thrd *thrd, int y, int p1, int p2)
 
 void			ft_mushroom(t_env *env)
 {
-if (env->tex.which_tex == 2)
+	if (env->tex.which_tex == 2)
 	{
 		if (!(env->tex.north = IMG_Load("RESSOURCES/olol.png")))
 			ft_error_exit("Wolf3d: Unable to load texture", env);
@@ -64,6 +64,7 @@ if (env->tex.which_tex == 2)
 			ft_error_exit("Wolf3d: Unable to load texture", env);
 	}
 }
+
 void			ft_load_basic(t_env *env)
 {
 	if (env->tex.which_tex == 0)

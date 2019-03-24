@@ -43,7 +43,7 @@
 # define RIGHT 90
 # define BACKWARD 180
 # define LEFT 270
-
+# define OFF 2
 # define FOV 60
 
 # define NB_THRD 8
@@ -154,6 +154,9 @@ struct						s_env
 	Uint32			last;		// last timestamp for fps
 	int				coef_minimap;	// coef minimap
 	t_point			ray_pos;		// ???
+
+	SDL_Surface		*weapon;		// current texture weapon
+	int				nb_frames;		// number of printed frames
 };
 
 /*
@@ -204,6 +207,7 @@ void			ft_reframe(t_env *env);
 void				ft_ui(t_env *env);
 Uint32			ft_texturing(t_thrd *thrd, int y, int p1, int p2);
 SDL_Surface		*ft_selectex(t_thrd *thrd);
+int				rbw(int x);
 
 /*
 **	Exit
@@ -211,5 +215,5 @@ SDL_Surface		*ft_selectex(t_thrd *thrd);
 
 void			ft_error_exit(char *str, t_env *env);
 void			ft_exit(t_env *env);
-void			ft_inventory(t_env *env);
+int				ft_inventory(t_env *env);
 #endif

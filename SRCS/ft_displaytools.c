@@ -1,18 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_crosshair.c                                     :+:      :+:    :+:   */
+/*   ft_displaytools.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 15:03:06 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/10 18:33:59 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/24 10:51:30 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-void	ft_crosshair(t_env *env)
+int				rbw(int x)
+{
+	int			color;
+	int			whichcolor;
+	int			thiscolor;
+	static int	rainbow[7] = {RED, ORANGE, YELLOW, GREEN, CYAN, BLUE, PURPLE};
+
+	color = 0;
+	whichcolor = (XDIM) / 7;
+	thiscolor = 0;
+	while (color < 6)
+	{
+		thiscolor = thiscolor + whichcolor;
+		if (x <= thiscolor)
+			return (rainbow[color]);
+		color++;
+	}
+	return (rainbow[color]);
+}
+
+void			ft_crosshair(t_env *env)
 {
 	t_point pt1;
 	t_point pt2;

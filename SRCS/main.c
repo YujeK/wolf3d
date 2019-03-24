@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 09:55:41 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/16 04:08:02 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/24 18:53:44 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,9 @@ void	init_game(t_env *env)
 	env->player.life = 100;
 	env->player.ammo = 100;
 	env->inv_state = 0;
-	env->weapon_state = 2;
+	env->weapon_state = 0;
+	env->weapon = env->tex.widow_0;
+	env->nb_frames = 0;
 }
 
 int		main(int ac, char **av)
