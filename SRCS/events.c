@@ -6,15 +6,16 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 10:22:21 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/14 21:51:14 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/25 13:27:40 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
-int		ft_movement(int	relative_dir_d, t_env *env)
+
+int		ft_calc_move(int relative_dir_d, t_env *env)
 {
 	t_point		step;
-	t_point 	pos;
+	t_point		pos;
 
 	step.x = -cos((env->player.dir_d + relative_dir_d) * M_PI / 180) * 0.1;
 	step.y = -sin((env->player.dir_d + relative_dir_d) * M_PI / 180) * 0.1;
@@ -30,29 +31,49 @@ int		ft_movement(int	relative_dir_d, t_env *env)
 	return (1);
 }
 
-int		ft_keyboard(Uint8 *state, t_env *env)
+int		ft_movement(Uint8 *state, t_env *env)
 {
 	int		change;
 
 	change = 0;
-	if (env->sdl.event.type == SDL_QUIT || state[SDL_SCANCODE_ESCAPE])
-		ft_exit(env);
 	if (state[SDL_SCANCODE_W])
-		change = ft_movement(FORWARD, env);
+		change = ft_calc_move(FORWARD, env);
 	if (state[SDL_SCANCODE_S])
-		change = ft_movement(BACKWARD, env);
+		change = ft_calc_move(BACKWARD, env);
 	if (state[SDL_SCANCODE_D])
-		change = ft_movement(LEFT, env);
+		change = ft_calc_move(LEFT, env);
 	if (state[SDL_SCANCODE_A])
-		change = ft_movement(RIGHT, env);
+		change = ft_calc_move(RIGHT, env);
 	return (change);
 }
 
-int		ft_mouse_event(t_env *env)
+int		ft_shoot_event(t_env *env)
+{
+	int		change;
+
+	change = 0;
+	if (SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_LEFT)
+	&& env->weapon_state == 0 && env->inv_state == 0)
+	{
+		env->weapon_state = 1;
+		env->player.ammo += (env->player.ammo > 0) ? -1 : 100;
+		change = 1;
+	}
+	else if (env->weapon_state == 1)
+	{
+		env->weapon_state = 0;
+		env->weapon = env->tex.widow_0;
+		change = 1;
+	}
+	return (change);
+}
+
+int		ft_rotation_event(t_env *env)
 {
 	int change;
 
-	if (env->mouse_x)
+	change = 0;
+	if (env->mouse_x && env->inv_state == 0)
 	{
 		env->player.dir_d -= env->mouse_x / 6;
 		if (env->player.dir_d > 360)
@@ -61,24 +82,8 @@ int		ft_mouse_event(t_env *env)
 			env->player.dir_d = 360 - env->player.dir_d;
 		change = 1;
 	}
-	if (env->sdl.event.type == SDL_MOUSEBUTTONDOWN)
-	{
-		//if (no sound playing)
-			if ((Mix_Playing(0)) == 0)
-				Mix_PlayChannel(0, env->widow_rifle, 0); // protect
-		env->weapon_state = (env->weapon_state) ? 0 : 1;
-		env->player.ammo += (env->player.ammo > 0) ? -1 : 100;
-		change = 1;
-	}
-	if (env->sdl.event.type == SDL_MOUSEBUTTONUP)
-	{
-		Mix_HaltChannel(0);
-		env->weapon_state = 0;
-		change = 1;
-	}
 	return (change);
 }
-
 
 int		events(t_env *env)
 {
@@ -89,26 +94,14 @@ int		events(t_env *env)
 	state = (Uint8 *)SDL_GetKeyboardState(0);
 	SDL_GetRelativeMouseState(&(env->mouse_x), &(env->mouse_y));
 	SDL_PollEvent(&(env->sdl.event));
-	(ft_keyboard(state, env) ? change = 1 : 0);
-	(ft_mouse_event(env) ? change = 1 : 0);
-	if (env->sdl.event.type == SDL_KEYDOWN)
-	{
-		if (env->sdl.event.key.keysym.sym == SDLK_p)
-			if (env->bloc_size < 540)
-				env->bloc_size += 30;
-		if (env->sdl.event.key.keysym.sym == SDLK_o)
-			if (env->bloc_size > 10)
-				env->bloc_size -= 30;
-		if (env->sdl.event.key.keysym.sym == SDLK_l)
-		{
-			env->tex.which_tex = 1;
-			ft_loadtexture(env);
-		}
-		if (env->sdl.event.key.keysym.sym == SDLK_k)
-		{
-			env->tex.which_tex = 0;
-			ft_loadtexture(env);
-		}
-	}
+	if (env->sdl.event.type == SDL_QUIT || state[SDL_SCANCODE_ESCAPE])
+		ft_exit(env);
+	(ft_rotation_event(env)) ? change = 1 : 0;
+	(ft_movement(state, env)) ? change = 1 : 0;
+	(ft_shoot_event(env)) ? change = 1 : 0;
+	(env->weapon_state == 1) ? change = 1 : 0;
+	(ft_inventory_event(env)) ? change = 1 : 0;
+	(ft_inventory(env)) ? change = 1 : 0;
+	(ft_click_inventory(env)) ? change = 1 : 0;
 	return (change);
 }

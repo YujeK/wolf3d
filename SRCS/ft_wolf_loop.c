@@ -3,24 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_wolf_loop.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 10:18:59 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/14 22:07:11 by badhont          ###   ########.fr       */
+/*   Updated: 2019/03/25 14:11:06 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-void	ft_reframe(t_env *env)
+void	ft_thrd_init(t_thrd *thrd, t_env *env)
 {
-	t_thrd		thrd[NB_THRD];
-	SDL_Texture		*texture;
-	SDL_Rect		rect;
-	int				i;
+	int		i;
 
-	SDL_RenderClear(env->sdl.renderer);
-	//
 	i = 0;
 	while (i < NB_THRD)
 	{
@@ -35,9 +30,16 @@ void	ft_reframe(t_env *env)
 		pthread_join(thrd[i].th, NULL);
 		i++;
 	}
-	//
-	//ft_minimap(env);
-	//ft_set_player_dir(env);
+}
+
+void	ft_reframe(t_env *env)
+{
+	t_thrd			thrd[NB_THRD];
+	SDL_Texture		*texture;
+	SDL_Rect		rect;
+
+	ft_thrd_init(thrd, env);
+	SDL_RenderClear(env->sdl.renderer);
 	ft_crosshair(env);
 	ft_ui(env);
 	texture = SDL_CreateTextureFromSurface(env->sdl.renderer, env->surface);
@@ -45,6 +47,7 @@ void	ft_reframe(t_env *env)
 	rect = (SDL_Rect){0, 0, 60, 30};
 	SDL_DestroyTexture(texture);
 	SDL_RenderPresent(env->sdl.renderer);
+	env->nb_frames++;
 }
 
 void	ft_wolf_loop(t_env *env)
@@ -52,8 +55,6 @@ void	ft_wolf_loop(t_env *env)
 	ft_reframe(env);
 	while (1)
 	{
-		SDL_GetRelativeMouseState(&(env->mouse_x), &(env->mouse_y));
-		SDL_PollEvent(&(env->sdl.event));
 		if (events(env))
 			ft_reframe(env);
 	}

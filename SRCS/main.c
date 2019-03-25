@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 09:55:41 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/14 22:13:01 by badhont          ###   ########.fr       */
+/*   Updated: 2019/03/25 14:22:30 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
-
 
 void	init_sdl(t_env *env)
 {
@@ -19,6 +18,8 @@ void	init_sdl(t_env *env)
 		ft_error_exit("Wolf3d: Unable to initialize SDL2", env);
 	if (TTF_Init() < 0)
 		ft_error_exit("Wolf3d: Unable to initialize SDL TTF", env);
+	if (SDL_Init(SDL_INIT_AUDIO) < 0)
+		ft_error_exit("Wolf3d: Unable to initialize SDL AUDIO", env);
 	if (Mix_Init(MIX_INIT_MP3) < 0)
 		ft_error_exit("Wolf3d: Unable to initialize SDL MP3 MIXER", env);
 	if (!(env->sdl.window = SDL_CreateWindow("Wolf3d",
@@ -41,10 +42,14 @@ void	init_game(t_env *env)
 	weapon_sound(env);
 	env->player.dir_d = 0;
 	env->coef_minimap = 1;
-	env->bloc_size = 50;
+	env->bloc_size = 40;
 	env->tex.which_tex = 0;
 	env->player.life = 100;
 	env->player.ammo = 100;
+	env->inv_state = 0;
+	env->weapon_state = OFF;
+	env->weapon = env->tex.widow_0;
+	env->nb_frames = 0;
 }
 
 int		main(int ac, char **av)
@@ -56,7 +61,7 @@ int		main(int ac, char **av)
 		ft_bzero(&env, sizeof(t_env));
 		init_sdl(&env);
 		init_game(&env);
-		ft_parsing(&env, av[1]); // protect content
+		ft_parsing(&env, av[1]);
 		ft_wolf_loop(&env);
 	}
 	ft_putendl("\nHi ^-^ !!! One argument only authorised to make it work.");
