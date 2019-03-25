@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 09:55:41 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/25 13:36:14 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/25 14:22:30 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int		main(int ac, char **av)
 		ft_bzero(&env, sizeof(t_env));
 		init_sdl(&env);
 		init_game(&env);
-		ft_parsing(&env, av[1]); // protect content
+		ft_parsing(&env, av[1]);
 		ft_wolf_loop(&env);
 	}
 	ft_putendl("\nHi ^-^ !!! One argument only authorised to make it work.");

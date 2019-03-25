@@ -6,11 +6,16 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 15:03:06 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/24 10:51:30 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/25 14:42:16 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
+
+double			ft_pythagore(double posx, double posy)
+{
+	return (sqrt(posx * posx + posy * posy));
+}
 
 int				rbw(int x)
 {

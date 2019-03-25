@@ -6,16 +6,11 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/19 15:35:24 by badhont           #+#    #+#             */
-/*   Updated: 2019/03/25 13:56:59 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/25 14:42:05 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
-
-double			ft_pythagore(double posx, double posy)
-{
-	return (sqrt(posx * posx + posy * posy));
-}
 
 void			ft_put_column(t_thrd *thrd, double wall_height, int x)
 {
@@ -31,8 +26,8 @@ void			ft_put_column(t_thrd *thrd, double wall_height, int x)
 		if (y < p1)
 		{
 			(thrd->env->tex.which_tex == 2)
-			? ft_setpixel(thrd->env->surface, XDIM - 1 - x, y, rbw(x))
-			: ft_setpixel(thrd->env->surface, XDIM - 1 - x, y, BLACK);
+				? ft_setpixel(thrd->env->surface, XDIM - 1 - x, y, rbw(x))
+				: ft_setpixel(thrd->env->surface, XDIM - 1 - x, y, BLACK);
 		}
 		else if (y >= p1 && y < p2)
 			ft_setpixel(thrd->env->surface, XDIM - 1 - x, y,
@@ -40,8 +35,8 @@ void			ft_put_column(t_thrd *thrd, double wall_height, int x)
 		if (y >= p2)
 		{
 			(thrd->env->tex.which_tex == 2)
-			? ft_setpixel(thrd->env->surface, XDIM - 1 - x, y, rbw(x))
-			: ft_setpixel(thrd->env->surface, XDIM - 1 - x, y, 0x2F4F4FFF);
+				? ft_setpixel(thrd->env->surface, XDIM - 1 - x, y, rbw(x))
+				: ft_setpixel(thrd->env->surface, XDIM - 1 - x, y, 0x2F4F4FFF);
 		}
 	}
 }
@@ -56,17 +51,11 @@ int				ft_is_in_wall(t_env *env, t_point pos)
 	return (0);
 }
 
-double			ft_cast_ray(t_thrd *thrd, double direction)
+double			ft_raydata(t_thrd *thrd, t_point step
+									, double direction, t_point origin)
 {
-	t_point	step;
-	t_point origin;
 	double	alpha;
 
-	step.x = -cos(direction * M_PI / 180) * 0.05;
-	step.y = -sin(direction * M_PI / 180) * 0.05;
-	thrd->ray.pos.x = thrd->env->player.pos.x * thrd->env->bloc_size;
-	thrd->ray.pos.y = thrd->env->player.pos.y * thrd->env->bloc_size;
-	origin = (t_point){thrd->ray.pos.x, thrd->ray.pos.y};
 	while (thrd->ray.pos.x > 0 && thrd->ray.pos.x
 			< thrd->env->map_width * thrd->env->bloc_size && thrd->ray.pos.y > 0
 			&& thrd->ray.pos.y < thrd->env->map_height * thrd->env->bloc_size)
@@ -89,6 +78,19 @@ double			ft_cast_ray(t_thrd *thrd, double direction)
 		}
 	}
 	return (0);
+}
+
+double			ft_cast_ray(t_thrd *thrd, double direction)
+{
+	t_point	step;
+	t_point origin;
+
+	step.x = -cos(direction * M_PI / 180) * 0.05;
+	step.y = -sin(direction * M_PI / 180) * 0.05;
+	thrd->ray.pos.x = thrd->env->player.pos.x * thrd->env->bloc_size;
+	thrd->ray.pos.y = thrd->env->player.pos.y * thrd->env->bloc_size;
+	origin = (t_point){thrd->ray.pos.x, thrd->ray.pos.y};
+	return (ft_raydata(thrd, step, direction, origin));
 }
 
 void			*ft_raycasting(void *arg)
