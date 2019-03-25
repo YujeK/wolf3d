@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 23:30:45 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/24 10:38:54 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/25 13:52:02 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,25 +27,23 @@ SDL_Surface		*ft_selectex(t_thrd *thrd)
 	return (thrd->env->tex.west);
 }
 
-Uint32			ft_texturing(t_thrd *thrd, int y, int p1, int p2)
+Uint32			put_tex(t_thrd *thrd, int y, int p1, int p2)
 {
 	SDL_Surface	*surface;
 	Uint32		color;
-	int			w_tex;
-	int			h_tex;
 	int			x_tex;
 	int			y_tex;
 	int			ywall;
 
 	ywall = y - p1;
 	surface = ft_selectex(thrd);
-	w_tex = surface->w;
-	h_tex = surface->h;
 	if (thrd->ray.side == 2)
-		x_tex = ((int)thrd->ray.pos.x % thrd->env->bloc_size) * w_tex / thrd->env->bloc_size;
+		x_tex = ((int)thrd->ray.pos.x % thrd->env->bloc_size)
+		* surface->w / thrd->env->bloc_size;
 	else
-		x_tex = ((int)thrd->ray.pos.y % thrd->env->bloc_size) * w_tex / thrd->env->bloc_size;
-	y_tex = ywall * h_tex / (p2 - p1);
+		x_tex = ((int)thrd->ray.pos.y % thrd->env->bloc_size)
+		* surface->w / thrd->env->bloc_size;
+	y_tex = ywall * surface->h / (p2 - p1);
 	color = ft_getpixel(surface, x_tex, y_tex, thrd->env);
 	return (color);
 }
@@ -85,13 +83,17 @@ void			ft_loadtexture(t_env *env)
 	ft_load_basic(env);
 	if (env->tex.which_tex == 1)
 	{
-		if (!(env->tex.north = IMG_Load("RESSOURCES/pics/halloffame/sgalasso.png")))
+		if (!(env->tex.north = IMG_Load(
+			"RESSOURCES/pics/halloffame/sgalasso.png")))
 			ft_error_exit("Wolf3d: Unable to load texture", env);
-		if (!(env->tex.east = IMG_Load("RESSOURCES/pics/halloffame/asamir-k.png")))
+		if (!(env->tex.east = IMG_Load(
+			"RESSOURCES/pics/halloffame/asamir-k.png")))
 			ft_error_exit("Wolf3d: Unable to load texture", env);
-		if (!(env->tex.west = IMG_Load("RESSOURCES/pics/halloffame/badhont.png")))
+		if (!(env->tex.west = IMG_Load(
+			"RESSOURCES/pics/halloffame/badhont.png")))
 			ft_error_exit("Wolf3d: Unable to load texture", env);
-		if (!(env->tex.south = IMG_Load("RESSOURCES/pics/halloffame/nihuynh.png")))
+		if (!(env->tex.south = IMG_Load(
+			"RESSOURCES/pics/halloffame/nihuynh.png")))
 			ft_error_exit("Wolf3d: Unable to load texture", env);
 	}
 	ft_load_weapontex(env);

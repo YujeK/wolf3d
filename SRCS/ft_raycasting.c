@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/19 15:35:24 by badhont           #+#    #+#             */
-/*   Updated: 2019/03/24 10:46:32 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/25 13:56:59 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,29 +23,26 @@ void			ft_put_column(t_thrd *thrd, double wall_height, int x)
 	int		p2;
 	int		y;
 
-	y = 0;
+	y = -1;
 	p1 = YDIM / 2 - wall_height / 2;
 	p2 = YDIM - p1;
-	while (y < YDIM)
+	while (++y < YDIM)
 	{
 		if (y < p1)
 		{
-			if (thrd->env->tex.which_tex == 2)
-				ft_setpixel(thrd->env->surface, XDIM - 1 - x, y, rbw(x));
-			else
-				ft_setpixel(thrd->env->surface, XDIM - 1 - x, y, BLACK);
+			(thrd->env->tex.which_tex == 2)
+			? ft_setpixel(thrd->env->surface, XDIM - 1 - x, y, rbw(x))
+			: ft_setpixel(thrd->env->surface, XDIM - 1 - x, y, BLACK);
 		}
 		else if (y >= p1 && y < p2)
 			ft_setpixel(thrd->env->surface, XDIM - 1 - x, y,
-					ft_texturing(thrd, y, p1, p2));
+					put_tex(thrd, y, p1, p2));
 		if (y >= p2)
 		{
-			if (thrd->env->tex.which_tex == 2)
-				ft_setpixel(thrd->env->surface, XDIM - 1 - x, y, rbw(XDIM - 1 - x));
-			else
-				ft_setpixel(thrd->env->surface, XDIM - 1 - x, y, 0x2F4F4FFF);
+			(thrd->env->tex.which_tex == 2)
+			? ft_setpixel(thrd->env->surface, XDIM - 1 - x, y, rbw(x))
+			: ft_setpixel(thrd->env->surface, XDIM - 1 - x, y, 0x2F4F4FFF);
 		}
-		y++;
 	}
 }
 
@@ -70,8 +67,9 @@ double			ft_cast_ray(t_thrd *thrd, double direction)
 	thrd->ray.pos.x = thrd->env->player.pos.x * thrd->env->bloc_size;
 	thrd->ray.pos.y = thrd->env->player.pos.y * thrd->env->bloc_size;
 	origin = (t_point){thrd->ray.pos.x, thrd->ray.pos.y};
-	while (thrd->ray.pos.x > 0 && thrd->ray.pos.x < thrd->env->map_width * thrd->env->bloc_size
-			&& thrd->ray.pos.y > 0 && thrd->ray.pos.y < thrd->env->map_height * thrd->env->bloc_size)
+	while (thrd->ray.pos.x > 0 && thrd->ray.pos.x
+			< thrd->env->map_width * thrd->env->bloc_size && thrd->ray.pos.y > 0
+			&& thrd->ray.pos.y < thrd->env->map_height * thrd->env->bloc_size)
 	{
 		thrd->ray.pos.x += step.x;
 		if (ft_is_in_wall(thrd->env, thrd->ray.pos))

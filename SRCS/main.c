@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 09:55:41 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/24 18:53:44 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/25 13:36:14 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ void	init_game(t_env *env)
 	weapon_sound(env);
 	env->player.dir_d = 0;
 	env->coef_minimap = 1;
-	env->bloc_size = 20;
+	env->bloc_size = 40;
 	env->tex.which_tex = 0;
 	env->player.life = 100;
 	env->player.ammo = 100;
 	env->inv_state = 0;
-	env->weapon_state = 0;
+	env->weapon_state = OFF;
 	env->weapon = env->tex.widow_0;
 	env->nb_frames = 0;
 }

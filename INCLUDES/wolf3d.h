@@ -57,6 +57,7 @@ typedef	struct	s_line		t_line;
 typedef	struct	s_ray		t_ray;
 typedef	struct	s_tex		t_tex;
 typedef	struct	s_env		t_env;
+typedef struct	s_rekt		t_rekt;
 
 struct						s_sdl
 {
@@ -127,10 +128,24 @@ struct						s_tex
 	SDL_Surface		*lil_bag;
 	SDL_Surface		*bag;
 	int				which_tex;
+	int				w_tex;
+	int				h_tex;
 };
+
+struct 						s_rekt
+{
+	int				x1;
+	int				x2;
+	int				y1;
+	int				y2;
+};
+
 
 struct						s_env
 {
+	int				x_tex;
+	int				y_tex;
+	t_rekt			rekt;
 	int				realm_x;
 	int				realm_y;
 	int				w_tex;
@@ -154,7 +169,6 @@ struct						s_env
 	Uint32			last;		// last timestamp for fps
 	int				coef_minimap;	// coef minimap
 	t_point			ray_pos;		// ???
-
 	SDL_Surface		*weapon;		// current texture weapon
 	int				nb_frames;		// number of printed frames
 };
@@ -190,7 +204,8 @@ void			weapon_sound(t_env *env);
 void			sound_control(t_env *env);
 void			ft_set_string(SDL_Rect rect, char *text,
 				SDL_Color color, t_env *env);
-int				ft_mouse_inventory(t_env *env, int change);
+int				ft_click_inventory(t_env *env);
+int				ft_inventory_event(t_env *env);
 /*
 **	Graphics
 */
@@ -205,7 +220,7 @@ void			dl(t_env *env, t_point pt1, t_point pt2, int color);
 SDL_Color		ft_hex_to_rgb(int hexa);
 void			ft_reframe(t_env *env);
 void				ft_ui(t_env *env);
-Uint32			ft_texturing(t_thrd *thrd, int y, int p1, int p2);
+Uint32			put_tex(t_thrd *thrd, int y, int p1, int p2);
 SDL_Surface		*ft_selectex(t_thrd *thrd);
 int				rbw(int x);
 

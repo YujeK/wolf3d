@@ -6,13 +6,13 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/15 01:39:25 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/24 20:12:33 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/25 12:59:00 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-int			ft_is_in(t_env *env, int x1, int x2, int y1, int y2)
+int			ft_in_rect(t_env *env)
 {
 	int posx;
 	int	posy;
@@ -20,15 +20,17 @@ int			ft_is_in(t_env *env, int x1, int x2, int y1, int y2)
 	SDL_GetMouseState(&(env->realm_x), &(env->realm_y));
 	posx = env->realm_x;
 	posy = env->realm_y;
-	if (posx > x1 && posx < x2 && posy > y1 && posy < y2)
+	if (posx > env->rekt.x1 && posx < env->rekt.x2
+		&& posy > env->rekt.y1 && posy < env->rekt.y2)
 		return (1);
 	return (0);
 }
 
 int			ft_ipod_weapon(t_env *env, int change)
 {
+	env->rekt = (t_rekt){275, 425, 350, 450};
 	if (SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_LEFT)
-	&& ft_is_in(env, 275, 425, 350, 450) == 1)
+			&& ft_in_rect(env) == 1)
 	{
 		if (Mix_PlayingMusic() == 0)
 			Mix_PlayMusic(env->plage, -1);
@@ -38,8 +40,9 @@ int			ft_ipod_weapon(t_env *env, int change)
 			Mix_PauseMusic();
 		change = 1;
 	}
+	env->rekt = (t_rekt){450, 600, 350, 450};
 	if (SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_LEFT)
-	&& ft_is_in(env, 450, 600, 350, 450) == 1)
+			&& ft_in_rect(env) == 1)
 	{
 		if (env->weapon_state == 0 || env->weapon_state == 1)
 			env->weapon_state = OFF;
@@ -51,32 +54,58 @@ int			ft_ipod_weapon(t_env *env, int change)
 	return (change);
 }
 
-int			ft_mouse_inventory(t_env *env, int change)
+int			ft_click_inventory(t_env *env)
 {
-	if (SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_LEFT)
-	&&	ft_is_in(env, 275, 425, 460, 550) == 1)
+	int change;
+
+	change = 0;
+	if (env->inv_state == 1)
 	{
-		if (env->tex.which_tex == 1)
-			env->tex.which_tex = 0;
-		else
-			env->tex.which_tex = 1;
+		env->rekt = (t_rekt){275, 425, 460, 550};
+		if (SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_LEFT)
+				&& ft_in_rect(env) == 1)
+		{
+			env->tex.which_tex = (env->tex.which_tex) ? 0 : 1;
+			ft_loadtexture(env);
+			change = 1;
+		}
+		env->rekt = (t_rekt){275, 425, 245, 340};
+		if (SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_LEFT)
+				&& ft_in_rect(env) == 1)
+		{
+			env->tex.which_tex = (env->tex.which_tex) ? 0 : 2;
+			ft_loadtexture(env);
+			change = 1;
+		}
+		(ft_ipod_weapon(env, change) ? change = 1 : 0);
+	}
+	return (change);
+}
+
+int			ft_inventory_event(t_env *env)
+{
+	int		change;
+
+	change = 0;
+	if (env->sdl.event.type == SDL_KEYDOWN)
+	{
+		if (env->sdl.event.key.keysym.scancode == SDL_SCANCODE_I)
+		{
+			env->inv_state = (env->inv_state) ? 0 : 1;
+			change = 1;
+		}
+	}
+	else if (env->sdl.event.key.keysym.scancode == SDL_SCANCODE_K)
+	{
+		env->tex.which_tex = 0;
 		ft_loadtexture(env);
 		change = 1;
 	}
-	if (SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_LEFT)
-	&&	ft_is_in(env, 275, 425, 245, 340) == 1)
-	{
-		env->tex.which_tex = 2;
-		ft_loadtexture(env);
-		change = 1;
-	}
-	(ft_ipod_weapon(env, change) ? change = 1 : 0);
 	return (change);
 }
 
 int			ft_inventory(t_env *env)
 {
-
 	int			change;
 	SDL_Rect	rect;
 	SDL_Surface	*inventory;
