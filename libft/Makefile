@@ -95,9 +95,7 @@ INCLUDES = includes/
 all:	$(NAME)
 
 $(NAME):    $(OBJS)
-	@printf "$(CYAN)[WAIT]$(WHITE) Compiling into %-50s\r" $(NAME)
 	@ar rc $(NAME) $(OBJS) && ranlib $(NAME)
-	@printf "$(GREEN)[OK]$(WHITE) %s has been well compiled\n" $(NAME)
 
 $(OBJS) : | $(OBJS_PATH)
 

@@ -1,6 +1,6 @@
 NAME 		= wolf3d
 CC			= gcc
-CFLAGS 		= -Wall -Wextra -Werror -O3 #-g -fsanitize=address
+CFLAGS 		= -Wall -Wextra -Werror -g
 
 ID_UN 		= $(shell id -un)
 SRC_PATH 	= srcs/
@@ -25,7 +25,7 @@ INC_PATH	+=	/Users/$(ID_UN)/.brew/Cellar/sdl2/$(SDL_NUM)/include/ \
 				/Users/$(ID_UN)/.brew/Cellar/sdl2_mixer/$(MIX_NUM)/include/
 
 SRC_NAME 	= 	main.c \
-				ft_crosshair.c \
+				ft_displaytools.c \
 				events.c \
 				ft_exit.c \
 				ft_minimap.c \
@@ -50,9 +50,9 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@Make -C $(LIBFT)
-	@printf "$(CYAN)[WAIT]$(WHITE) Compiling into %-50s\r" $(NAME)
 	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) -L$(LIBFT) -lft $(INC) $(LSDL2)
-	@printf "$(GREEN)[OK]$(WHITE) %s has been well compiled\n" $(NAME)
+	@echo "\033[1;34;2m FRIED CHICKEN READY TO BE EATEN ~ (__)=3 ~\033[0m"
+	@echo "\033[0;31;3m                        (ALL RULE DONE)                               ~ (__)=3 ~\033[0m"
 
 $(OBJ) : | $(OBJ_PATH)
 
@@ -60,19 +60,22 @@ $(OBJ_PATH) :
 	@mkdir objs
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c $(INC_PATH) Makefile
-	@printf "$(CYAN)[WAIT]$(WHITE) Compiling into .o %-50s\r" $@
 	@$(CC) $(CFLAGS) $(INC) -o $@ -c $<
 
 clean:
 	@make -C $(LIBFT) clean
 	@rm -rf $(OBJ_PATH)
-	@printf "$(GREEN)[OK]$(WHITE) Clean done\n"
+	@echo "\033[1;33;2m IVE EATEN HALF OF THE CHICKEN , ONE WORD AND WINGS ERADICATION WILL BE ORDERED \033[0m"
+	@echo "\033[0;31;3m                        (CLEAN RULE DONE)                             ~ (__)=3 ~ \033[0m"
 
 fclean: clean
 	@make -C $(LIBFT) fclean
 	@rm -f $(NAME)
-	@printf "$(GREEN)[OK]$(WHITE) Fclean done\n"
+	@echo "\033[1;31;2m JOB DONE SERGEANT WingZLord NO MORE WINGS ARE DETECTED IN THE bckt (-_-)ゞ\033[0m"
+	@echo "\033[0;31;3m                        (FCLEAN RULE DONE)                            ~ (__)=3  ~\033[0m"
 
 re: fclean all
+	@echo "\033[0;35;2m BTW I'VE SUCCESSFULLY REFILL 24 WINGS JUST FOR YOU (♥_♥)ゞ\033[0m"
+	@echo "\033[0;31;3m                        (RE RULE DONE)                                ~ (__)=3  ~\033[0m"
 
 .PHONY: all re clean fclean

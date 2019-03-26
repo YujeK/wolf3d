@@ -6,7 +6,7 @@
 /*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/10 23:42:09 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/16 02:59:42 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/26 19:22:46 by badhont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,36 +47,35 @@ void			ft_value_display(t_env *env)
 	rect = (SDL_Rect){0, 0, 60, 30};
 	ft_set_string(rect, "HP", ft_color_nb_state(env->player.life), env);
 	rect = (SDL_Rect){0, 40, 60, 30};
-//	ft_set_string(rect, ft_itoa(env->player.life),
-//		ft_color_nb_state(env->player.life), env);
+	ft_set_nbrstring(env->player.life, rect,
+		ft_color_nb_state(env->player.life), env);
 	rect = (SDL_Rect){0, 80, 60, 30};
-	ft_set_string(rect, "AMMO", ft_color_nb_state(env->player.ammo), env);
+	ft_set_string(rect, "AMMO", ft_hex_to_rgb(rbw(PURPLE)), env);
 	rect = (SDL_Rect){0, 120, 60, 30};
-	//ft_set_string(rect, ft_itoa(env->player.ammo),
-//		ft_color_nb_state(env->player.ammo), env);
+	ft_set_nbrstring(env->player.ammo, rect,
+	ft_color_nb_state(env->player.ammo), env);
+	rect = (SDL_Rect){100, 100, 0, 30};
 }
 
 void			weapon_sound(t_env *env)
 {
 	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
-
-	env->plage = Mix_LoadMUS("RESSOURCES/sound/ulysse.wav");
-	env->widow_rifle = Mix_LoadWAV("RESSOURCES/sound/widow_rifle.wav");
+	if (!(env->plage = Mix_LoadMUS("RESSOURCES/sound/plage.wav")))
+		ft_error_exit("Wolf3d: Unable to load music", env);
+	if (!(env->widow_rifle = Mix_LoadWAV("RESSOURCES/sound/widow_rifle.wav")))
+		ft_error_exit("Wolf3d: Unable to load sound effect", env);
 }
 
 void			ft_ui(t_env *env)
 {
-	SDL_Surface *weapon;
 	SDL_Rect	rect;
 
 	ft_value_display(env);
-		ft_error_exit("Wolf3d: Unable to display weapon", env);
-
-	if (env->weapon_state == 1 || env->weapon_state == 0)
-	{
-		weapon = (env->weapon_state == 1) ? env->tex.widow_1 : env->tex.widow_0;
-		rect = (SDL_Rect){XDIM / 3.5, 0, 1000, 1000};
-		SDL_BlitScaled(weapon, 0, env->surface, &rect);
-	}
+	if (env->weapon_state == 1)
+		env->weapon = (env->weapon == env->tex.widow_1)
+			? env->tex.widow_0 : env->tex.widow_1;
+	rect = (SDL_Rect){XDIM / 3.5, 0, XDIM, YDIM};
+	if (env->weapon_state != 2)
+		SDL_BlitScaled(env->weapon, 0, env->surface, &rect);
 	ft_inventory(env);
 }
