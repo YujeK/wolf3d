@@ -6,7 +6,7 @@
 /*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 15:08:24 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/26 16:34:20 by badhont          ###   ########.fr       */
+/*   Updated: 2019/03/26 19:46:40 by badhont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef	struct s_ray		t_ray;
 typedef	struct s_tex		t_tex;
 typedef	struct s_env		t_env;
 typedef struct s_rekt		t_rekt;
-typedef	struct	s_pos		t_pos;
+typedef	struct s_pos		t_pos;
 
 struct						s_sdl
 {
@@ -75,10 +75,10 @@ struct						s_point
 	double					y;
 };
 
-struct					s_pos
+struct						s_pos
 {
-	int					x;
-	int					y;
+	int						x;
+	int						y;
 };
 
 struct						s_rect
@@ -177,7 +177,7 @@ struct						s_env
 	t_point					ray_pos;
 	SDL_Surface				*weapon;
 	int						nb_frames;
-	t_pos			mapsize;
+	t_pos					mapsize;
 };
 
 /*

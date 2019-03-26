@@ -6,7 +6,7 @@
 /*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 10:22:21 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/25 13:27:40 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/26 20:03:31 by badhont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int		ft_calc_move(int relative_dir_d, t_env *env)
 	t_point		step;
 	t_point		pos;
 
-	step.x = -cos((env->player.dir_d + relative_dir_d) * M_PI / 180) * 0.1;
-	step.y = -sin((env->player.dir_d + relative_dir_d) * M_PI / 180) * 0.1;
+	step.x = -cos((env->player.dir_d + relative_dir_d) * M_PI / 180) * 0.15;
+	step.y = -sin((env->player.dir_d + relative_dir_d) * M_PI / 180) * 0.15;
 	env->player.pos.x += step.x;
 	env->player.pos.y += step.y;
 	pos.x = env->player.pos.x * env->bloc_size;

@@ -6,7 +6,7 @@
 /*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 23:30:45 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/18 20:52:20 by badhont          ###   ########.fr       */
+/*   Updated: 2019/03/26 19:25:56 by badhont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,4 @@ void			ft_loadtexture(t_env *env)
 	}
 	ft_load_weapontex(env);
 	ft_mushroom(env);
-	//ft_reframe(env);
 }

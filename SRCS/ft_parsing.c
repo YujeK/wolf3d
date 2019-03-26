@@ -6,13 +6,13 @@
 /*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 16:14:06 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/26 15:58:09 by badhont          ###   ########.fr       */
+/*   Updated: 2019/03/26 20:25:53 by badhont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-void		ft_check_first_line(char *line, t_env *env)
+int			ft_check_first_line(char *line, t_env *env)
 {
 	int		i;
 
@@ -28,7 +28,8 @@ void		ft_check_first_line(char *line, t_env *env)
 	if (line[i])
 		ft_error_exit("Wolf3d: Map: First line: Two numbers required", env);
 	if (env->mapsize.x > MAX_DIM || env->mapsize.y > MAX_DIM)
-		ft_error_exit("Wolf3d: The map is bigger than 500", env);
+		ft_error_exit("Wolf3d: The map is larger than 200", env);
+	return (1);
 }
 
 void		ft_check_map_line(char *line, t_env *env)
@@ -75,7 +76,7 @@ int			ft_stock_line(char *line, int y, t_env *env)
 	return (1);
 }
 
-void		ft_check_characters(char *str, t_env *env)
+int			ft_check_characters(char *str, t_env *env)
 {
 	int			fd;
 	int			i;
@@ -99,6 +100,7 @@ void		ft_check_characters(char *str, t_env *env)
 	}
 	if (newline == 0)
 		ft_error_exit("Wolf3d: Newline character not found", env);
+	return (1);
 }
 
 void		ft_parsing(t_env *env, char *str)
@@ -107,11 +109,10 @@ void		ft_parsing(t_env *env, char *str)
 	int			nb_line;
 	char		*line;
 
-	ft_check_characters(str, env);
-	if ((fd = open(str, O_RDONLY)) == -1)
+	if ((fd = open(str, O_RDONLY)) == -1 && ft_check_characters(str, env))
 		ft_error_exit("Wolf3d: Unable to open the file", env);
-	if (get_next_line(fd, &line) == 1)
-		ft_check_first_line(line, env);
+	if (get_next_line(fd, &line) == 1 && ft_check_first_line(line, env))
+		ft_strdel(&line);
 	if (!(env->map = (int **)ft_memalloc(sizeof(int *) * (env->mapsize.y))))
 		ft_error_exit("Wolf3d: Unable to malloc the map", env);
 	nb_line = 0;
@@ -122,6 +123,7 @@ void		ft_parsing(t_env *env, char *str)
 		ft_strdel(&line);
 		nb_line++;
 	}
+	ft_strdel(&line);
 	if (nb_line != env->mapsize.y)
 		ft_error_exit("Wolf3d: Invalid map format", env);
 	if (env->player.pos.x == -1)
