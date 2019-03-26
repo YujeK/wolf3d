@@ -3,14 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   ft_displaytools.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
+/*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 15:03:06 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/25 14:42:16 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/26 16:34:26 by badhont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
+
+
+void			ft_set_nbrstring(int value, SDL_Rect rect,
+					SDL_Color color, t_env *env)
+{
+	char	*str;
+
+	if (!(str = ft_itoa(value)))
+		ft_error_exit("itoa dhont allowed", env);
+	ft_set_string(rect, str, color, env);
+	ft_strdel(&str);
+}
 
 double			ft_pythagore(double posx, double posy)
 {

@@ -6,7 +6,7 @@
 /*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/19 15:35:24 by badhont           #+#    #+#             */
-/*   Updated: 2019/03/26 15:09:48 by badhont          ###   ########.fr       */
+/*   Updated: 2019/03/26 16:09:50 by badhont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void			ft_put_column(t_thrd *thrd, double wall_height, int x)
 
 int				ft_is_in_wall(t_env *env, t_point pos)
 {
-	if (pos.x < 0 || pos.x > env->mapsize.x * env->bloc_size ||
-			pos.y < 0 || pos.y > env->mapsize.y * env->bloc_size)
+	if (pos.x < 0 || pos.x > env->mapsize.y * env->bloc_size ||
+			pos.y < 0 || pos.y > env->mapsize.x * env->bloc_size)
 		return (1);
 	if (env->map[(int)pos.x / env->bloc_size][(int)pos.y / env->bloc_size] == 1)
 		return (1);
@@ -57,8 +57,8 @@ double			ft_raydata(t_thrd *thrd, t_point step
 	double	alpha;
 
 	while (thrd->ray.pos.x > 0 && thrd->ray.pos.x
-			< thrd->env->mapsize.x * thrd->env->bloc_size && thrd->ray.pos.y > 0
-			&& thrd->ray.pos.y < thrd->env->mapsize.y * thrd->env->bloc_size)
+			< thrd->env->mapsize.y * thrd->env->bloc_size && thrd->ray.pos.y > 0
+			&& thrd->ray.pos.y < thrd->env->mapsize.x * thrd->env->bloc_size)
 	{
 		thrd->ray.pos.x += step.x;
 		if (ft_is_in_wall(thrd->env, thrd->ray.pos))

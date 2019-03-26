@@ -6,7 +6,7 @@
 /*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 09:55:41 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/25 14:22:30 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/26 16:49:15 by badhont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	init_game(t_env *env)
 	ft_loadtexture(env);
 	weapon_sound(env);
 	env->player.pos.x = -1;
-	//env->player.dir_d = 0;
+	env->player.dir_d = 0;
 	env->coef_minimap = 1;
 	env->bloc_size = 40;
 	env->tex.which_tex = 0;

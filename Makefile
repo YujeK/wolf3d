@@ -1,6 +1,6 @@
 NAME 		= wolf3d
 CC			= gcc
-CFLAGS 		= -Wall -Wextra -Werror -O3 #-g -fsanitize=address
+CFLAGS 		= -Wall -Wextra -Werror -g
 
 ID_UN 		= $(shell id -un)
 SRC_PATH 	= srcs/

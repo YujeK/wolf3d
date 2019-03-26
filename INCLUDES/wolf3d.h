@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wolf3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
+/*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 15:08:24 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/25 15:15:38 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/26 16:34:20 by badhont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # include <pthread.h>
 # include <math.h>
 
-# define YDIM 1000
-# define XDIM 1000
+# define YDIM 800
+# define XDIM 800
 # define TEX_W 64
 # define TEX_H 64
 # define MAX_DIM 200
@@ -232,7 +232,8 @@ Uint32						put_tex(t_thrd *thrd, int y, int p1, int p2);
 SDL_Surface					*ft_selectex(t_thrd *thrd);
 int							rbw(int x);
 double						ft_pythagore(double posx, double posy);
-
+void						ft_set_nbrstring(int value, SDL_Rect rect,
+							SDL_Color color, t_env *env);
 /*
 **	Exit
 */

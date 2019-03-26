@@ -6,7 +6,7 @@
 /*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/10 23:42:09 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/25 13:15:27 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/26 16:49:06 by badhont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,12 @@ void			ft_value_display(t_env *env)
 	rect = (SDL_Rect){0, 0, 60, 30};
 	ft_set_string(rect, "HP", ft_color_nb_state(env->player.life), env);
 	rect = (SDL_Rect){0, 40, 60, 30};
-	ft_set_string(rect, ft_itoa(env->player.life),
+	ft_set_nbrstring(env->player.life, rect,
 		ft_color_nb_state(env->player.life), env);
 	rect = (SDL_Rect){0, 80, 60, 30};
 	ft_set_string(rect, "AMMO", ft_hex_to_rgb(rbw(PURPLE)), env);
 	rect = (SDL_Rect){0, 120, 60, 30};
-	ft_set_string(rect, ft_itoa(env->player.ammo),
+	ft_set_nbrstring(env->player.ammo,rect,
 		ft_color_nb_state(env->player.ammo), env);
 	rect = (SDL_Rect){100, 100, 0, 30};
 }
