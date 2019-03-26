@@ -6,7 +6,7 @@
 /*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/19 15:35:24 by badhont           #+#    #+#             */
-/*   Updated: 2019/03/16 18:06:44 by badhont          ###   ########.fr       */
+/*   Updated: 2019/03/26 15:09:48 by badhont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ double			ft_raydata(t_thrd *thrd, t_point step
 	double	alpha;
 
 	while (thrd->ray.pos.x > 0 && thrd->ray.pos.x
-			< thrd->env->map_width * thrd->env->bloc_size && thrd->ray.pos.y > 0
-			&& thrd->ray.pos.y < thrd->env->map_height * thrd->env->bloc_size)
+			< thrd->env->mapsize.x * thrd->env->bloc_size && thrd->ray.pos.y > 0
+			&& thrd->ray.pos.y < thrd->env->mapsize.y * thrd->env->bloc_size)
 	{
 		thrd->ray.pos.x += step.x;
 		if (ft_is_in_wall(thrd->env, thrd->ray.pos))
