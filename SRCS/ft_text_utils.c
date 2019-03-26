@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_text_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
+/*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 23:30:45 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/25 13:52:02 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/18 20:52:20 by badhont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,5 @@ void			ft_loadtexture(t_env *env)
 	}
 	ft_load_weapontex(env);
 	ft_mushroom(env);
-	ft_reframe(env);
+	//ft_reframe(env);
 }

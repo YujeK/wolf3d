@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ui.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
+/*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/10 23:42:09 by asamir-k          #+#    #+#             */
 /*   Updated: 2019/03/25 13:15:27 by asamir-k         ###   ########.fr       */

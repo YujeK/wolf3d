@@ -25,6 +25,7 @@
 # define XDIM 1000
 # define TEX_W 64
 # define TEX_H 64
+# define MAX_DIM 200
 
 # define PINK 0xFFE62BFD
 # define BLUE 0xFFFD1200
@@ -45,6 +46,7 @@
 # define LEFT 270
 # define OFF 2
 # define FOV 60
+# define MOUSE_SENS 12
 
 # define NB_THRD 8
 
@@ -58,6 +60,7 @@ typedef	struct s_ray		t_ray;
 typedef	struct s_tex		t_tex;
 typedef	struct s_env		t_env;
 typedef struct s_rekt		t_rekt;
+typedef	struct	s_pos		t_pos;
 
 struct						s_sdl
 {
@@ -70,6 +73,12 @@ struct						s_point
 {
 	double					x;
 	double					y;
+};
+
+struct					s_pos
+{
+	int					x;
+	int					y;
 };
 
 struct						s_rect
@@ -160,8 +169,6 @@ struct						s_env
 	SDL_Surface				*surface;
 	TTF_Font				*font;
 	int						**map;
-	int						map_width;
-	int						map_height;
 	t_player				player;
 	int						mouse_x;
 	int						mouse_y;
@@ -170,6 +177,7 @@ struct						s_env
 	t_point					ray_pos;
 	SDL_Surface				*weapon;
 	int						nb_frames;
+	t_pos			mapsize;
 };
 
 /*

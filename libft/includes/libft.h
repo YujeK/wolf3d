@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
+/*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/12 18:09:46 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/01/17 22:18:10 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/17 00:11:12 by badhont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,6 @@ char					*ft_strrchr(const char *s, int c);
 char					*ft_strstr(const char *haystack, const char *needle);
 int						ft_tolower(int c);
 int						ft_toupper(int c);
+int						ft_numberlen(int nb);
 
 #endif

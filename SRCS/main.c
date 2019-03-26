@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
+/*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 09:55:41 by asamir-k          #+#    #+#             */
 /*   Updated: 2019/03/25 14:22:30 by asamir-k         ###   ########.fr       */
@@ -20,6 +20,8 @@ void	init_sdl(t_env *env)
 		ft_error_exit("Wolf3d: Unable to initialize SDL TTF", env);
 	if (SDL_Init(SDL_INIT_AUDIO) < 0)
 		ft_error_exit("Wolf3d: Unable to initialize SDL AUDIO", env);
+	if (!(env->font = TTF_OpenFont("RESSOURCES/BEBAS.ttf", 100)))
+		ft_error_exit("Wolf3d: Unable to get font", env);
 	if (Mix_Init(MIX_INIT_MP3) < 0)
 		ft_error_exit("Wolf3d: Unable to initialize SDL MP3 MIXER", env);
 	if (!(env->sdl.window = SDL_CreateWindow("Wolf3d",
@@ -36,11 +38,10 @@ void	init_sdl(t_env *env)
 void	init_game(t_env *env)
 {
 	env->surface = ft_new_surface(YDIM, XDIM, env);
-	if (!(env->font = TTF_OpenFont("RESSOURCES/BEBAS.ttf", 100)))
-		ft_error_exit("Wolf3d: Unable to get font", env);
 	ft_loadtexture(env);
 	weapon_sound(env);
-	env->player.dir_d = 0;
+	env->player.pos.x = -1;
+	//env->player.dir_d = 0;
 	env->coef_minimap = 1;
 	env->bloc_size = 40;
 	env->tex.which_tex = 0;
@@ -59,9 +60,9 @@ int		main(int ac, char **av)
 	if (ac == 2)
 	{
 		ft_bzero(&env, sizeof(t_env));
-		init_sdl(&env);
 		init_game(&env);
 		ft_parsing(&env, av[1]);
+		init_sdl(&env);
 		ft_wolf_loop(&env);
 	}
 	ft_putendl("\nHi ^-^ !!! One argument only authorised to make it work.");

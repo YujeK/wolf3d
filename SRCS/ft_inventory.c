@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ft_inventory.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
+/*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/15 01:39:25 by asamir-k          #+#    #+#             */
 /*   Updated: 2019/03/25 12:59:00 by asamir-k         ###   ########.fr       */
