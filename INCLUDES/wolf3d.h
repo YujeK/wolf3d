@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 15:08:24 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/27 18:11:42 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/27 19:21:28 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,7 +211,7 @@ void						weapon_sound(t_env *env);
 void						sound_control(t_env *env);
 void						ft_set_string(SDL_Rect rect, char *text,
 								SDL_Color color, t_env *env);
-int							ft_click_inventory(t_env *env);
+int							ft_click_inventory(t_env *env, int change);
 int							ft_inventory_event(t_env *env);
 /*
 **	Graphics

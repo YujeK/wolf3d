@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   events.c                                           :+:      :+:    :+:   */
+/*   ft_events.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 10:22:21 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/27 14:04:02 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/27 19:45:43 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ int		ft_shoot_event(t_env *env)
 	{
 		if (Mix_Playing(0) == 1)
 			Mix_HaltChannel(0);
-		Mix_PlayChannel(0, env->widow_rifle, 0);
+		if (Mix_PlayChannel(0, env->widow_rifle, 0) == -1)
+			ft_error_exit("Wolf3d: Unable to play channel", env);
 		env->weapon_state = 1;
 		env->player.ammo += (env->player.ammo > 0) ? -1 : 100;
 		change = 1;
@@ -105,6 +106,6 @@ int		events(t_env *env)
 	(env->weapon_state == 1) ? change = 1 : 0;
 	(ft_inventory_event(env)) ? change = 1 : 0;
 	(ft_inventory(env)) ? change = 1 : 0;
-	(ft_click_inventory(env)) ? change = 1 : 0;
+	(ft_click_inventory(env, change)) ? change = 1 : 0;
 	return (change);
 }

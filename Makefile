@@ -26,7 +26,7 @@ INC_PATH	+=	/Users/$(ID_UN)/.brew/Cellar/sdl2/$(SDL_NUM)/include/ \
 
 SRC_NAME 	= 	main.c \
 				ft_displaytools.c \
-				events.c \
+				ft_events.c \
 				ft_exit.c \
 				ft_minimap.c \
 				ft_new_surface.c \
