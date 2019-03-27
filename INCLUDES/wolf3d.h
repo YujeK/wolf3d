@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wolf3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 15:08:24 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/26 19:46:40 by badhont          ###   ########.fr       */
+/*   Updated: 2019/03/27 18:11:42 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,5 +240,7 @@ void						ft_set_nbrstring(int value, SDL_Rect rect,
 
 void						ft_error_exit(char *str, t_env *env);
 void						ft_exit(t_env *env);
+void						ft_destroy_texture(t_env *env);
+void						ft_destroy_items(t_env *env);
 int							ft_inventory(t_env *env);
 #endif

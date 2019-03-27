@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_inventory.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/15 01:39:25 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/25 12:59:00 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/27 18:18:52 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int			ft_click_inventory(t_env *env)
 				&& ft_in_rect(env) == 1)
 		{
 			env->tex.which_tex = (env->tex.which_tex) ? 0 : 1;
+			ft_destroy_texture(env);
 			ft_loadtexture(env);
 			change = 1;
 		}
@@ -74,6 +75,7 @@ int			ft_click_inventory(t_env *env)
 				&& ft_in_rect(env) == 1)
 		{
 			env->tex.which_tex = (env->tex.which_tex) ? 0 : 2;
+			ft_destroy_texture(env);
 			ft_loadtexture(env);
 			change = 1;
 		}
@@ -94,12 +96,6 @@ int			ft_inventory_event(t_env *env)
 			env->inv_state = (env->inv_state) ? 0 : 1;
 			change = 1;
 		}
-	}
-	else if (env->sdl.event.key.keysym.scancode == SDL_SCANCODE_K)
-	{
-		env->tex.which_tex = 0;
-		ft_loadtexture(env);
-		change = 1;
 	}
 	return (change);
 }

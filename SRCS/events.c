@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 10:22:21 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/26 20:03:31 by badhont          ###   ########.fr       */
+/*   Updated: 2019/03/27 14:04:02 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,9 @@ int		ft_shoot_event(t_env *env)
 	if (SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_LEFT)
 	&& env->weapon_state == 0 && env->inv_state == 0)
 	{
+		if (Mix_Playing(0) == 1)
+			Mix_HaltChannel(0);
+		Mix_PlayChannel(0, env->widow_rifle, 0);
 		env->weapon_state = 1;
 		env->player.ammo += (env->player.ammo > 0) ? -1 : 100;
 		change = 1;
