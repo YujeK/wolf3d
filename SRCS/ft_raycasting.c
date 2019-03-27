@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_raycasting.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/19 15:35:24 by badhont           #+#    #+#             */
-/*   Updated: 2019/03/26 16:09:50 by badhont          ###   ########.fr       */
+/*   Updated: 2019/03/27 18:22:38 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void			ft_put_column(t_thrd *thrd, double wall_height, int x)
 		{
 			(thrd->env->tex.which_tex == 2)
 				? ft_setpixel(thrd->env->surface, XDIM - 1 - x, y, rbw(x))
-				: ft_setpixel(thrd->env->surface, XDIM - 1 - x, y, BLACK);
+				: ft_setpixel(thrd->env->surface, XDIM - 1 - x, y, YELLOW);
 		}
 		else if (y >= p1 && y < p2)
 			ft_setpixel(thrd->env->surface, XDIM - 1 - x, y,
@@ -107,7 +107,7 @@ void			*ft_raycasting(void *arg)
 		thrd->ray.direction = (thrd->env->player.dir_d - FOV / 2)
 			+ i * ((double)FOV / (double)XDIM);
 		thrd->ray.distance = ft_cast_ray(thrd, thrd->ray.direction);
-		wall_height = (thrd->env->bloc_size) / thrd->ray.distance * 800;
+		wall_height = (thrd->env->bloc_size) / thrd->ray.distance * 630;
 		ft_put_column(thrd, wall_height, i);
 		i += 8;
 	}

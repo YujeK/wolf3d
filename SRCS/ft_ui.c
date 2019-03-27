@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ui.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/10 23:42:09 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/26 19:22:46 by badhont          ###   ########.fr       */
+/*   Updated: 2019/03/27 16:24:42 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
 void			ft_set_string(SDL_Rect rect, char *text,
-				SDL_Color color, t_env *env)
+		SDL_Color color, t_env *env)
 {
 	SDL_Rect			sdl_rect;
 	SDL_Surface			*surface;
@@ -48,12 +48,12 @@ void			ft_value_display(t_env *env)
 	ft_set_string(rect, "HP", ft_color_nb_state(env->player.life), env);
 	rect = (SDL_Rect){0, 40, 60, 30};
 	ft_set_nbrstring(env->player.life, rect,
-		ft_color_nb_state(env->player.life), env);
+			ft_color_nb_state(env->player.life), env);
 	rect = (SDL_Rect){0, 80, 60, 30};
 	ft_set_string(rect, "AMMO", ft_hex_to_rgb(rbw(PURPLE)), env);
 	rect = (SDL_Rect){0, 120, 60, 30};
 	ft_set_nbrstring(env->player.ammo, rect,
-	ft_color_nb_state(env->player.ammo), env);
+			ft_color_nb_state(env->player.ammo), env);
 	rect = (SDL_Rect){100, 100, 0, 30};
 }
 
@@ -62,7 +62,7 @@ void			weapon_sound(t_env *env)
 	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
 	if (!(env->plage = Mix_LoadMUS("RESSOURCES/sound/plage.wav")))
 		ft_error_exit("Wolf3d: Unable to load music", env);
-	if (!(env->widow_rifle = Mix_LoadWAV("RESSOURCES/sound/widow_rifle.wav")))
+	if (!(env->widow_rifle = Mix_LoadWAV("RESSOURCES/sound/pew.wav")))
 		ft_error_exit("Wolf3d: Unable to load sound effect", env);
 }
 

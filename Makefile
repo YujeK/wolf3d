@@ -1,6 +1,6 @@
 NAME 		= wolf3d
 CC			= gcc
-CFLAGS 		= -Wall -Wextra -Werror -g
+CFLAGS 		= -Wall -Wextra -Werror -O3
 
 ID_UN 		= $(shell id -un)
 SRC_PATH 	= srcs/

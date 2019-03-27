@@ -5,15 +5,6 @@ CFLAGS = -Wall -Wextra -Werror
 SRCS_PATH = ./srcs/
 OBJS_PATH = ./objects/
 
-YELLOW		= "\\033[33m"
-BLUE		= "\\033[34m"
-RED			= "\\033[31m"
-WHITE		= "\\033[0m"
-CYAN		= "\\033[36m"
-GREEN		= "\\033[32m"
-BOLD		= "\\033[1m"
-PINK		= "\\033[95m"
-
 SRCS_NAME = ft_atoi.c \
 			ft_bzero.c \
 			ft_clamp.c \

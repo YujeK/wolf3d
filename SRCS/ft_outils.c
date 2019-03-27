@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 15:36:41 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/25 14:11:41 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/27 18:10:57 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void			ft_load_weapontex(t_env *env)
 {
+	ft_destroy_items(env);
 	if (!(env->tex.widow_0 = IMG_Load("RESSOURCES/pics/weapon/widow.png")))
 		ft_error_exit("Wolf3d: Unable to load texture", env);
 	if (!(env->tex.widow_1 = IMG_Load("RESSOURCES/pics/weapon/widow2.png")))

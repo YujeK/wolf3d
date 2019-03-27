@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parsing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: badhont <badhont@student.42.fr>            +#+  +:+       +#+        */
+/*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 16:14:06 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/26 20:25:53 by badhont          ###   ########.fr       */
+/*   Updated: 2019/03/27 17:01:07 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,9 @@ void		ft_parsing(t_env *env, char *str)
 	int			nb_line;
 	char		*line;
 
-	if ((fd = open(str, O_RDONLY)) == -1 && ft_check_characters(str, env))
+	if ((fd = open(str, O_RDONLY)) == -1)
 		ft_error_exit("Wolf3d: Unable to open the file", env);
+	ft_check_characters(str, env);
 	if (get_next_line(fd, &line) == 1 && ft_check_first_line(line, env))
 		ft_strdel(&line);
 	if (!(env->map = (int **)ft_memalloc(sizeof(int *) * (env->mapsize.y))))
