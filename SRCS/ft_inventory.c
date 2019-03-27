@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/15 01:39:25 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/27 18:18:52 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/27 19:34:54 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ int			ft_ipod_weapon(t_env *env, int change)
 			&& ft_in_rect(env) == 1)
 	{
 		if (Mix_PlayingMusic() == 0)
-			Mix_PlayMusic(env->plage, -1);
+			if (Mix_PlayMusic(env->plage, -1) == -1)
+				ft_error_exit("Cannot play music", env);
 		if (Mix_PausedMusic() == 1)
 			Mix_ResumeMusic();
 		else
@@ -54,11 +55,8 @@ int			ft_ipod_weapon(t_env *env, int change)
 	return (change);
 }
 
-int			ft_click_inventory(t_env *env)
+int			ft_click_inventory(t_env *env, int change)
 {
-	int change;
-
-	change = 0;
 	if (env->inv_state == 1)
 	{
 		env->rekt = (t_rekt){275, 425, 460, 550};
@@ -97,6 +95,12 @@ int			ft_inventory_event(t_env *env)
 			change = 1;
 		}
 	}
+	else if (env->sdl.event.key.keysym.scancode == SDL_SCANCODE_K)
+	{
+		env->tex.which_tex = 0;
+		ft_loadtexture(env);
+		change = 1;
+	}
 	return (change);
 }
 
@@ -112,9 +116,9 @@ int			ft_inventory(t_env *env)
 	{
 		if (SDL_SetRelativeMouseMode(TRUE) < 0)
 			ft_error_exit("Wolf3d: Unable to set relative mode", env);
-		rect = (SDL_Rect){0, 850, 150, 150};
+		rect = (SDL_Rect){0, 630, 150, 150};
 		SDL_BlitScaled(inventory, 0, env->surface, &rect);
-		rect = (SDL_Rect){50, 870, 15, 20};
+		rect = (SDL_Rect){50, 650, 15, 20};
 		ft_set_string(rect, "Inventory", ft_hex_to_rgb(GREEN), env);
 	}
 	else

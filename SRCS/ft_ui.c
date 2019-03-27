@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/10 23:42:09 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/27 16:24:42 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/27 19:35:05 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ void			ft_value_display(t_env *env)
 
 void			weapon_sound(t_env *env)
 {
-	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
+	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) == -1)
+		ft_error_exit("Can't open audio", env);
 	if (!(env->plage = Mix_LoadMUS("RESSOURCES/sound/plage.wav")))
 		ft_error_exit("Wolf3d: Unable to load music", env);
 	if (!(env->widow_rifle = Mix_LoadWAV("RESSOURCES/sound/pew.wav")))
