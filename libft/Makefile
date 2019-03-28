@@ -81,8 +81,6 @@ SRCS = $(addprefix $(SRCS_PATH), $(SRCS_NAME))
 OBJS = $(subst $(SRCS_PATH), $(OBJS_PATH), $(SRCS:.c=.o))
 INCLUDES = includes/
 
-#.SILENT:
-
 all:	$(NAME)
 
 $(NAME):    $(OBJS)
@@ -93,7 +91,7 @@ $(OBJS) : | $(OBJS_PATH)
 $(OBJS_PATH):
 	@mkdir objects
 
-$(OBJS_PATH)%.o: $(SRCS_PATH)%.c $(INCLUDES)libft.h Makefile
+$(OBJS_PATH)%.o: $(SRCS_PATH)%.c includes/libft.h Makefile
 	@$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDES)
 
 clean:

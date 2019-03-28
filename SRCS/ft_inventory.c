@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/15 01:39:25 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/27 19:34:54 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/28 13:27:27 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,6 @@ int			ft_inventory_event(t_env *env)
 			env->inv_state = (env->inv_state) ? 0 : 1;
 			change = 1;
 		}
-	}
-	else if (env->sdl.event.key.keysym.scancode == SDL_SCANCODE_K)
-	{
-		env->tex.which_tex = 0;
-		ft_loadtexture(env);
-		change = 1;
 	}
 	return (change);
 }

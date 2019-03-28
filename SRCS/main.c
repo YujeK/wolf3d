@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 09:55:41 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/27 18:13:57 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/28 13:25:26 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,13 @@ void	init_game(t_env *env)
 	env->player.pos.x = -1;
 	env->player.dir_d = 0;
 	env->coef_minimap = 1;
-	env->bloc_size = 41;
+	env->bloc_size = 40;
 	env->tex.which_tex = 0;
 	env->player.life = 100;
 	env->player.ammo = 100;
 	env->inv_state = 0;
 	env->weapon_state = OFF;
 	env->weapon = env->tex.widow_0;
-	env->nb_frames = 0;
 }
 
 int		main(int ac, char **av)

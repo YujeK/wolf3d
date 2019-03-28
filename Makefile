@@ -9,10 +9,6 @@ INC_PATH	= includes/ \
 				libft/includes/
 LIBFT 		= libft/
 
-WHITE       = "\\033[0m"
-CYAN        = "\\033[36m"
-GREEN       = "\\033[32m"
-
 SDL_NUM		= $(shell ls /Users/$(ID_UN)/.brew/Cellar/sdl2/ | tail -1)
 TTF_NUM		= $(shell ls /Users/$(ID_UN)/.brew/Cellar/sdl2_ttf/ | tail -1)
 IMG_NUM		= $(shell ls /Users/$(ID_UN)/.brew/Cellar/sdl2_image/ | tail -1)
@@ -59,7 +55,7 @@ $(OBJ) : | $(OBJ_PATH)
 $(OBJ_PATH) :
 	@mkdir objs
 
-$(OBJ_PATH)%.o: $(SRC_PATH)%.c $(INC_PATH) Makefile
+$(OBJ_PATH)%.o: $(SRC_PATH)%.c includes/wolf3d.h $(INC_PATH) Makefile
 	@$(CC) $(CFLAGS) $(INC) -o $@ -c $<
 
 clean:
