@@ -24,7 +24,6 @@ SRC_NAME 	= 	main.c \
 				ft_displaytools.c \
 				ft_events.c \
 				ft_exit.c \
-				ft_minimap.c \
 				ft_new_surface.c \
 				ft_outils.c \
 				ft_parsing.c \

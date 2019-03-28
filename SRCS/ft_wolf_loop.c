@@ -6,7 +6,7 @@
 /*   By: asamir-k <asamir-k@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 10:18:59 by asamir-k          #+#    #+#             */
-/*   Updated: 2019/03/28 13:25:32 by asamir-k         ###   ########.fr       */
+/*   Updated: 2019/03/28 14:29:33 by asamir-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ void	ft_reframe(t_env *env)
 	SDL_RenderClear(env->sdl.renderer);
 	ft_crosshair(env);
 	ft_ui(env);
-	texture = SDL_CreateTextureFromSurface(env->sdl.renderer, env->surface);
+	if (!(texture = SDL_CreateTextureFromSurface(env->sdl.renderer,
+		env->surface)))
+		ft_error_exit("Texture problem (-_-')>", env);
 	SDL_RenderCopy(env->sdl.renderer, texture, 0, 0);
 	rect = (SDL_Rect){0, 0, 60, 30};
 	SDL_DestroyTexture(texture);
